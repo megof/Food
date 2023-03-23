@@ -2,6 +2,8 @@
 
 // Importing the express module
 import express from 'express';
+// Imrpoting morgan
+import morgan from 'morgan';
 // Importing the routes
 import ProductTypeRoutes from './routes/productType.routes.js';
 import OrderRoutes from './routes/order.routes.js';
@@ -15,6 +17,7 @@ const app = express();
 // Set the middlewares
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'));
 
 //routes
 app.use('/api/v1/types', ProductTypeRoutes);
