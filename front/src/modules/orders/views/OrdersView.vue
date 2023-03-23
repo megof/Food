@@ -1,6 +1,5 @@
 <template>
-  <h2>Escribe tu ruta arriba</h2>
-  <RouterView />
+  <h1>Init</h1>
 </template>
 
 <script>
