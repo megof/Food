@@ -1,6 +1,5 @@
 <template>
-  <h2>HOla mundo</h2>
-  <RouterView />
+  <h2>Hola xD</h2>
 </template>
 
 <script>
