@@ -1,15 +1,21 @@
-import "dotenv/config"
-import express from "express"
+// Description: This is the main file for the application
 
-const app = express()
+// Importing the app
+import app from './app.js';
 
-app.use(express.json())
+// Import the connection to the database
+import connectDatabase from './database/foodDatabase.js';
 
-//prueba
-app.get("/", (req, res) => {
-    res.json({ok:true})
-})
+// Importing the environment variables
+import {PORT, URI_MONGO} from './config.js';
 
-const PORT = process.env.PORT  || 5000
+// Connect to the database;
+connectDatabase(URI_MONGO);
 
-app.listen(PORT, () => console.log("run http://localhost:"+PORT))
+// Setting the port
+const port = PORT || 3000;
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
