@@ -18,7 +18,7 @@ const toppingSchema = new Schema(
     },
     {
         edo: {
-            type: String,
+            type: Boolean,
             required: true, 
             trim: true
         }

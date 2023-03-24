@@ -80,6 +80,7 @@ export const deleteOne = async (req, res) =>{
 }
 
 
+//actualizar el topping
 export const update = async (req, res) =>{
     try {
         const topping = await Topping.findById(req.params.id)
