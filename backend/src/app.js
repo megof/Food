@@ -26,6 +26,7 @@ import userRouter from './routes/user.routes.js'
 import orderRouter from './routes/order.routes.js'
 import toppingRoutes from './routes/topping.routes.js'
 import toppingProductRoutes from './routes/toppingProduct.routes.js'
+import detailOrderRouter from './routes/detailOrder.routes.js';
 
 // Importing the swagger configuration
 import swaggerConfiguration from './config/swagger.config.js';
@@ -52,6 +53,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
 app.use('/api/v1/topping', toppingRoutes);
 app.use('/api/v1/toppingProduct',  toppingProductRoutes);
+app.use('/api/v1/detailOrders', verifyTokenMiddleware, detailOrderRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
 
 

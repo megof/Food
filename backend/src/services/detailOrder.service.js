@@ -2,7 +2,7 @@
 // Author: Sebastián Gámez Ariza
 
 // Importing the OrderDetail model
-import OrderDetailModel from "../models/OrderDetail.js";
+import detailOrderModel from "../models/DetailOrder.js";
 
 
 // Get all the order details
@@ -12,7 +12,7 @@ export const getAllOrderDetails = async () => {
     // Try to get all the order details
     try {
         // Get all the order details
-        const orderDetails = await OrderDetailModel.find().populate('idOrder').populate('idProduct');
+        const orderDetails = await detailOrderModel.find().populate('idOrder').populate('idProduct');
         // Create the response object
         response = {
             status: 200,
@@ -42,7 +42,7 @@ export const getOrderDetailById = async (id) => {
     // Try to get the order detail
     try {
         // Get the order detail
-        const orderDetail = await OrderDetailModel.findById(id).populate('idOrder').populate('idProduct');
+        const orderDetail = await detailOrderModel.findById(id).populate('idOrder').populate('idProduct');
         // Create the response object
         response = {
             status: 200,
@@ -69,7 +69,7 @@ export const createOrderDetail = async (orderDetail) => {
     // Try to create the order detail
     try {
         // Create the order detail
-        await OrderDetailModel.create(orderDetail);
+        await detailOrderModel.create(orderDetail);
         // Create the response object
         response = {
             status: 200,
@@ -96,7 +96,7 @@ export const updateOrderDetail = async (id, orderDetail) => {
     let response;
     // Try to update the order detail
     try {
-        await OrderDetailModel.findByIdAndUpdate(id, orderDetail);
+        await detailOrderModel.findByIdAndUpdate(id, orderDetail);
         // Create the response object
         response = {
             status: 200,
@@ -122,7 +122,7 @@ export const deleteOrderDetail = async (id) => {
     let response;
     // Try to delete the order detail
     try {
-        await OrderDetailModel.findByIdAndDelete(id);
+        await detailOrderModel.findByIdAndDelete(id);
         // Create the response object
         response = {
             status: 200,
