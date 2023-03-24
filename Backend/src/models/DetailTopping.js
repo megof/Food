@@ -3,18 +3,20 @@ import { Schema, model } from "mongoose";
 const detailtoppingSchema = new Schema(
     {
         id_det_order: {
-            type: Number,
+            type: Schema.Types.ObjectId,
+            ref: 'DetailOrder',
             required: true,
             unique: true,
             trim: true,
         },
         id_topping: {
-            type: Number,
+            type: Schema.Types.ObjectId,
+            ref: 'Topping',
             required: true,
             trim: true,
         },
         cant: {
-            type: String,
+            type: Number,
             required: true,
             trim: true,
         },
