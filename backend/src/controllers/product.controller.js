@@ -1,4 +1,5 @@
 import Product from '../models/Product.js'
+import {uploadImage} from '../config/cloudinary.config.js'
 
 export const getAll = async (req, res) =>{
     try {
@@ -27,7 +28,7 @@ export const getOne = async (req, res) =>{
 
 
 export const save = async (req, res) =>{
-    if(!req.body.id_tp_product || !req.body.name || !req.body.description || !req.body.generalDescr || !req.body.price || !req.body.image || !req.body.status || !req.body.edo){
+    if(!req.body.id_tp_product || !req.body.name || !req.body.description || !req.body.generalDescr || !req.body.price || !req.body.status || !req.body.edo){
         return res.status(400).send({
             message: 'Content cannot be empty.'
         })
@@ -39,10 +40,21 @@ export const save = async (req, res) =>{
             description: req.body.description,
             generalDescr: req.body.generalDescr,
             price: req.body.price,
-            image: req.body.image,
+            image: {
+                
+            },
             status: req.body.status,
             edo: req.body.edo
         })
+        
+        if(req.files?.image){
+            const result = await uploadImage(req.files.image.tempFilePath);
+            newProduct.image = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+            }
+        }
+        console.log(newProduct);
         const productSaved = await newProduct.save()
         res.status(201).json(productSaved)
     } catch (error) {

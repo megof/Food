@@ -26,13 +26,11 @@ const productSchema = new Schema(
         price: {
             type: Number,
             required: true,
-            unique: true,
             trim: true
         },
-        img: {
-            type: String,
-            required: true,
-            trim: true  
+        image: {
+            public_id: String,
+            secure_url: String
         },
         status: { 
             type: String, 
