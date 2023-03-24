@@ -11,6 +11,19 @@ import OrderRoutes from './routes/order.routes.js';
 // Importing the cors module
 import cors from 'cors';
 
+// Importing the swagger UI
+import swaggerUi from 'swagger-ui-express';
+
+// Importing the middlewares
+import verifyTokenMiddleware from './middlewares/verifyToken.middleware.js';
+
+// Importing the routes
+import userRouter from './routes/user.routes.js'
+import orderRouter from './routes/order.routes.js'
+
+// Importing the swagger configuration
+import swaggerConfiguration from './config/swagger.config.js';
+
 // Creating an instance of express
 const app = express();
 
@@ -22,6 +35,12 @@ app.use(morgan('dev'));
 //routes
 app.use('/api/v1/types', ProductTypeRoutes);
 app.use('/api/v1/orders', OrderRoutes);
+
+// Set the routes
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
+
 
 // Exporting the app
 export default app;
