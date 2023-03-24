@@ -2,7 +2,7 @@
 // Author: Sebastián Gámez Ariza
 
 // Importing the OrderDetail model
-import OrderDetailModel from "../models/orderDetail.js";
+import OrderDetailModel from "../models/OrderDetail.js";
 
 
 // Get all the order details

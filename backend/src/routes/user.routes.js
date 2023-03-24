@@ -14,7 +14,7 @@ import {
 } from '../controllers/user.controller.js';
 
 // Importing the verify token middleware
-import verifyTokenMiddleware from '../middlewares/verifyTokenMiddleware.js';
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
 
 // Creating the router
 const userRouter = Router();

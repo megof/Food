@@ -7,7 +7,7 @@ import express from 'express';
 import cors from 'cors';
 
 // Importing the middlewares
-import verifyTokenMiddleware from './middlewares/verifyTokenMiddleware.js';
+import verifyTokenMiddleware from './middlewares/verifyToken.middleware.js';
 
 // Importing the routes
 import userRouter from './routes/user.routes.js'
@@ -21,8 +21,8 @@ app.use(cors());
 app.use(express.json());
 
 // Set the routes
-app.use('/api/users', userRouter);
-app.use('/api/orders', verifyTokenMiddleware, orderRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
 
 
 // Exporting the app

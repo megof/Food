@@ -2,7 +2,7 @@
 // Author: Sebastián Gámez Ariza
 
 // Importing the User model
-import UserModel from '../models/user.js';
+import UserModel from '../models/User.js';
 
 // Get all users method
 export const getAllUsers = async () => {
