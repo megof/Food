@@ -1,5 +1,4 @@
 <template>
-  <h2>Escribe tu ruta arriba</h2>
   <RouterView />
 </template>
 

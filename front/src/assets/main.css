@@ -1,0 +1,6 @@
+body {
+    font-family: "Bungee", cursive;
+    background-color: #f2f3f8;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
