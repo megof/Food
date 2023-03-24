@@ -32,7 +32,7 @@ export const save = async (req, res) =>{
     }
     try {
         const newOrder = new Order({
-            user: req.body.id_tp_product,
+            client: req.body.client,
             address: req.body.address,
             phone: req.body.phone,
             obs: req.body.obs,
