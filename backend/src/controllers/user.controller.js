@@ -17,7 +17,7 @@ import {
 	createUser,
 	updateUser,
 	deleteUser,
-} from '../services/userService.js';
+} from '../services/user.service.js';
 
 // Login user
 export const loginUserController = async (req, res) => {
@@ -37,7 +37,6 @@ export const loginUserController = async (req, res) => {
         }
         // Check if the password is correct
         const passwordCorrect = await bcrypt.compare( user.password, userDb.data.password );
-        // Check if the password is correct
         if (!passwordCorrect) {
             // Send the response
             return res.status(400).json({

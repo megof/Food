@@ -6,8 +6,12 @@ import express from 'express';
 // Importing the cors module
 import cors from 'cors';
 
+// Importing the middlewares
+import verifyTokenMiddleware from './middlewares/verifyTokenMiddleware.js';
+
 // Importing the routes
-import userRouter from './routes/userRoute.js'
+import userRouter from './routes/user.routes.js'
+import orderRouter from './routes/order.routes.js'
 
 // Creating an instance of express
 const app = express();
@@ -18,6 +22,8 @@ app.use(express.json());
 
 // Set the routes
 app.use('/api/users', userRouter);
+app.use('/api/orders', verifyTokenMiddleware, orderRouter);
+
 
 // Exporting the app
 export default app;

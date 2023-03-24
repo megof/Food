@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import { JWT_PASSWORD } from '../config.js';
 
 // Verify token middleware
-export const verifyTokenMiddleware = (req, res, next) => {
+const verifyTokenMiddleware = (req, res, next) => {
     // Get the token from the headers
     const token = req.headers['x-access-token'];
     // Check if the token exists
@@ -35,3 +35,6 @@ export const verifyTokenMiddleware = (req, res, next) => {
         });
     }
 }
+
+// Export the verify token middleware
+export default verifyTokenMiddleware;
