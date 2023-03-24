@@ -9,32 +9,32 @@ const couponSchema = new Schema(
             trim: true,
         },
         start_date: {
-            type: String,
+            type: Date,
             required: true,
             trim: true,
         },
         end_date: {
-            type: String,
+            type: Date,
             required: true,
             trim: true,
         },
         value: {
-            type: String,
+            type: Number,
             required: true,
             trim: true,
         },
         dcto: {
-            type: String,
+            type: Number,
             required: true,
             trim: true,
         },
         min_purchase: {
-            type: String,
+            type: Number,
             required: true,
             trim: true,
         },
         status: {
-            type: String,
+            type: Boolean,
             required: true,
             trim: true,
         }
