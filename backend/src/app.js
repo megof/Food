@@ -19,7 +19,7 @@ import verifyTokenMiddleware from './middlewares/verifyToken.middleware.js';
 
 // Importing the routes
 import userRouter from './routes/user.routes.js'
-import orderRouter from './routes/order.routes.js'
+import detailOrderRouter from './routes/detailOrder.routes.js';
 
 // Importing the swagger configuration
 import swaggerConfiguration from './config/swagger.config.js';
@@ -38,7 +38,7 @@ app.use('/api/v1/orders', OrderRoutes);
 
 // Set the routes
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
+app.use('/api/v1/detailOrders', verifyTokenMiddleware, detailOrderRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
 
 

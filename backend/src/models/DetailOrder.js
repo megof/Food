@@ -17,7 +17,15 @@ const orderDetailSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Product',
             required: true
+        },
+        cant: {
+            type: Number,
+            required: true
         }
+    },
+    {
+        timestamps: false,
+        versionKey: false
     }
 );
 
