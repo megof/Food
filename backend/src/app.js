@@ -17,7 +17,8 @@ import verifyTokenMiddleware from './middlewares/verifyToken.middleware.js';
 // Importing the routes
 import userRouter from './routes/user.routes.js'
 import orderRouter from './routes/order.routes.js'
-
+import toppingRoutes from './routes/topping.routes.js'
+import toppingProductRoutes from './routes/toppingProduct.routes.js'
 // Creating an instance of express
 const app = express();
 
@@ -33,6 +34,8 @@ app.use('/api/v1/orders', OrderRoutes);
 // Set the routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
+app.use('/api/v1/topping', toppingRoutes);
+app.use('/api/v1/toppingProduct',  toppingProductRoutes);
 
 
 // Exporting the app

@@ -1,4 +1,4 @@
-import ToppingProduct from '../models/toRefs.js'
+import ToppingProduct from '../models/ToppingProduct.js'
 
 //tener todas los toppingsProPro
 export const getAll = async (req, res) =>{
@@ -39,15 +39,14 @@ export const getOne = async (req, res) =>{
 //guardar un ToppingProduct
 export const save = async (req, res) =>{
     //verificar que el nombre no esté vacío
-    if(!req.body.name){
+    const {idProduct, idTopping} = req.body
+    if(!idProduct || !idTopping){
         return res.status(400).send({
             message: 'Content cannot be empty.'
         })
     }
     try {
-        const newToppingsPro= new ToppingProduct({
-            name: req.body.name,
-        })
+        const newToppingsPro= new ToppingProduct({idProduct, idTopping})
         const ToppingProductSaved = await newToppingsPro.save()
         res.status(201).json(ToppingProductSaved)
 

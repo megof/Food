@@ -7,16 +7,14 @@ const toppingSchema = new Schema(
             required: true, 
             unique: true,
             trim: true
-        }
-    },
-    {
+        },
+    
         price: {
-            type: Numbre,
+            type: Number,
             required: true, 
             trim: true
-        }
-    },
-    {
+        },
+    
         edo: {
             type: Boolean,
             required: true, 
