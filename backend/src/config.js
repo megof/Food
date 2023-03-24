@@ -10,4 +10,5 @@ config();
 // Exporting the environment variables
 export const PORT = process.env.PORT;
 export const URI_MONGO = process.env.URI_MONGO;
+export const JWT_PASSWORD = process.env.JWT_PASSWORD;
 
