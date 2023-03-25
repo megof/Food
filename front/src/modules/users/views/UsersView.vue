@@ -13,41 +13,15 @@
               <div class="login-wrap p-0">
                 <div class="signin-form">
                   <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Nombre de Usuario"
-                      v-model="input.username"
-                      required
-                    />
                   </div>
                   <div class="form-group">
-                    <input
-                      id="password-field"
-                      type="password"
-                      class="form-control"
-                      placeholder="Contraseña"
-                      v-model="input.password"
-                      required
-                    />
-                    <span
-                      toggle="#password-field"
-                      class="fa fa-fw fa-eye field-icon toggle-password"
-                    ></span>
-                  </div>
-                  <div class="form-group">
-                    <button
-                      type="submit"
-                      @click="login"
-                      class="form-control btn btn-primary submit px-3"
-                    >
+                    <button type="submit" @click="login" class="form-control btn btn-primary submit px-3">
                       Iniciar
                     </button>
                   </div>
                   <div class="form-group d-md-flex">
                     <div class="w-50">
-                      <label class="checkbox-wrap checkbox-primary"
-                        >Remember Me
+                      <label class="checkbox-wrap checkbox-primary">Remember Me
                         <input type="checkbox" checked />
                         <span class="checkmark"></span>
                       </label>
