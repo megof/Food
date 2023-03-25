@@ -10,36 +10,33 @@
             
             <div >
                 <h2 class="text-center">{{title}}</h2>
-                <!-- <form class="w-75 mx-auto" @submit.prevent="processForm">
+                <form class="w-75 mx-auto" @submit.prevent="processForm">
                     <div class="form-group mb-2">
                         <label for="name" class="mb-2">Nombre:</label>
-                        <input type="text" class="form-control w-100" id="name" placeholder="Nombre del dispositivo" v-model="name">
+                        <input type="text" class="form-control w-100" id="name" placeholder="Nombre del producto" v-model="name">
                     </div>
                     <div class="form-group mb-2">
-                        <label for="serial" class="mb-2">Serial:</label>
-                        <input type="text" class="form-control w-100" id="serial" placeholder="Ingrese el serial" v-model="serial">
+                      <label class="mb-2">Tipo de Comida:</label>
+                      <SelectComponent :data="productType" v-model="idTypeProduct"/>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="description" class="mb-2">Descripcion:</label>
-                        <input type="text" class="form-control w-100" id="description" placeholder="Ingrese la descripción del equipo." v-model="description">
+                        <label for="description" class="mb-2">Descripción:</label>
+                        <input type="text" class="form-control w-100" id="description" placeholder="Ingrese una descripción." v-model="description">
                     </div>
                     <div class="form-group mb-2">
-                        <label for="available" class="mb-2">Disponibilidad del Equipo:</label>
-                        <select class="form-select" id="available" v-model="stateForm">
-                            <option value="true">Disponible</option>
-                            <option value="false">No Disponible</option>
-                        </select>
+                        <label for="generalDescription" class="mb-2">Descripcion General:</label>
+                        <input type="text" class="form-control w-100" id="generalDescription" placeholder="Ingrese descripción general." v-model="generalDescription">
                     </div>
                     <div class="form-group mb-2">
-                      <label class="mb-2">Marca:</label>
-                      <SelectComponent :data="brands" v-model="brandsId"/>
-                       
+                        <label for="price" class="mb-2">Precio:</label>
+                        <input type="number" class="form-control w-100" id="price" placeholder="Ingrese la descripción del equipo." v-model="price">
                     </div>
                     <div class="form-group mb-2">
-                        <label class="mb-2">Referencia:</label>
-                        <SelectComponent :data="references" v-model="referencesId"/>
-                        <SelectComponent :data="[{id:1,name:'Computador'},{id:2,name:'SmartPhone'}]" v-model="referencesId"/>
+                        <label for="image" class="mb-2">Cargue una imagen:</label>
+                        <input type="text" class="form-control w-100" id="image" placeholder="Inserte una imagen aquí." v-model="image">
                     </div>
+                    
+                    
                     
                    
                     
@@ -53,7 +50,7 @@
                         aria-label="Close"
                         >{{buttonText}}</button>
                     </div>
-                </form> -->
+                </form>
             </div>
           </div>
        </div>
@@ -82,62 +79,59 @@
 
         
         // //Variables Reactivas...
-
-
-        // const name=ref('');
-        // const serial=ref('');
-        // const description=ref('');
-        // const stateForm=ref('');
-        // const brandsId=ref('');
-        // const referencesId=ref('');
+            const idTypeProduct=ref('');
+            const name=ref('');
+            const description=ref('');
+            const generalDescription=ref('');
+            const price=ref('');
+            const image=ref('');
+       
 
      
         
-        // //Funcionalidad del formulario.
-        // const formValidation=()=>{
-        //     let flag=true;
-        //     //Validación si hay algún campo vacío...
-        //     if(name.value===''|| serial.value===''|| description.value==='' || stateForm.value==='' || brandsId.value==='' || referencesId===''){
-        //         flag=false
-        //     }
-           
-        //     return flag;
+        //Funcionalidad del formulario.
+        const formValidation=()=>{
+            let flag=true;
+            //Validación si hay algún campo vacío...
+            if(idTypeProduct.value===''|| name.value===''|| description.value==='' || generalDescription.value==='' || price.value==='' || image.value===''){
+                flag=false
+            }
+            //TODO: Aquí van las demás validaciones que consideremos necesarias.
+            return flag;
 
-        // }
-        // const processForm=()=>{
-        //     const correctForm=formValidation();
-        //     // console.log(correctForm)
-        //     if(correctForm){
-        //         (create.value)?createItem():updateItem();
-        //     }
-           
-        // }
+        }
+        const processForm=()=>{
+            (create.value)?createItem():updateItem();
+        }
               
                
       
-        // const createItem=()=>{
-        //        //Validación para que el serial sea único...
-        //         const repeatedSerial=devices.value.some(el=>el.serial===serial.value);
-        //         if(repeatedSerial) return
-        //         let stateBoolean=(stateForm.value==='true');
-        //         const device={
-        //             id:devices.value[devices.value.length-1]?.id+1 || 1,
-        //             name:name.value,
-        //             serial:serial.value,
-        //             description:description.value,
-        //             state:stateBoolean,
-        //             brandsId:brandsId.value,
-        //             referencesId:referencesId.value
-        //         }
-        //         console.log(stateForm.value)
-        //         addDevice(device);
-        //         name.value='';
-        //         serial.value='';
-        //         description.value='';
-        //         stateForm.value='';
-        //         brandsId.value='';
-        //         referencesId.value='';
-        // }
+        const createItem=()=>{
+                const product={
+                    id:products.value[products.value.length-1]?.id+1 || 1,
+                    idTypeProduct:idTypeProduct.value,
+                    name:name.value,
+                    description:description.value,
+                    generalDescription:generalDescription.value,
+                    price:price.value,
+                    image:image.value,
+                }
+                //Aquí es que debo hacer la validacion ...
+                let correctForm=formValidation();
+                if(correctForm){
+                    product.state=true;
+                }else{
+                    product.state=false;
+                }
+                console.log(product)
+                addProduct(product);
+                idTypeProduct.value='',
+                name.value='',
+                description.value='',
+                generalDescription.value='',
+                price.value='',
+                image.value=''
+        }
         // const updateItem=()=>{
         //     let stateBoolean=(stateForm.value==='true');
         //     const newDevice={

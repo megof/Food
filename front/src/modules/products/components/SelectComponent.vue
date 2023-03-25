@@ -4,9 +4,9 @@
 <template>
    
     <select class="form-select"  v-model="reactiveVariable">
-        <!-- <template v-for="item in data" :key="item.id" >
+        <template v-for="item in data" :key="item.id" >
             <option :value="item.id" >{{item.name}}</option>
-        </template>  -->
+        </template> 
     </select>
 </template>
 
