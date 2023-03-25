@@ -38,6 +38,10 @@ const userRouter = Router();
  *     status:
  *      type: boolean
  *      description: The status of the user
+ *    example:
+ *     name: Sebastián Gámez
+ *     username: sebastian.gamez
+ *     status: true
  *    
  *   Response:
  *    type: object
@@ -59,9 +63,36 @@ const userRouter = Router();
  *    required:
  *     - status
  *     - message 
+ *    example:
+ *     status: 200
+ *     message: Users found
+ * 
+ *  parameters:
+ *   token:
+ *    in: header
+ *    name: x-access-token
+ *    description: The token to access the API
+ *    schema:
+ *     type: string
+ *    required: true
+ *  
+ *   id:
+ *    in: path
+ *    name: id
+ *    description: The id of the user
+ *    schema:
+ *     type: string
+ *    required: true
  * 
  */
 
+/**
+ * @swagger
+ * tags:
+ *  name: Users
+ *  description: The users managing API
+ * 
+ */
 
 /**
  * @swagger
@@ -71,6 +102,8 @@ const userRouter = Router();
  *   description: Return a list of users
  *   tags:
  *   - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Users found
@@ -78,6 +111,19 @@ const userRouter = Router();
  *      application/json:
  *       schema:
  *        $ref: '#/components/schemas/Response'
+ *        example:
+ *         status: 200
+ *         message: Users found
+ *    500:
+ *     description: Error getting users
+ *     content: 
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error getting users
+ * 
  */
 userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
 
@@ -88,6 +134,17 @@ userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
  *   summary: Create new user
  *   tags:
  *    - Users
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/User'
+ *      example:
+ *       name: admin
+ *       username: admin
+ *       password: "123456"
+ *       status: true
  *   responses:
  *    200:
  *     description: Users found
@@ -95,13 +152,175 @@ userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
  *      application/json:
  *       schema: 
  *        $ref: '#/components/schemas/Response'
+ *      example:
+ *       status: 200
+ *       message: User created
+ *    400:
+ *     description: User already exists
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 400
+ *        message: User already exists
+ *    500:
+ *     description: Error creating user
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/User'
+ *       example:
+ *        status: 500
+ *        message: Error creating user
  */
-userRouter.post('/', createUserController);
-// Login a user
+userRouter.post('/', verifyTokenMiddleware, createUserController);
+
+/**
+ * @swagger
+ * /api/v1/users/login:
+ *  post:
+ *   summary: Login user
+ *   tags:
+ *   - Users
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/User'
+ *      example:
+ *       username: admin
+ *       password: "123456"
+ *   responses:
+ *    200:
+ *     description: User logged in
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: User logged in
+ *    400:
+ *     description: Username or password incorrect
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 400
+ *        message: Username or password incorrect
+ *    401:
+ *     description: User is not active
+ *     content:
+ *      application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/Response'
+ *      example:
+ *       status: 401
+ *       message: User is not active
+ *    500:
+ *     description: Error logging in
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error logging in
+ */
 userRouter.post('/login', loginUserController);
-// Update a user
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *  put:
+ *   summary: Update user
+ *   tags: 
+ *    - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
+ *    - $ref: '#/components/parameters/id'
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/User'
+ *      example:
+ *       status: true
+ *   responses:
+ *    200:
+ *     description: User updated
+ *     content:   
+ *      application/json:    
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *      example:
+ *       status: 200
+ *       message: User updated
+ *    404:
+ *     description: User not found
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 404
+ *        message: User not found
+ *    500:
+ *     description: Error updating user
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error updating user
+ * 
+ */ 
 userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
-// Delete a user
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *  delete:
+ *   summary: Delete user
+ *   tags: 
+ *    - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
+ *    - $ref: '#/components/parameters/id'
+ *   responses:
+ *    200:
+ *     description: User deleted
+ *     content:   
+ *      application/json:    
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *      example:
+ *       status: 200
+ *       message: User deleted
+ *    404:
+ *     description: User not found
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 404
+ *        message: User not found
+ *    500:
+ *     description: Error deleting user
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error deleting user
+ */ 
 userRouter.delete('/:id', verifyTokenMiddleware, deleteUserController);
 
 
