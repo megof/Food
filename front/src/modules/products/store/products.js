@@ -19,12 +19,12 @@ export const useProductsStore=defineStore('products',{
             {
                 id:1,
                 idProduct:1,
-                name:'Hamgurguesa Mexicana',
+                name:'Hamburguesa Mexicana',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Hamburguesa Mexicana con papas a la francesa y gaseosa',
                 price:30000,
                 image:'Aquí va la imagen XD',
-                state:'active', //active-> ya está listo en BD; desactive->Está en edición
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
             },
             {
                 id:2,
@@ -34,7 +34,7 @@ export const useProductsStore=defineStore('products',{
                 generalDescription:'Perro Mexicano con salsas al gusto.',
                 price:15000,
                 image:'Aquí va la imagen XD',
-                state:'active', //active-> ya está listo en BD; desactive->Está en edición
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
             }
         ],
 

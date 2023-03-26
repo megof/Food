@@ -132,48 +132,56 @@
                 price.value='',
                 image.value=''
         }
-        // const updateItem=()=>{
-        //     let stateBoolean=(stateForm.value==='true');
-        //     const newDevice={
-        //         id:id.value, 
-        //         name:name.value,
-        //         serial:serial.value,
-        //         description:description.value,
-        //         state:stateBoolean,
-        //         brandsId:brandsId.value,
-        //         referencesId:referencesId.value
-        //     }
-        //     // console.log(`Data que recojo del formulario: ${JSON.stringify(newBrand)}`);
-        //     // console.log(stateForm.value)
-        //     updateDevice(id.value,newDevice);
-        // }
+
+        const updateItem=()=>{
+                    
+            const newProduct={
+                id:id.value,
+                idTypeProduct:idTypeProduct.value,
+                name:name.value,
+                description:description.value,
+                generalDescription:generalDescription.value,
+                price:price.value,
+                image:image.value,
+            }
+            //Aquí es que debo hacer la validacion ...
+            let correctForm=formValidation();
+                if(correctForm){
+                    newProduct.state=true;
+                }else{
+                    newProduct.state=false;
+                }
+            // console.log(`Data que recojo del formulario: ${JSON.stringify(newBrand)}`);
+            updateProduct(id.value,newProduct);
+        }
       
 
         // //Este es el watch en composition API.
-        // watch(title,(newTitle,oldTitle)=>{
+        watch(title,(newTitle,oldTitle)=>{
             
-        //       let item=getDeviceById(id.value)
-        //       if(item){
-        //         name.value=item.name,
-        //         serial.value=item.serial,
-        //         description.value=item.description,
-        //         stateForm.value=item.state,
-        //         brandsId.value=item.brandsId,
-        //         referencesId.value=item.referencesId
-        //       }else{
-        //         name.value='',
-        //         serial.value='',
-        //         description.value='',
-        //         stateForm.value='',
-        //         brandsId.value='',
-        //         referencesId.value=''
-        //       }
-        // });
+              let item=getProductById(id.value)
+              if(item){
+                idTypeProduct.value=item.id,
+                name.value=item.name,
+                description.value=item.description,
+                generalDescription.value=item.generalDescription,
+                price.value=item.price,
+                image.value=item.image
 
-        // //Ciclos de vida del componente....
+              }else{
+                idTypeProduct.value='',
+                name.value='',
+                description.value='',
+                generalDescription.value='',
+                price.value='',
+                image.value=''
+               
+              }
+        });
+
+        //Ciclos de vida del componente....
         // onMounted(()=>{
-        //     getBrands();
-        //     getReferences();
+        //     getProducts();
         // });
     </script>
     

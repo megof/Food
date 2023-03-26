@@ -3,11 +3,10 @@
          <h2>{{ title }}:</h2>
         <button
            @click="createAction"
-           class="btn btn-outline-success"
+           class="btn btn-outline-dark"
            data-bs-toggle="offcanvas"
            :data-bs-target='`#${id}`'
-           ><i
-           class="bi bi-person-plus-fill me-2"></i><span
+           ><i class="bi bi-plus-circle-fill me-2"></i><span
            class="d-none d-md-inline-block">Agregar
            {{
            title
