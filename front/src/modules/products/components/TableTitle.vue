@@ -6,7 +6,7 @@
            class="btn btn-outline-dark"
            data-bs-toggle="offcanvas"
            :data-bs-target='`#${id}`'
-           ><i class="bi bi-plus-circle-fill me-2"></i><span
+           ><i class="bi bi-plus-circle-fill me-2 " style="font-size: 1.3em;"></i><span
            class="d-none d-md-inline-block">Agregar
            {{
            title

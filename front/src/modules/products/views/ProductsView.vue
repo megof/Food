@@ -8,7 +8,7 @@
             <input type="text" class="form-control " placeholder="Buscar por nombre" aria-label="Username" aria-describedby="addon-wrapping" v-model="filter">
          </div>
          <div>
-                <button  class="mx-2 mb-2  btn btn-outline-dark ">Hamburguesas</button>
+                <button  class="mx-2 mb-2  btn btn-outline-dark  active">Hamburguesas</button>
                 <button  class="mx-2 mb-2 btn btn-outline-dark ">Perros</button>
                 <button  class="mx-2 mb-2 btn btn-outline-dark ">Pizza</button>
                 <button  class="mx-2 mb-2 btn btn-outline-dark ">Pollo Broaster</button>
