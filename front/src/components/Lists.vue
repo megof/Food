@@ -52,6 +52,18 @@
               </n-button>
               </n-space>
             </template>
+
+            <template v-if="column === 'opcion'">
+            
+              <n-button color="green">
+                <n-icon>
+                  <EyeSharp/>
+                </n-icon>
+              </n-button>
+            
+            </template>
+
+
             <template v-else>
               {{ item[column] }}
             </template>

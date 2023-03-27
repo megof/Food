@@ -23,7 +23,7 @@ export default {
   // },
   data() {
      return {
-     columns: ['id', 'Cliente', 'Dirección', 'teléfono', 'Observación', 'Total','Estado', 'Fecha', 'opciones'],
+     columns: ['id', 'Cliente', 'Dirección', 'teléfono', 'Observación', 'Total','Estado', 'Fecha', 'opcion'],
       items: [
         { id: 1, Cliente: 'John Doe', Dirección: 30, teléfono: 'Male', Observación: 'Male',  Total: 'Male', Estado:'hola',  Fecha: '89-8987', },
         { id: 2, Cliente: 'Jane Doe', Dirección: 25, teléfono: 'Female', Observación: 'Male',  Total: 'Male', Estado:'hola',  Fecha: '89-8987'},
