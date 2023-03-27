@@ -22,7 +22,7 @@ const detailOrderRouter = Router();
  *  schemas:
  * 
  *   Product:
- *    type: Object
+ *    type: object
  *    properties:
  *     id:
  *      type: string
@@ -70,7 +70,7 @@ const detailOrderRouter = Router();
  *     edo: true
  *   
  *   Order:
- *    type: Object
+ *    type: object
  *    properties:
  *     id:
  *      type: string
@@ -120,10 +120,7 @@ const detailOrderRouter = Router();
  *      type: 
  *       - object
  *       - array
- *      items:
- *       - $ref: '#/components/schemas/User'
- *       - $ref: '#/components/schemas/User'
- *      description: The data of the user or users
+ *      description: The data send by the server
  *    required:
  *     - status
  *     - message 
@@ -131,6 +128,35 @@ const detailOrderRouter = Router();
  *     status: 200
  *     message: Users found
  * 
+ *   DetailOrder:
+ *    type: object
+ *    properties:
+ *     id: 
+ *      type: string
+ *      description: auto-generated id of order detail
+ *     idOrder:
+ *      type: object
+ *      description: idOrder populated
+ *     idProduct:
+ *      type: object
+ *      description: idProduct populated
+ *     cant:
+ *      type: number
+ *      description: Quantity of the product 
+ *    required:
+ *     - idOrder 
+ *     - idProduct
+ *     - cant
+ *    example:
+ *     id: 641e1436e5181e37b4d9d326
+ *     idOrder: 
+ *      schema:
+ *       $ref: '#/components/schemas/Order'
+ *     idProduct:
+ *      schema:  
+ *       $ref: '#/components/schemas/Product'
+ *     cant: 2
+ *  
  *  parameters:
  *   token:
  *    in: header
@@ -150,18 +176,172 @@ const detailOrderRouter = Router();
  * 
  */
 
-// Create the routes
-detailOrderRouter
-    // Get all order details
-    .get("/", getAllOrderDetailsController)
-    // Get order detail by id
-    .get("/:id", getOrderDetailByIdController)
-    // Create order detail
-    .post("/", createOrderDetailController)
-    // Update order detail
-    .put("/:id", updateOrderDetailController)
-    // Delete order detail
-    .delete("/:id", deleteOrderDetailController);
+/**
+ * @swagger
+ * tags:
+ *  name: Order Details
+ *  description: Order details management
+ */
+
+/**
+ * @swagger
+ * /api/v1/detailOrders:
+ *  get:
+ *   summary: Get all order details
+ *   tags:
+ *   - Order Details
+ *   responses:
+ *    200:
+ *     description: Order details found
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: Order details found
+ *        data: [...OrdersDetail]
+ *    500:
+ *     description: Error getting the order details
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error getting the order details
+ *        
+ *   
+*/
+detailOrderRouter.get("/", getAllOrderDetailsController);
+/**
+ * @swagger
+ * /api/v1/detailOrders/{id}:
+ *  get:
+ *   summary: Get detail order by id
+ *   tags:
+ *    - Order Details
+ *   parameters:
+ *    - $ref: '#/components/parameters/id'
+ *   responses:
+ *    200:
+ *     description: Order detail found
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: Order detail found
+ *        data: ...OrderDetail
+ *    500:
+ *     description: Error getting the order detail
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error getting the order detail
+ */
+detailOrderRouter.get("/:id", getOrderDetailByIdController);
+/**
+ * @swagger
+ * /api/v1/detailOrders:
+ *  post:
+ *   summary: Create a new order detail
+ *   tags:
+ *    - Order Details
+ *   requestBody:
+ *    content:
+ *     application/json:
+ *      schema:
+ *       $ref: '#/components/schemas/Response'
+ *      example:
+ *       idOrder: 641e1436e5181e37b4d9d326
+ *       idProduct: 641e1436e5181e37b4d9d326
+ *       cant: 2
+ *   responses:
+ *    200:
+ *     description: Order detail created
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: Order detail created
+ *    500:
+ *     description: Error creating the order detail
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error creating the order detail
+ */
+detailOrderRouter.post("/", createOrderDetailController);
+/**
+ * @swagger
+ * /api/v1/detailOrders/{id}:
+ *  put:
+ *   summary: Update detail order
+ *   tags:
+ *    - Order Details
+ *   parameters:
+ *    - $ref: '#/components/parameters/id'
+ *   responses:
+ *    200:
+ *     description: Order detail updated
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: Order detail updated
+ *    500:
+ *     description: Error updating the order detail
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error updating the order detail
+ */
+detailOrderRouter.put("/:id", updateOrderDetailController);
+/**
+ * @swagger
+ * /api/v1/detailOrders/{id}:
+ *  delete:
+ *   summary: Delete detail order
+ *   tags:
+ *    - Order Details
+ *   parameters:
+ *    - $ref: '#/components/parameters/id'
+ *   responses:
+ *    200:
+ *     description: Order detail deleted
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 200
+ *        message: Detail order deleted
+ *    500:
+ *     description: Error deleting the order detail
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 500
+ *        message: Error deleting the order detail
+ */
+detailOrderRouter.delete("/:id", deleteOrderDetailController);
 
 // Exporting the router
 export default detailOrderRouter;

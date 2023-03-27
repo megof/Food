@@ -8,7 +8,7 @@ const router = Router();
  * components:
  *  schemas:
  *      Order:
- *          type: Object
+ *          type: object
  *          properties:
  *              id:
  *                  type: string

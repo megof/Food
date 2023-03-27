@@ -56,10 +56,7 @@ const userRouter = Router();
  *      type: 
  *       - object
  *       - array
- *      items:
- *       - $ref: '#/components/schemas/User'
- *       - $ref: '#/components/schemas/User'
- *      description: The data of the user or users
+ *      description: The data send by the server
  *    required:
  *     - status
  *     - message 
@@ -112,6 +109,7 @@ const userRouter = Router();
  *        example:
  *         status: 200
  *         message: Users found
+ *         data: [...Users]
  *    500:
  *     description: Error getting users
  *     content: 
