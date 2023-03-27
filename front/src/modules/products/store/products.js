@@ -13,6 +13,10 @@ export const useProductsStore=defineStore('products',{
             {
                 id:2,
                 name:'Perro Caliente'
+            },
+            {
+                id:3,
+                name:'Pizza'
             }
         ],
         products:[
@@ -33,6 +37,46 @@ export const useProductsStore=defineStore('products',{
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Perro Mexicano con salsas al gusto.',
                 price:15000,
+                image:'Aquí va la imagen XD',
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
+            },
+            {
+                id:3,
+                idProduct:1,
+                name:'Hamburguesa Tradicional',
+                description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
+                generalDescription:'Hamburguesa tradicional con la receta de la casa.',
+                price:13000,
+                image:'Aquí va la imagen XD',
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
+            },
+            {
+                id:4,
+                idProduct:1,
+                name:'Hamburguesa Ranchera',
+                description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
+                generalDescription:'Hamburguesa ranchera con la receta de la casa.',
+                price:17000,
+                image:'Aquí va la imagen XD',
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
+            },
+            {
+                id:5,
+                idProduct:2,
+                name:'Asquerosito',
+                description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
+                generalDescription:'Perro caliente venezolano, con la auténtica receta.',
+                price:12000,
+                image:'Aquí va la imagen XD',
+                state:true, //active-> ya está listo en BD; desactive->Está en edición
+            },
+            {
+                id:6,
+                idProduct:3,
+                name:'Pizza Hawaiana',
+                description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
+                generalDescription:'izza Hawaiana con el mejor sabor.',
+                price:28000,
                 image:'Aquí va la imagen XD',
                 state:true, //active-> ya está listo en BD; desactive->Está en edición
             }

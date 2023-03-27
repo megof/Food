@@ -3,15 +3,14 @@
       <div class="container-md container-fluid mt-5">
          <TableTitle title="Productos" id="offcanvasProduct"/>
          <!-- Filtro de búsqueda -->
-         <div class="input-group flex-nowrap w-75 mt-4 mb-4">
+         <!-- <div class="input-group flex-nowrap w-75 mt-4 mb-4">
             <span class="input-group-text bg-dark text-white" id="addon-wrapping"><i class="bi bi-search"></i></span>
             <input type="text" class="form-control " placeholder="Buscar por nombre" aria-label="Username" aria-describedby="addon-wrapping" v-model="filter">
-         </div>
-         <div>
-                <button  class="mx-2 mb-2  btn btn-outline-dark  active">Hamburguesas</button>
-                <button  class="mx-2 mb-2 btn btn-outline-dark ">Perros</button>
-                <button  class="mx-2 mb-2 btn btn-outline-dark ">Pizza</button>
-                <button  class="mx-2 mb-2 btn btn-outline-dark ">Pollo Broaster</button>
+         </div> -->
+         <div class="mt-3">
+          <button @click="productCharacterization(0,0)" class="mx-2 mb-2  btn btn-outline-dark active" id="0">Todos</button>
+          <button v-for="type in productType" :key="type.id" @click='productCharacterization(type.id,type.id)' class="mx-2 mb-2  btn btn-outline-dark" :id="type.id" >{{ type.name }}</button>
+                
           </div>
          <!-- Fin del filtro de búsqueda -->
          
@@ -31,7 +30,7 @@
                </tr>
              </thead>
              <tbody>
-               <tr v-for="product in productFilter" :key="product.id"> 
+               <tr v-for="product in characterizedProducts" :key="product.id"> 
                  <td class=" d-none d-sm-table-cell">{{product.id}}</td>
                  <td class=" d-none d-sm-table-cell">{{product.idProduct}}</td>
                  <td >{{product.name}}</td>
@@ -73,20 +72,35 @@
       import {useProductsStore} from '../store/products.js';
       import {useOffCanvasStore} from '../store/offCanvas.js';
       import { storeToRefs } from 'pinia';
-      import {ref,computed,onMounted} from 'vue';
+      import {ref,onMounted} from 'vue';
 
       const useProducts=useProductsStore();
       const useOffCanvas=useOffCanvasStore();
       const {updateAction}=useOffCanvas;
-      const {products}=storeToRefs(useProducts);
+      const {products,productType}=storeToRefs(useProducts);
       const {getProducts, deleteProduct}=useProducts;
 
       //Variable reactiva para el filtro de búsqueda ....
-      const filter=ref('');
+      // const filter=ref('');
       //Propiedad computada que es la que me filtra según lo digitado en el campo...
-      const productFilter=computed(()=>{
-        return products.value.filter(el=>el.name.toLowerCase().includes(filter.value.toLowerCase()));
-      })
+      // const productFilter=computed(()=>{
+      //   return products.value.filter(el=>el.name.toLowerCase().includes(filter.value.toLowerCase()));
+      // })
+      const characterizedProducts=ref(products.value);
+      const clearButtons=()=>{
+        for(let i=0;i<=productType.value.length;i++){
+          document.getElementById(i).classList.remove("active");
+        }
+      }
+      const productCharacterization=(idProduct,idButton)=>{
+        clearButtons();
+        if(idProduct!==0){
+          characterizedProducts.value=products.value.filter(product=>product.idProduct===idProduct);
+        }else{
+          characterizedProducts.value=products.value;
+        }
+        document.getElementById(idButton).classList.add("active");
+      }
   
       onMounted(()=>{
         getProducts();
