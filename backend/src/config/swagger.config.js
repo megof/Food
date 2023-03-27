@@ -5,7 +5,7 @@
 import swaggerJsDoc from 'swagger-jsdoc';
 
 // Import the port from the environment variables
-import { PORT } from '../config.js';
+import { PORT } from './env.config.js';
 
 // Create the swagger options
 const swaggerOptions = {

@@ -8,7 +8,7 @@ import {
     createOrderDetail,
     updateOrderDetail,
     deleteOrderDetail
-} from '../services/orderDetail.service.js';
+} from '../services/detailOrder.service.js';
 
 
 // Get all order details method

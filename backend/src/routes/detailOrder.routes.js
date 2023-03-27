@@ -11,13 +11,13 @@ import {
     createOrderDetailController,
     updateOrderDetailController,
     deleteOrderDetailController
-} from "../controllers/orderDetail.controller.js";
+} from "../controllers/detailOrder.controller.js";
 
 // Creating the router
-const orderDetailRouter = Router();
+const detailOrderRouter = Router();
 
 // Create the routes
-orderDetailRouter
+detailOrderRouter
     // Get all order details
     .get("/", getAllOrderDetailsController)
     // Get order detail by id
@@ -30,5 +30,5 @@ orderDetailRouter
     .delete("/:id", deleteOrderDetailController);
 
 // Exporting the router
-export default orderDetailRouter;
+export default detailOrderRouter;
 

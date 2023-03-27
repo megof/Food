@@ -96,12 +96,20 @@ export const updateUser = async (id, user) => {
 	// Try to update the user
 	try {
 		// Update the user
-		await UserModel.findByIdAndUpdate(id, user);
-		// Set the response
-		response = {
-			status: 200,
-			message: 'User updated',
-		};
+		const userDb = await UserModel.findByIdAndUpdate(id, user);
+		if (!userDb) {
+			// Set the response
+			response = {
+				status: 404,
+				message: 'User not found',
+			};
+		} else{
+			// Set the response
+			response = {
+				status: 200,
+				message: 'User updated',
+			};
+		}
 	// Catch the error
 	} catch (error) {
 		// Log the error
@@ -124,12 +132,21 @@ export const deleteUser = async (id) => {
 	// Try to delete the user
 	try {
 		// Delete the user
-		await UserModel.findByIdAndDelete(id);
-		// Set the response
-		response = {
-			status: 200,
-			message: 'User deleted',
-		};
+		const userDb = await UserModel.findByIdAndDelete(id).select('-password');
+		if (!userDb) {
+			// Set the response
+			response = {
+				status: 404,
+				message: 'User not found',
+			};
+		}
+		else {
+			// Set the response
+			response = {
+				status: 200,
+				message: 'User deleted',
+			};
+		}
 	// Catch the error
 	} catch (error) {
 		// Log the error

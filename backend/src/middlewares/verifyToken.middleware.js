@@ -5,7 +5,7 @@
 import jwt from 'jsonwebtoken';
 
 // Import the JWT password
-import { JWT_PASSWORD } from '../config.js';
+import { JWT_PASSWORD } from '../config/env.config.js';
 
 // Verify token middleware
 const verifyTokenMiddleware = (req, res, next) => {

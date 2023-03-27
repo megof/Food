@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // Import the JWT password
-import { JWT_PASSWORD } from '../config.js';
+import { JWT_PASSWORD } from '../config/env.config.js';
 
 // Import the user service
 import {
@@ -32,7 +32,7 @@ export const loginUserController = async (req, res) => {
             // Send the response
             return res.status(400).json({
                 status: 400,
-                message: 'User does not exist',
+                message: 'Username or password incorrect',
             });
         }
         // Check if the password is correct
@@ -41,9 +41,18 @@ export const loginUserController = async (req, res) => {
             // Send the response
             return res.status(400).json({
                 status: 400,
-                message: 'Incorrect password',
+                message: 'Username or password incorrect',
             });
         }
+        // Check if the user is active
+        if (!userDb.data.status) {
+            // Send the response
+            return res.status(401).json({
+                status: 401,
+                message: 'User is not active',
+            });
+        }
+
         // Sign the token
         const token = jwt.sign({id: userDb.id}, JWT_PASSWORD, { expiresIn: '24h' });
 
@@ -114,6 +123,11 @@ export const updateUserController = async (req, res) => {
 	const {id} = req.params;
 	// Get the user
 	const user = req.body;
+    // Check if the password will be updated
+    if (user.password) {
+        // Encrypt the password
+        user.password = await bcrypt.hash(user.password, 10);
+    }
 	// Update the user
 	const response = await updateUser(id, user);
 	// Send the response
