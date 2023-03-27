@@ -1,0 +1,27 @@
+# Description: Docker compose file for a Node.js app with MongoDB at development
+# Author: Sebastián Gámez Ariza
+
+version: '3.9'
+services:
+  db:
+    image: mongo:6
+    ports:
+      - "27018:27017"
+    env_file:
+      - .env.dev
+    volumes:
+      - mongo-data:/data/db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env.dev
+    links:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/app
+volumes:
+  mongo-data:
