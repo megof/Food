@@ -10,8 +10,8 @@
         Crear
       </n-button>
 
- <n-button color="#0066b2">
-    <!--
+      <n-button color="#0066b2">
+        <!--
         Esto se hace por si le da click que lo envíe donde desee para actualizar
         @click="actualizarEmpleado(employees._id, employees.name, employees.last, employees.dir, employees.phone, employees.email)" -->
         <n-icon>
@@ -19,31 +19,26 @@
         </n-icon>
         Actualizar
       </n-button>
-      
- <n-button color="#a90b30">
+
+      <n-button color="#a90b30">
         <n-icon>
           <Trash />
         </n-icon>
         Eliminar
       </n-button>
     </n-space>
+
     <n-table class="table table-striped table-hover table-bordered m-4">
       <thead>
         <tr>
-          <TH>CLIENTES</TH>
-          <TH>DIRECCIÓN</TH>
-          <TH>TELÉFONO</TH>
-          <TH>OBSERVACIÓN</TH>
-          <TH>FECHA</TH>
+          <th v-for="(column, index) in columns" :key="index">{{ column }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Oscar</td>
-          <td>Calle 22</td>
-          <td>31758220</td>
-          <td>Piso 2</td>
-          <td>4/7/2023</td>
+        <tr v-for="(item, index) in items" :key="index">
+          <td v-for="(column, index) in columns" :key="index">
+            {{ item[column] }}
+          </td>
         </tr>
       </tbody>
     </n-table>
@@ -60,8 +55,9 @@ import {
   NIcon,
   NAvatar,
   NSpace,
+
 } from "naive-ui";
-import { EyeSharp, Trash, Create,ArrowUpCircle } from "@vicons/ionicons5";
+import { EyeSharp, Trash, Create, ArrowUpCircle } from "@vicons/ionicons5";
 
 export default {
   name: "Lists",
@@ -77,9 +73,14 @@ export default {
     Trash,
     NSpace,
     Create,
-    ArrowUpCircle
+    ArrowUpCircle,
+
   },
   props: {
+    columns: {
+      type: Array,
+      required: true,
+    },
     items: {
       type: Array,
       required: true,
