@@ -27,7 +27,7 @@
         Eliminar
       </n-button>
     </n-space>
-    <n-table class="table table-striped table-hover table-bordered">
+    <n-table class="table table-striped table-hover table-bordered m-4">
       <thead>
         <tr>
           <TH>CLIENTES</TH>
