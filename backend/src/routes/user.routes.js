@@ -125,7 +125,7 @@ const userRouter = Router();
  *        message: Error getting users
  * 
  */
-userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
+userRouter.get('/', getAllUsersController);
 
 /**
  * @swagger
@@ -280,7 +280,7 @@ userRouter.post('/login', loginUserController);
  *        message: Error updating user
  * 
  */ 
-userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
+userRouter.put('/:id', updateUserController);
 
 /**
  * @swagger
@@ -321,7 +321,7 @@ userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
  *        status: 500
  *        message: Error deleting user
  */ 
-userRouter.delete('/:id', verifyTokenMiddleware, deleteUserController);
+userRouter.delete('/:id', deleteUserController);
 
 
 // Exporting the router
