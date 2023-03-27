@@ -85,16 +85,16 @@
 import { onMounted, ref } from 'vue';
 import axios from "axios";
 
-const marcas = ref([]);
+const users = ref([]);
 const name = ref("")
 
 onMounted(()=>{
-     getMarcas();
-     console.log(marcas.value);
+     getUsers();
+     console.log(users.value);
 })
 
 
-async function getMarcas() {
+async function getUsers() {
     const res = await fetch("http://localhost:3000/api/v1/brand/all")
     const data = await res.json();
     marcas.value = data;
@@ -185,7 +185,7 @@ td img {
 
 .table_ thead {
     background-color: #161a42;
-    background-image: linear-gradient(160deg, #161a42 0%, #5462ca 100%);
+    background-image: linear-gradient(160deg, #cbcbd3 0%, #f0eded 100%);
     border-bottom: solid 5px rgba(255, 255, 255, .5);
 }
 

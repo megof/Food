@@ -33,6 +33,9 @@
           <a href="#" class="text-decoration-none w-50 d-flex justify-content-center"
             ><span class="material-symbols-outlined"> login </span>Login</a
           >
+          <li>
+            <router-link to="/admin/users"  class="network-name">Admin Users</router-link>
+        </li>
           <a href="#" class="text-decoration-none w-50 d-flex justify-content-center shopping">
             <span
               class="material-symbols-outlined d-flex justify-content-center align-items-center"

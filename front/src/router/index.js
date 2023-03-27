@@ -29,6 +29,7 @@ const router = createRouter({
       name: "admin-users",
       component: () => import("../modules/users/views/UsersView.vue"),
     },
+    
 
     // error - 404
     {
