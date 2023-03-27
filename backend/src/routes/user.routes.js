@@ -174,7 +174,7 @@ userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
  *        status: 500
  *        message: Error creating user
  */
-userRouter.post('/', verifyTokenMiddleware, createUserController);
+userRouter.post('/', createUserController);
 
 /**
  * @swagger
@@ -215,11 +215,11 @@ userRouter.post('/', verifyTokenMiddleware, createUserController);
  *     description: User is not active
  *     content:
  *      application/json:
- *      schema:
- *       $ref: '#/components/schemas/Response'
- *      example:
- *       status: 401
- *       message: User is not active
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 401
+ *        message: User is not active
  *    500:
  *     description: Error logging in
  *     content:

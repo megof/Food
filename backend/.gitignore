@@ -18,12 +18,12 @@ coverage
 
 #enviroment variables
 .env 
-
+.env.dev
 /cypress/videos/
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
+.vscode
 !.vscode/extensions.json
 .idea
 *.suo

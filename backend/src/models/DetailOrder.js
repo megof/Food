@@ -6,7 +6,7 @@
 import { Schema, model } from "mongoose";
 
 // Creating the OrderDetail schema
-const orderDetailSchema = new Schema(
+const detailOrderSchema = new Schema(
     {
         idOrder:{
             type: Schema.Types.ObjectId,
@@ -30,7 +30,7 @@ const orderDetailSchema = new Schema(
 );
 
 // Creating the OrderDetail model
-const OrderDetailModel = model('OrderDetail', orderDetailSchema);
+const detailOrderModel = model('DetailOrder', detailOrderSchema);
 
 // Exporting the User model
-export default OrderDetailModel;
+export default detailOrderModel;
