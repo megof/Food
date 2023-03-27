@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="image" class="mb-2">Cargue una imagen:</label>
-                        <input type="text" class="form-control w-100" id="image" placeholder="Inserte una imagen aquí." v-model="image">
+                        <input type="file" class="form-control w-100" id="image" @change="onFileSelected" >
                     </div>
                     
                     
@@ -100,6 +100,12 @@
             return flag;
 
         }
+        const onFileSelected=(e)=>{
+            console.log("Entró a cargar el archivo...")
+            image.value = e.target.files[0];
+            console.log("archivo cargado");
+            console.log(image.value);
+        }
         const processForm=()=>{
             (create.value)?createItem():updateItem();
         }
@@ -152,6 +158,7 @@
                     newProduct.state=false;
                 }
             // console.log(`Data que recojo del formulario: ${JSON.stringify(newBrand)}`);
+            console.log(newProduct);
             updateProduct(id.value,newProduct);
         }
       

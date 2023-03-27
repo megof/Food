@@ -22,7 +22,7 @@ export const useProductsStore=defineStore('products',{
         products:[
             {
                 id:1,
-                idProduct:1,
+                idTypeProduct:1,
                 name:'Hamburguesa Mexicana',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Hamburguesa Mexicana con papas a la francesa y gaseosa',
@@ -32,7 +32,7 @@ export const useProductsStore=defineStore('products',{
             },
             {
                 id:2,
-                idProduct:2,
+                idTypeProduct:2,
                 name:'Perro Mexicano',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Perro Mexicano con salsas al gusto.',
@@ -42,7 +42,7 @@ export const useProductsStore=defineStore('products',{
             },
             {
                 id:3,
-                idProduct:1,
+                idTypeProduct:1,
                 name:'Hamburguesa Tradicional',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Hamburguesa tradicional con la receta de la casa.',
@@ -52,7 +52,7 @@ export const useProductsStore=defineStore('products',{
             },
             {
                 id:4,
-                idProduct:1,
+                idTypeProduct:1,
                 name:'Hamburguesa Ranchera',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Hamburguesa ranchera con la receta de la casa.',
@@ -62,7 +62,7 @@ export const useProductsStore=defineStore('products',{
             },
             {
                 id:5,
-                idProduct:2,
+                idTypeProduct:2,
                 name:'Asquerosito',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'Perro caliente venezolano, con la auténtica receta.',
@@ -72,7 +72,7 @@ export const useProductsStore=defineStore('products',{
             },
             {
                 id:6,
-                idProduct:3,
+                idTypeProduct:3,
                 name:'Pizza Hawaiana',
                 description:'Nisi cupidatat officia fugiat consequat ullamco voluptate aliqua Et culpa pariatur magna eiusmod magna pariatur sunt.',
                 generalDescription:'izza Hawaiana con el mejor sabor.',

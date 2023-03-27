@@ -32,7 +32,7 @@
              <tbody>
                <tr v-for="product in characterizedProducts" :key="product.id"> 
                  <td class=" d-none d-sm-table-cell">{{product.id}}</td>
-                 <td class=" d-none d-sm-table-cell">{{product.idProduct}}</td>
+                 <td class=" d-none d-sm-table-cell">{{product.idTypeProduct}}</td>
                  <td >{{product.name}}</td>
                  <!-- <td class=" d-none d-sm-table-cell">{{product.description}}</td>
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
@@ -92,10 +92,10 @@
           document.getElementById(i).classList.remove("active");
         }
       }
-      const productCharacterization=(idProduct,idButton)=>{
+      const productCharacterization=(idTypeProduct,idButton)=>{
         clearButtons();
-        if(idProduct!==0){
-          characterizedProducts.value=products.value.filter(product=>product.idProduct===idProduct);
+        if(idTypeProduct!==0){
+          characterizedProducts.value=products.value.filter(product=>product.idTypeProduct===idTypeProduct);
         }else{
           characterizedProducts.value=products.value;
         }
