@@ -37,7 +37,12 @@
       <tbody>
         <tr v-for="(item, index) in items" :key="index">
           <td v-for="(column, index) in columns" :key="index">
-            {{ item[column] }}
+            <template v-if="column === 'opciones'">
+              <n-button>Ver</n-button>
+            </template>
+            <template v-else>
+              {{ item[column] }}
+            </template>
           </td>
         </tr>
       </tbody>
@@ -55,7 +60,6 @@ import {
   NIcon,
   NAvatar,
   NSpace,
-
 } from "naive-ui";
 import { EyeSharp, Trash, Create, ArrowUpCircle } from "@vicons/ionicons5";
 
@@ -74,7 +78,6 @@ export default {
     NSpace,
     Create,
     ArrowUpCircle,
-
   },
   props: {
     columns: {
