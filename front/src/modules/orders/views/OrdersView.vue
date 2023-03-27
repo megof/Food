@@ -2,6 +2,8 @@
   <h1>Pedidos</h1>
   <Lists :columns="columns" :items="items"/>
 
+  
+
 </template>
 
 <script>

@@ -15,7 +15,7 @@
         Esto se hace por si le da click que lo envíe donde desee para actualizar
         @click="actualizarEmpleado(employees._id, employees.name, employees.last, employees.dir, employees.phone, employees.email)" -->
         <n-icon>
-          <ArrowUpCircle />
+          <SyncCircle />
         </n-icon>
         Actualizar
       </n-button>
@@ -38,7 +38,19 @@
         <tr v-for="(item, index) in items" :key="index">
           <td v-for="(column, index) in columns" :key="index">
             <template v-if="column === 'opciones'">
-              <n-button>Ver</n-button>
+              <n-space>
+              <n-button color="#0066b2">
+                <n-icon>
+                  <SyncCircle />
+                </n-icon>
+              </n-button>
+
+              <n-button color="#a90b30">
+                <n-icon>
+                  <Trash />
+                </n-icon>
+              </n-button>
+              </n-space>
             </template>
             <template v-else>
               {{ item[column] }}
@@ -61,7 +73,7 @@ import {
   NAvatar,
   NSpace,
 } from "naive-ui";
-import { EyeSharp, Trash, Create, ArrowUpCircle } from "@vicons/ionicons5";
+import { EyeSharp, Trash, Create, SyncCircle } from "@vicons/ionicons5";
 
 export default {
   name: "Lists",
@@ -77,7 +89,7 @@ export default {
     Trash,
     NSpace,
     Create,
-    ArrowUpCircle,
+    SyncCircle,
   },
   props: {
     columns: {
