@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: "/products",
       name: "products",
-      // component: () => import('../views/AboutView.vue')
+      component: () => import("@/views/HomeProducts.vue"),
     },
     {
       path: "/admin/orders",
@@ -27,6 +27,12 @@ const router = createRouter({
       path: "/admin/users",
       name: "admin-users",
       component: () => import("../modules/users/views/UsersView.vue"),
+    },
+
+    // error - 404
+    {
+      path: "/:pathMatch(.*)*",
+      component: () => import("@/modules/shared/pages/404.vue"),
     },
   ],
 });

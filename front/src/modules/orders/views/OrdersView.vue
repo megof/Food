@@ -1,9 +1,3 @@
-<template>
-  <h1>Init</h1>
-</template>
+<template></template>
 
-<script>
-export default {};
-</script>
-
-<style></style>
+<script setup></script>
