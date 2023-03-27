@@ -102,8 +102,6 @@ const userRouter = Router();
  *   description: Return a list of users
  *   tags:
  *   - Users
- *   parameters:
- *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Users found
@@ -240,7 +238,6 @@ userRouter.post('/login', loginUserController);
  *   tags: 
  *    - Users
  *   parameters:
- *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   requestBody:
  *    required: true
@@ -290,7 +287,6 @@ userRouter.put('/:id', updateUserController);
  *   tags: 
  *    - Users
  *   parameters:
- *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
