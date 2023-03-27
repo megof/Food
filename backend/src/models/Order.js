@@ -25,7 +25,6 @@ const orderSchema = new Schema(
         total: {
             type: Number,
             required: true,
-            unique: true,
             trim: true
         },
         status: { 
