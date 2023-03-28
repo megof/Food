@@ -3,7 +3,7 @@
     <h2>{{ title }}:</h2>
     <button
       @click="createAction"
-      class="btn btn-outline-success"
+      class="btn btn-outline-dark"
       data-bs-toggle="offcanvas"
       :data-bs-target="`#${id}`"
     >

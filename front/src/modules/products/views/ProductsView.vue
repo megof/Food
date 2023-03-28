@@ -1,13 +1,10 @@
 <template>
   <div>
     <div class="container-md container-fluid mt-5">
-      <h1 class="text-center my-4">Productos</h1>
-      <!-- <TableTitle title="Productos" id="offcanvasProduct"/> -->
+      <!-- <h1 class="text-center my-4">Productos</h1> -->
+      <TableTitle title="Productos" id="offcanvasProduct"/>
       <!-- Filtro de búsqueda -->
-      <!-- <div class="input-group flex-nowrap w-75 mt-4 mb-4">
-            <span class="input-group-text bg-dark text-white" id="addon-wrapping"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control " placeholder="Buscar por nombre" aria-label="Username" aria-describedby="addon-wrapping" v-model="filter">
-         </div> -->
+     
       <div class="mt-3 d-flex justify-content-center">
         <button
           @click="productCharacterization(0, 0)"
@@ -29,18 +26,18 @@
       <!-- Fin del filtro de búsqueda -->
 
       <ProductOffCanvas />
-      <table class="table table-dark mt-3 table-bordered border-white" v-if="products.length !== 0">
+      <table class="table  mt-3 table-bordered" v-if="products.length !== 0">
         <thead>
           <tr>
             <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
             <th scope="col" class="d-none d-sm-table-cell col-1">Id Producto</th>
             <!-- <th scope="col" class=" d-none d-sm-table-cell">Descripcion</th>
                  <th scope="col" class=" d-none d-sm-table-cell">Descripcion General</th> -->
-            <th scope="col" class="col-4">Nombre</th>
+            <th scope="col" class="col-3">Nombre</th>
             <th scope="col" class="col-2">Precio</th>
             <!-- <th scope="col">Imagen</th> -->
             <th scope="col" class="col-2">Estado</th>
-            <th scope="col" class="col-2">Action</th>
+            <th scope="col" class="col-3">Action</th>
           </tr>
         </thead>
         <tbody>
