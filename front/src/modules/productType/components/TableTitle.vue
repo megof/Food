@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import {useOffCanvasStore} from '@/store/offCanvas.js'
+import {useOffCanvasStore} from '../store/offCanvas.js'
 const useOffCanvas=useOffCanvasStore();
 const {createAction}=useOffCanvas;
     const props=defineProps({

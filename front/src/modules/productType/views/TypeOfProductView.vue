@@ -1,9 +1,9 @@
 <template>
   <div class="container-md container-fluid mt-5">
-    <TableTitle title="Referencias" id="offcanvasReferences"/>
-    <ReferencesOffCanvas/>
+    <TableTitle title="Tipos de Producto" id="offcanvasTypes"/>
+    <TypeOfProductOffCanvas/>
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-75" v-if="references.length!==0"> <!--v-if="references.length!==0"-->
+    <table class="table bg-white bg-opacity-75 mt-3 w-75" v-if="types.length!==0"> <!--v-if="references.length!==0"-->
           <thead >
             <tr>
               <th scope="col">Id</th>
@@ -12,19 +12,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="reference in references" :key="reference.id"> <!--Aquí debe ir el v-for después de la petición http-->
-              <td >{{reference.id}}</td>
-              <td >{{reference.name}}</td>
+            <tr v-for="type in types" :key="type.id"> 
+              <td >{{type._id}}</td>
+              <td >{{type.name}}</td>
               <td>
-                <!--Este es el botón que habilita mi offCanvas-->
+                
                <button 
-                  class="btn  btn-sm btn-secondary me-2" data-bs-toggle="offcanvas" data-bs-target='#offcanvasReferences'
-                  @click="updateAction(reference.id,reference.name)"
+                  class="btn  btn-sm btn-secondary me-2" data-bs-toggle="offcanvas" data-bs-target='#offcanvasTypes'
+                  @click="updateAction(type._id,type.name)"
                   ><i
                   class="bi bi-arrow-repeat me-1"></i><span
                   class="d-none d-md-inline-block">Actualizar</span>
                   </button>
-                <button class="btn btn-sm btn-danger" @click="deleteReference(reference.id)"><i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span></button>
+                <button class="btn btn-sm btn-danger" @click="deleteType(type._id)"><i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span></button>
               </td>
             </tr>
           
@@ -37,21 +37,22 @@
 
 <script setup>
   import TableTitle from '../components/TableTitle.vue';
-  import ReferencesOffCanvas from '../components/offcanvas/ReferencesOffCanvas.vue';
+  import TypeOfProductOffCanvas from '../components/TypeOfProductOffCanvas.vue';
   import LoadingSpinner from '../components/LoadingSpinner.vue';
-  import {useReferencesStore} from '@/store/references.js';
-  import {useOffCanvasStore} from '@/store/offCanvas.js'
+
+  import {useTypeStore} from '../store/types.js';
+  import {useOffCanvasStore} from '../store/offCanvas.js'
   import { storeToRefs } from 'pinia';
   import {onMounted} from 'vue';
 
-  const useReferences=useReferencesStore();
+  const useType=useTypeStore();
   const useOffCanvas=useOffCanvasStore();
   const {updateAction}=useOffCanvas;
-  const {references}=storeToRefs(useReferences);
-  const {getReferences,deleteReference}=useReferences;
+  const {types}=storeToRefs(useType);
+  const {getTypes,deleteType}=useType;
   
 onMounted(()=>{
-  getReferences();
+  getTypes();
 });
 </script>
 

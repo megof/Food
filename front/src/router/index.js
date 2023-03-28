@@ -24,6 +24,11 @@ const router = createRouter({
       component: () => import("../modules/products/views/ProductsView.vue"),
     },
     {
+      path: "/admin/productType",
+      name: "admin-product-type",
+      component: () => import("../modules/productType/views/TypeOfProductView.vue"),
+    },
+    {
       path: "/admin/users",
       name: "admin-users",
       component: () => import("../modules/users/views/UsersView.vue"),

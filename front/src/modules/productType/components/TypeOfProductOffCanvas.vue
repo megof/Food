@@ -1,6 +1,6 @@
 <template>
   
-    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasReferences" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasTypes" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -38,18 +38,18 @@
     
     <script setup>
         import {ref,watch} from 'vue'
-        import {useReferencesStore} from '@/store/references.js';
-        import {useOffCanvasStore} from '@/store/offCanvas.js'
+        import {useTypeStore} from '../store/types.js';
+        import {useOffCanvasStore} from '../store/offCanvas.js'
         import { storeToRefs } from 'pinia';
        
         
         
 
 
-        const useReferences=useReferencesStore();
+        const useType=useTypeStore();
        
-        const {references}=storeToRefs(useReferences);
-        const {getReferenceById,addReference,updateReference}=useReferences;
+        const {types}=storeToRefs(useType);
+        const {getTypeById,addType,updateType}=useType;
 
         const useOffCanvas=useOffCanvasStore();
         const {create,id,title,buttonText}=storeToRefs(useOffCanvas);
@@ -57,12 +57,7 @@
         
         //Variables Reactivas...
         const name=ref('');
-        // const errorName=ref(false);
-        const myOffCanvas=ref(null);
-        
-        //const item=getBrandById(id.value)
-              
-       
+
 
         //Funcionalidad del formulario.
         const processForm=()=>{
@@ -73,35 +68,33 @@
             }
         }
         const createItem=()=>{
-            let flag=references.value.some(reference=>reference.name.toLowerCase()===name.value.toLowerCase())
+            let flag=types.value.some(type=>type.name.toLowerCase()===name.value.toLowerCase())
             if(!flag && name.value!==''){
              
-                const reference={
-                id:references.value[references.value.length-1]?.id+1||1,
+                const type={
+                _id:'641e1453e5181e37b4d9d32z',
                 name:name.value,
                 }
-                addReference(reference);
+                addType(type);
                 name.value='';
-                // closeOffCanvas();
             }else{
-                // errorName.value=true
                 name.value='';
             }
             
         }
         const updateItem=()=>{
-            const newReference={
-                id:id.value, 
+            const newType={
+                _id:id.value, 
                 name:name.value
             }
-            updateReference(id.value,newReference);
+            updateType(id.value,newType);
         }
        
 
         //Este es el watch en composition API.
         watch(title,(newTitle,oldTitle)=>{
             
-              let item=getReferenceById(id.value)
+              let item=getTypeById(id.value)
               if(item){
                 name.value=item.name
               }else{
