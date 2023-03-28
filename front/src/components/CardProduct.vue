@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="card h-100">
     <img src="..." class="card-img-top" alt="..." />
     <div class="card-body">
@@ -11,10 +11,32 @@
     </div>
     <div class="card-footer"></div>
   </div>
+</template> -->
+
+<template>
+  <n-card :title="title">
+    <template #cover>
+      <img src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
+    </template>
+    Card Content
+    <template #footer> #footer </template>
+    <template #action> #action </template>
+  </n-card>
 </template>
 
 <script>
-export default {};
+import { NCard } from "naive-ui";
+export default {
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
+  components: {
+    NCard,
+  },
+};
 </script>
 
 <style></style>
