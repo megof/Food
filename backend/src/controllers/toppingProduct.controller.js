@@ -1,9 +1,12 @@
 import ToppingProduct from '../models/ToppingProduct.js'
-
+import Topping from '../models/Topping.js'
+import Product from '../models/Product.js'
 //tener todas los toppingsProPro
 export const getAll = async (req, res) =>{
     try {
         const toppingsPro = await ToppingProduct.find()
+        .populate('idProduct')
+        .populate('idTopping')
         //si no existe tareas devuelve 404
         if(!toppingsPro)
             return  res.status(404).json({error: 'Something goes wrong retrieving the ToppingProducts.'})
@@ -22,6 +25,8 @@ export const getAll = async (req, res) =>{
 export const getOne = async (req, res) =>{
     try {
         const toppingsPro = await ToppingProduct.findById(req.params.id)
+        .populate('idProduct')
+        .populate('idTopping')
        
         if(!toppingsPro)
         return  res.status(404).json({error: 'Something goes wrong retrieving the ToppingProduct.'})
@@ -46,12 +51,24 @@ export const save = async (req, res) =>{
         })
     }
     try {
-        const newToppingsPro= new ToppingProduct({
-            idProduct: req.body.idProduct, 
-            idTopping: req.body.idTopping
-        })
+        const toppingProd = req.body
+        const newToppingsPro= new ToppingProduct(toppingProd)
         const ToppingProductSaved = await newToppingsPro.save()
         res.status(201).json(ToppingProductSaved)
+        /**
+        const existTopping = await Topping.findById(req.body.idTopping)
+        const existProduct = await Product.findById(req.body.idProduct)
+        if(existProduct && existTopping){
+            const newToppingsPro= new ToppingProduct({
+                idProduct: existProduct._id, 
+                idTopping: existTopping._id
+            })
+            const ToppingProductSaved = await newToppingsPro.save()
+            res.status(201).json(ToppingProductSaved)
+        }else{
+            res.status(400).send({message: 'product or topping not found'})
+        }
+         */
 
     } catch (error) {
         res.status(500).json({
