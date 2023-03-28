@@ -1,5 +1,5 @@
 <template>
-  <h1>Init</h1>
+  <h1 class="text-center my-4">Usuarios</h1>
 </template>
 
 <script>
