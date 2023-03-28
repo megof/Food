@@ -7,21 +7,22 @@ import { Router } from "express";
 // Importing the coupon controller
 import * as Coupon from '../controllers/coupon.controller.js'
 
+// Importing the verify token middleware
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 // Creating the router
 const router = Router();
-
-router.get('/', Coupon.getAll);
 
 /**
  * @swagger
  * components:
  *  schemas:
- *   User:
+ *   Coupon:
  *    type: object
  *    properties:
  *     name:
  *      type: string
- *      description: The name of the user
+ *      description: The name of the coupon
  *     start_date:
  *      type: Date
  *      description: The start date of the coupon
@@ -124,7 +125,9 @@ router.get('/', Coupon.getAll);
  * 
  */
 
-router.get('/:id', Coupon.getOne);
+router.get('/', verifyTokenMiddleware, Coupon.getAll);
+
+router.get('/:id', verifyTokenMiddleware, Coupon.getOne);
 
 /**
  * @swagger
@@ -220,7 +223,7 @@ router.post('/', Coupon.save);
  * 
  */ 
 
-router.put('/:id', Coupon.update);
+router.put('/:id', verifyTokenMiddleware, Coupon.update);
 
 /**
  * @swagger
@@ -250,7 +253,7 @@ router.put('/:id', Coupon.update);
  *        $ref: '#/components/schemas/Response'
  *       example:
  *        status: 404
- *        message: User not found
+ *        message: Coupon not found
  *    500:
  *     description: Error deleting coupon
  *     content:
@@ -262,6 +265,6 @@ router.put('/:id', Coupon.update);
  *        message: Error deleting coupon
  */ 
 
-router.delete('/:id', Coupon.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, Coupon.deleteOne);
 
 export default router;
