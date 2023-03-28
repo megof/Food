@@ -9,12 +9,12 @@
 
 <style>
 .loader {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100vh;
+  width: 17.5rem;
+  border-radius: 50%;
+  padding: 1rem;
   background-color: #000;
-  z-index: 1000;
+  z-index: 99;
+  overflow: hidden;
 }
 
 .content {
@@ -24,17 +24,17 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 15rem;
-  height: 15rem;
+  width: 10rem;
 }
 
 .content img {
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 .content span {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #fff;
   animation: floating 3s ease-in-out infinite;
 }
@@ -44,13 +44,13 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(15deg);
+    transform: rotate(5deg);
   }
   50% {
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-15deg);
+    transform: rotate(-5deg);
   }
   100% {
     transform: rotate(-0deg);

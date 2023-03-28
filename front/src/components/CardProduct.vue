@@ -1,42 +1,78 @@
-<!-- <template>
-  <div class="card h-100">
-    <img src="..." class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk of the card's
-        content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer"></div>
-  </div>
-</template> -->
-
 <template>
-  <n-card :title="title">
-    <template #cover>
-      <img src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
-    </template>
-    Card Content
-    <template #footer> #footer </template>
-    <template #action> #action </template>
-  </n-card>
+  <div class="card h-100" v-if="product">
+    <img :src="product.image.secure_url" class="card-img-top" :alt="product.name" />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text open-sans">
+        {{ product.description }}
+      </p>
+    </div>
+    <div class="card-footer">
+      <h5 class="card-text text-center">
+        ${{
+          product.price.toLocaleString("es-ES", {
+            style: "currency",
+            currency: "COP",
+            maximumFractionDigits: 0,
+          })
+        }}
+      </h5>
+      <div class="cart d-flex justify-content-center align-items-center gap-2">
+        <button class="btn btn-primary btn-first" :data-id="product._id">-</button>
+        <input
+          class="form-control text-center open-sans"
+          type="number"
+          placeholder="Cantidad"
+          readonly
+          :value="product.units"
+        />
+        <button class="btn btn-primary btn-first" :data-id="product._id">+</button>
+      </div>
+      <button
+        class="btn btn-primary btn-first text-center w-100 my-3"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        :id="product.id"
+      >
+        Agregar Al Carrito
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
-import { NCard } from "naive-ui";
 export default {
   props: {
-    title: {
-      type: String,
+    product: {
+      type: Object,
       required: true,
     },
-  },
-  components: {
-    NCard,
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.card {
+  width: 18rem !important;
+  opacity: 0.9;
+  flex-grow: 1;
+  transition: 0.5s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+.btn-first {
+  border: none !important;
+  background-color: var(--color-4) !important;
+  opacity: 0.85;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-first:hover {
+  opacity: 1;
+}
+</style>

@@ -9,10 +9,6 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-    },
-    {
-      path: "/products",
-      name: "products",
       component: () => import("@/views/HomeProducts.vue"),
     },
 
@@ -22,11 +18,6 @@ const router = createRouter({
       name: "admin",
       component: () => import("@/modules/main/layouts/AdminLayout.vue"),
       children: [
-        // {
-        //   path: "",
-        //   name: "admin-home",
-        //   component: () => import("@/modules/main/layouts/AdminLayout.vue"),
-        // },
         {
           path: "users",
           name: "admin-users",
@@ -45,16 +36,11 @@ const router = createRouter({
       ],
     },
 
-    // {
-    //   path: "/admin/users",
-    //   name: "admin-users",
-    //   component: () => import("../modules/users/views/UsersView.vue"),
-    // },
-
     // error - 404
     {
       path: "/:pathMatch(.*)*",
-      component: () => import("@/modules/shared/pages/404.vue"),
+      redirect: { name: "home" },
+      // component: () => import("@/modules/shared/pages/404.vue"),
     },
   ],
 });
