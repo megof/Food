@@ -15,18 +15,18 @@
          <!-- Fin del filtro de búsqueda -->
          
          <ProductOffCanvas/>
-           <table class="table table-dark mt-3 table-bordered border-white" v-if="products.length!==0">
+           <table class="table  mt-3 " v-if="products.length!==0">
              <thead >
                <tr>
                  <th scope="col" class=" d-none d-sm-table-cell col-1">Id</th>
                  <th scope="col" class=" d-none d-sm-table-cell col-1">Id Producto</th>
                  <!-- <th scope="col" class=" d-none d-sm-table-cell">Descripcion</th>
                  <th scope="col" class=" d-none d-sm-table-cell">Descripcion General</th> -->
-                 <th scope="col" class="col-4">Nombre</th>
+                 <th scope="col" class="col-3">Nombre</th>
                  <th scope="col" class="col-2">Precio</th>
                  <!-- <th scope="col">Imagen</th> -->
                  <th scope="col" class="col-2">Estado</th>
-                 <th scope="col" class="col-2">Action</th>
+                 <th scope="col" class="col-3">Action</th>
                </tr>
              </thead>
              <tbody>
