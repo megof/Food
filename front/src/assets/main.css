@@ -1,35 +1,25 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+:root {
+  --color-1: #ec1c24;
+  --color-2: #fdbd10;
+  --color-3: #0066b2;
+  --color-4: #ed7902;
+  --color5: #a90b30;
+  --white: #fff;
+  --black: #000;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+body {
+  font-family: "Bungee", cursive;
+  background-color: #f2f3f8;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.open-sans {
+  font-family: "Open Sans";
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.open-sans-bold {
+  font-family: "Open Sans";
+  font-weight: 500;
 }
