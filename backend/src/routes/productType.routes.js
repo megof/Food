@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ProductTypeController from '../controllers/productType.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 
 /**
@@ -51,8 +54,6 @@ const router = Router();
  *      get:
  *          summary: Get a product types list
  *          tags: [Product Types]
- *          parameters:
- *              - $ref: '#/components/parameters/token'
  *          responses: 
  *              200:
  *                  description: the list of product types
@@ -73,7 +74,6 @@ router.get('/', ProductTypeController.getAll);
  *          summary: Get a product type by id
  *          tags: [Product Types]
  *          parameters:
- *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          responses: 
  *              200:
@@ -111,7 +111,7 @@ router.get('/:id', ProductTypeController.getOne);
  *              404:
  *                  description: Product type was not found
  * */
-router.post('/', ProductTypeController.save);
+router.post('/', verifyTokenMiddleware, ProductTypeController.save);
 
 /**
  * @swagger
@@ -138,7 +138,7 @@ router.post('/', ProductTypeController.save);
  *              500:
  *                  description: Something wrong with the request.
  */
-router.put('/:id', ProductTypeController.update);
+router.put('/:id', verifyTokenMiddleware, ProductTypeController.update);
 
 /**
  * @swagger
@@ -153,6 +153,6 @@ router.put('/:id', ProductTypeController.update);
  *              200: 
  *                  description: the product type was deleted
  */
-router.delete('/:id', ProductTypeController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ProductTypeController.deleteOne);
 
 export default router;

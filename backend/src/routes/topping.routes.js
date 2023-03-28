@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ToppingController from '../controllers/topping.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 
 /**
@@ -86,7 +89,7 @@ const router = Router();
  *      400: 
  *        description: There are no registered toppings
  */
-router.post('/', ToppingController.save);
+router.post('/', verifyTokenMiddleware, ToppingController.save);
 
 
 /**
@@ -95,8 +98,6 @@ router.post('/', ToppingController.save);
  *  get:
  *      summary: Return a Topping list
  *      tags: [Toppings]
- *      parameters:
- *         - $ref: '#/components/parameters/token'
  *      responses:
  *          200:
  *              description: A list of toppings
@@ -120,7 +121,6 @@ router.get('/', ToppingController.getAll);
  *      summary: Return a Topping by id 
  *      tags: [Toppings]
  *      parameters:
- *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      responses:
  *          200:
@@ -171,7 +171,7 @@ router.get('/:id', ToppingController.getOne);
  *                          $ref: '#/components/schemas/ToppingNotFound'
  *       
  */
-router.put('/:id', ToppingController.update);
+router.put('/:id', verifyTokenMiddleware, ToppingController.update);
 
 /**
  * @swagger
@@ -198,6 +198,6 @@ router.put('/:id', ToppingController.update);
  *                          $ref: '#/components/schemas/ToppingNotFound'
  *       
  */
-router.delete('/:id', ToppingController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ToppingController.deleteOne);
 
 export default router;

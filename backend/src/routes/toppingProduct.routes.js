@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ToppingProductController from '../controllers/toppingProduct.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 /**
  * @swagger
@@ -77,7 +80,7 @@ const router = Router();
  *          400: 
  *              description: There are no registered ToppingsProduct
  */
-router.post('/', ToppingProductController.save);
+router.post('/', verifyTokenMiddleware, ToppingProductController.save);
 
 
 /**
@@ -86,8 +89,6 @@ router.post('/', ToppingProductController.save);
  *  get:
  *      summary: Return a Toppings Product list
  *      tags: [ToppingsProduct]
- *      parameters:
- *          - $ref: '#/components/parameters/token'
  *      responses:
  *          200:
  *              description: A list of Toppings Product
@@ -111,7 +112,6 @@ router.get('/', ToppingProductController.getAll);
  *      summary: Return a ToppingsProduct by id 
  *      tags: [ToppingsProduct]
  *      parameters:
- *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/ToppingsProductId'
  *      responses:
  *          200:
@@ -132,7 +132,7 @@ router.get('/', ToppingProductController.getAll);
 router.get('/:id', ToppingProductController.getOne);
 
 
-router.put('/:id', ToppingProductController.update);
+router.put('/:id', verifyTokenMiddleware, ToppingProductController.update);
 
 /**
  * @swagger
@@ -159,6 +159,6 @@ router.put('/:id', ToppingProductController.update);
  *                          $ref: '#/components/schemas/ToppingNotFound'
  *       
  */
-router.delete('/:id', ToppingProductController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ToppingProductController.deleteOne);
 
 export default router;
