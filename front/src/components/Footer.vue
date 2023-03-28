@@ -137,13 +137,6 @@ ul > li {
   border: 1px solid #c13584;
 }
 
-.open-sans {
-  font-family: "Open Sans";
-}
-.open-sans-bold {
-  font-weight: 500;
-}
-
 .box-text {
   padding: 0;
   margin: 0;

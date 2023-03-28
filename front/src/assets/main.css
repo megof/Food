@@ -14,3 +14,12 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+
+.open-sans {
+  font-family: "Open Sans";
+}
+
+.open-sans-bold {
+  font-family: "Open Sans";
+  font-weight: 500;
+}

@@ -1,7 +1,6 @@
 <template>
   <header>
     <Nav />
-    <!-- <Galery class="z-1" v-if="$route.fullPath === '/'" /> -->
     <Galery class="z-1" />
   </header>
 </template>
