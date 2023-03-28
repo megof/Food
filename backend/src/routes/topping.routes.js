@@ -49,6 +49,13 @@ const router = Router();
  *          schema:
  *              type: string
  *              description: the topping_id
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  *  
 */
 
@@ -59,6 +66,8 @@ const router = Router();
  *  post:
  *    summary: create a new Topping
  *    tags: [Toppings]
+ *    parameters:
+ *      - $ref: '#/components/parameters/token'
  *    requestBody:
  *      required: true
  *      content:
@@ -86,6 +95,8 @@ router.post('/', ToppingController.save);
  *  get:
  *      summary: Return a Topping list
  *      tags: [Toppings]
+ *      parameters:
+ *         - $ref: '#/components/parameters/token'
  *      responses:
  *          200:
  *              description: A list of toppings
@@ -109,6 +120,7 @@ router.get('/', ToppingController.getAll);
  *      summary: Return a Topping by id 
  *      tags: [Toppings]
  *      parameters:
+ *         - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      responses:
  *          200:
@@ -136,6 +148,7 @@ router.get('/:id', ToppingController.getOne);
  *      summary: Update a Topping by id 
  *      tags: [Toppings]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      requestBody:
  *          required: true
@@ -167,6 +180,7 @@ router.put('/:id', ToppingController.update);
  *      summary: Delete a Topping by id 
  *      tags: [Toppings]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      responses:
  *          200:

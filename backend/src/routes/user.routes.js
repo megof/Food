@@ -99,6 +99,8 @@ const userRouter = Router();
  *   description: Return a list of users
  *   tags:
  *   - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Users found
@@ -121,7 +123,7 @@ const userRouter = Router();
  *        message: Error getting users
  * 
  */
-userRouter.get('/', getAllUsersController);
+userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
 
 /**
  * @swagger
@@ -130,6 +132,8 @@ userRouter.get('/', getAllUsersController);
  *   summary: Create new user
  *   tags:
  *    - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   requestBody:
  *    required: true
  *    content:
@@ -170,7 +174,7 @@ userRouter.get('/', getAllUsersController);
  *        status: 500
  *        message: Error creating user
  */
-userRouter.post('/', createUserController);
+userRouter.post('/', verifyTokenMiddleware, createUserController);
 
 /**
  * @swagger
@@ -236,6 +240,7 @@ userRouter.post('/login', loginUserController);
  *   tags: 
  *    - Users
  *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   requestBody:
  *    required: true
@@ -275,7 +280,7 @@ userRouter.post('/login', loginUserController);
  *        message: Error updating user
  * 
  */ 
-userRouter.put('/:id', updateUserController);
+userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
 
 /**
  * @swagger
@@ -285,6 +290,7 @@ userRouter.put('/:id', updateUserController);
  *   tags: 
  *    - Users
  *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
@@ -315,7 +321,7 @@ userRouter.put('/:id', updateUserController);
  *        status: 500
  *        message: Error deleting user
  */ 
-userRouter.delete('/:id', deleteUserController);
+userRouter.delete('/:id', verifyTokenMiddleware, deleteUserController);
 
 
 // Exporting the router

@@ -62,6 +62,13 @@ const router = Router();
  *          schema:
  *              type: string
  *          description: product's id
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  */
 
 /**
@@ -77,6 +84,8 @@ const router = Router();
  *      get:
  *          summary: Get a products list
  *          tags: [Products]
+ *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *          responses: 
  *              200:
  *                  description: the list of products
@@ -96,6 +105,7 @@ router.get('/', ProductController.getAll);
  *          summary: Get a product by id
  *          tags: [Products]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productId'
  *          responses: 
  *              200:
@@ -115,6 +125,8 @@ router.get('/:id', ProductController.getOne);
  *      post:
  *          summary: Save a new product
  *          tags: [Products]
+ *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *          requestBody:
  *              required: true
  *              content:
@@ -123,7 +135,7 @@ router.get('/:id', ProductController.getOne);
  *                          $ref: '#/components/schemas/Product'
  *          responses: 
  *              201:
- *                  description: Product succesfully created
+ *                  description: Product successfully created
  *                  content: 
  *                      application/json:
  *                          schema:
@@ -140,6 +152,7 @@ router.post('/', ProductController.save);
  *          summary: Update a product by id
  *          tags: [Products]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productId'
  *          requestBody:
  *              required: true
@@ -166,6 +179,7 @@ router.put('/:id', ProductController.update);
  *          summary: Delete a product by id
  *          tags: [Products]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productId'
  *          responses:
  *              200: 

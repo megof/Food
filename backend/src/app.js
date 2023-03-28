@@ -45,12 +45,12 @@ app.use(fileUpload({
 
 // Set the routes
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/orders', orderRouter);
-app.use('/api/v1/topping', toppingRoutes);
-app.use('/api/v1/types', ProductTypeRoutes);
-app.use('/api/v1/products', ProductRoutes);
-app.use('/api/v1/toppingProduct',  toppingProductRoutes);
-app.use('/api/v1/detailOrders', detailOrderRouter);
+app.use('/api/v1/orders', verifyTokenMiddleware, orderRouter);
+app.use('/api/v1/topping', verifyTokenMiddleware, toppingRoutes);
+app.use('/api/v1/types', verifyTokenMiddleware, ProductTypeRoutes);
+app.use('/api/v1/products', verifyTokenMiddleware, ProductRoutes);
+app.use('/api/v1/toppingProduct',  verifyTokenMiddleware, toppingProductRoutes);
+app.use('/api/v1/detailOrders', verifyTokenMiddleware, detailOrderRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
 
 // Exporting the app

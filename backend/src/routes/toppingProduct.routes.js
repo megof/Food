@@ -41,6 +41,13 @@ const router = Router();
  *          schema:
  *              type: string
  *              description: the toppingProduct_id
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
 */
 
 
@@ -50,6 +57,8 @@ const router = Router();
  *  post:
  *      summary: create a new Topping
  *      tags: [ToppingsProduct]
+ *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *      requestBody:
  *          required: true
  *          content:
@@ -77,6 +86,8 @@ router.post('/', ToppingProductController.save);
  *  get:
  *      summary: Return a Toppings Product list
  *      tags: [ToppingsProduct]
+ *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *      responses:
  *          200:
  *              description: A list of Toppings Product
@@ -100,6 +111,7 @@ router.get('/', ToppingProductController.getAll);
  *      summary: Return a ToppingsProduct by id 
  *      tags: [ToppingsProduct]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/ToppingsProductId'
  *      responses:
  *          200:
@@ -129,6 +141,7 @@ router.put('/:id', ToppingProductController.update);
  *      summary: Delete a ToppingsProduct by id 
  *      tags: [ToppingsProduct]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/ToppingsProductId'
  *      responses:
  *          200:

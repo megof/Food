@@ -29,6 +29,13 @@ const router = Router();
  *          schema:
  *              type: string
  *          description: id of the product type
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  */
 
 /**
@@ -44,6 +51,8 @@ const router = Router();
  *      get:
  *          summary: Get a product types list
  *          tags: [Product Types]
+ *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *          responses: 
  *              200:
  *                  description: the list of product types
@@ -64,6 +73,7 @@ router.get('/', ProductTypeController.getAll);
  *          summary: Get a product type by id
  *          tags: [Product Types]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          responses: 
  *              200:
@@ -83,6 +93,8 @@ router.get('/:id', ProductTypeController.getOne);
  *      post:
  *          summary: Save a new product type
  *          tags: [Product Types]
+ *          parameters:
+ *             - $ref: '#/components/parameters/token'
  *          requestBody:
  *              required: true
  *              content:
@@ -108,6 +120,7 @@ router.post('/', ProductTypeController.save);
  *          summary: Update a product type by id
  *          tags: [Product Types]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          requestBody:
  *              required: true
@@ -134,6 +147,7 @@ router.put('/:id', ProductTypeController.update);
  *          summary: Delete a product type by id
  *          tags: [Product Types]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          responses:
  *              200: 

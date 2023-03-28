@@ -190,6 +190,8 @@ const detailOrderRouter = Router();
  *   summary: Get all order details
  *   tags:
  *   - Order Details
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Order details found
@@ -222,6 +224,7 @@ detailOrderRouter.get("/", getAllOrderDetailsController);
  *   tags:
  *    - Order Details
  *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
@@ -252,6 +255,8 @@ detailOrderRouter.get("/:id", getOrderDetailByIdController);
  *   summary: Create a new order detail
  *   tags:
  *    - Order Details
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   requestBody:
  *    content:
  *     application/json:
@@ -290,6 +295,7 @@ detailOrderRouter.post("/", createOrderDetailController);
  *   tags:
  *    - Order Details
  *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
@@ -320,6 +326,7 @@ detailOrderRouter.put("/:id", updateOrderDetailController);
  *   tags:
  *    - Order Details
  *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
