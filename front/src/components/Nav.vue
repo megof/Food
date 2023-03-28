@@ -22,14 +22,10 @@
         <nav
           class="navbar-nav container d-flex flex-md-row justify-content-center align-items-center text-center gap-4 my-3"
         >
-          <NDropdown :options="options" trigger="hover" class="drop-items"
-            ><router-link
-              :to="{ name: 'products' }"
-              class="text-decoration-none w-50 d-flex justify-content-center"
-            >
-              <span class="material-symbols-outlined"> restaurant_menu </span>Productos</router-link
-            ></NDropdown
+          <a href="#ProductHome" class="text-decoration-none w-50 d-flex justify-content-center">
+            <span class="material-symbols-outlined"> restaurant_menu </span>Productos</a
           >
+
           <a href="#" class="text-decoration-none w-50 d-flex justify-content-center"
             ><span class="material-symbols-outlined"> login </span>Login</a
           >
@@ -53,41 +49,13 @@
 </template>
 
 <script>
-import { NDropdown } from "naive-ui";
-export default {
-  components: {
-    NDropdown,
-  },
-
-  data() {
-    return {
-      options: [
-        {
-          label: "Marina Bay Sands",
-          key: "marina bay sands",
-          disabled: true,
-        },
-        {
-          label: "Brown's Hotel, London",
-          key: "brown's hotel, london",
-        },
-        {
-          label: "Atlantis Bahamas, Nassau",
-          key: "atlantis nahamas, nassau",
-        },
-        {
-          label: "The Beverly Hills Hotel, Los Angeles",
-          key: "the beverly hills hotel, los angeles",
-        },
-      ],
-    };
-  },
-};
+export default {};
 </script>
 
 <style scoped>
 .nav-bar-home {
-  position: fixed;
+  position: fixed !important;
+  top: 0 !important;
   width: 100%;
   z-index: 999;
   transition: all 0.3s ease-in;
