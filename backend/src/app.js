@@ -15,9 +15,6 @@ import fileUpload from 'express-fileupload';
 // Importing the swagger UI
 import swaggerUi from 'swagger-ui-express';
 
-// Importing the middlewares
-import verifyTokenMiddleware from './middlewares/verifyToken.middleware.js';
-
 // Importing the swagger configuration
 import swaggerConfiguration from './config/swagger.config.js';
 
@@ -49,7 +46,7 @@ app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/topping', toppingRoutes);
 app.use('/api/v1/types', ProductTypeRoutes);
 app.use('/api/v1/products', ProductRoutes);
-app.use('/api/v1/toppingProduct',  toppingProductRoutes);
+app.use('/api/v1/toppingProduct', toppingProductRoutes);
 app.use('/api/v1/detailOrders', detailOrderRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
 

@@ -1,4 +1,10 @@
+// Description: This file contains the Coupon model
+// Author: Juan David Ospina Ortega
+
+// Importing the mongoose library
 import { Schema, model } from "mongoose";
+
+// Creating the Coupon schema
 
 const couponSchema = new Schema(
     {
@@ -45,4 +51,5 @@ const couponSchema = new Schema(
     }
 );
 
+// Exporting the Coupon model
 export default model('Coupon', couponSchema)

@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ToppingController from '../controllers/topping.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 
 /**
@@ -49,6 +52,13 @@ const router = Router();
  *          schema:
  *              type: string
  *              description: the topping_id
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  *  
 */
 
@@ -59,6 +69,8 @@ const router = Router();
  *  post:
  *    summary: create a new Topping
  *    tags: [Toppings]
+ *    parameters:
+ *      - $ref: '#/components/parameters/token'
  *    requestBody:
  *      required: true
  *      content:
@@ -77,7 +89,7 @@ const router = Router();
  *      400: 
  *        description: There are no registered toppings
  */
-router.post('/', ToppingController.save);
+router.post('/', verifyTokenMiddleware, ToppingController.save);
 
 
 /**
@@ -136,6 +148,7 @@ router.get('/:id', ToppingController.getOne);
  *      summary: Update a Topping by id 
  *      tags: [Toppings]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      requestBody:
  *          required: true
@@ -158,7 +171,7 @@ router.get('/:id', ToppingController.getOne);
  *                          $ref: '#/components/schemas/ToppingNotFound'
  *       
  */
-router.put('/:id', ToppingController.update);
+router.put('/:id', verifyTokenMiddleware, ToppingController.update);
 
 /**
  * @swagger
@@ -167,6 +180,7 @@ router.put('/:id', ToppingController.update);
  *      summary: Delete a Topping by id 
  *      tags: [Toppings]
  *      parameters:
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      responses:
  *          200:
@@ -184,6 +198,6 @@ router.put('/:id', ToppingController.update);
  *                          $ref: '#/components/schemas/ToppingNotFound'
  *       
  */
-router.delete('/:id', ToppingController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ToppingController.deleteOne);
 
 export default router;

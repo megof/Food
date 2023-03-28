@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ProductTypeController from '../controllers/productType.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 
 /**
@@ -29,6 +32,13 @@ const router = Router();
  *          schema:
  *              type: string
  *          description: id of the product type
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  */
 
 /**
@@ -83,6 +93,8 @@ router.get('/:id', ProductTypeController.getOne);
  *      post:
  *          summary: Save a new product type
  *          tags: [Product Types]
+ *          parameters:
+ *             - $ref: '#/components/parameters/token'
  *          requestBody:
  *              required: true
  *              content:
@@ -99,7 +111,7 @@ router.get('/:id', ProductTypeController.getOne);
  *              404:
  *                  description: Product type was not found
  * */
-router.post('/', ProductTypeController.save);
+router.post('/', verifyTokenMiddleware, ProductTypeController.save);
 
 /**
  * @swagger
@@ -108,6 +120,7 @@ router.post('/', ProductTypeController.save);
  *          summary: Update a product type by id
  *          tags: [Product Types]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          requestBody:
  *              required: true
@@ -125,7 +138,7 @@ router.post('/', ProductTypeController.save);
  *              500:
  *                  description: Something wrong with the request.
  */
-router.put('/:id', ProductTypeController.update);
+router.put('/:id', verifyTokenMiddleware, ProductTypeController.update);
 
 /**
  * @swagger
@@ -134,11 +147,12 @@ router.put('/:id', ProductTypeController.update);
  *          summary: Delete a product type by id
  *          tags: [Product Types]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productTypeId'
  *          responses:
  *              200: 
  *                  description: the product type was deleted
  */
-router.delete('/:id', ProductTypeController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ProductTypeController.deleteOne);
 
 export default router;

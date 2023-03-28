@@ -52,6 +52,13 @@ const router = Router();
  *          schema:
  *              type: string
  *          description: Id of the order
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  */
 
 /**
@@ -67,6 +74,8 @@ const router = Router();
  *      get:
  *          summary: Get a orders list
  *          tags: [Orders]
+ *          parameters:
+ *          - $ref: '#/components/parameters/token'
  *          responses: 
  *              200:
  *                  description: the list of orders
@@ -86,6 +95,7 @@ router.get('/', OrderController.getAll);
  *          summary: Get an order by id
  *          tags: [Orders]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/orderId'
  *          responses: 
  *              200:
@@ -105,6 +115,8 @@ router.get('/:id', OrderController.getOne);
  *      post:
  *          summary: Save a new order
  *          tags: [Orders]
+ *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *          requestBody:
  *              required: true
  *              content:
@@ -130,6 +142,7 @@ router.post('/', OrderController.save);
  *          summary: Update an order by id
  *          tags: [Orders]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/orderId'
  *          requestBody:
  *              required: true
@@ -156,6 +169,7 @@ router.put('/:id', OrderController.update);
  *          summary: Delete an order by id
  *          tags: [Orders]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/orderId'
  *          responses:
  *              200: 

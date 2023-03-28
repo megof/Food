@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ProductController from '../controllers/product.controller.js'
 
+// Importing the middlewares
+import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
+
 const router = Router();
 
 /**
@@ -62,6 +65,13 @@ const router = Router();
  *          schema:
  *              type: string
  *          description: product's id
+ *      token:
+ *          in: header
+ *          name: x-access-token
+ *          description: The token to access the API
+ *          schema:
+ *              type: string
+ *          required: true
  */
 
 /**
@@ -115,6 +125,8 @@ router.get('/:id', ProductController.getOne);
  *      post:
  *          summary: Save a new product
  *          tags: [Products]
+ *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *          requestBody:
  *              required: true
  *              content:
@@ -123,7 +135,7 @@ router.get('/:id', ProductController.getOne);
  *                          $ref: '#/components/schemas/Product'
  *          responses: 
  *              201:
- *                  description: Product succesfully created
+ *                  description: Product successfully created
  *                  content: 
  *                      application/json:
  *                          schema:
@@ -131,7 +143,7 @@ router.get('/:id', ProductController.getOne);
  *              404:
  *                  description: Product was not found
  * */
-router.post('/', ProductController.save);
+router.post('/', verifyTokenMiddleware, ProductController.save);
 
 /**
  * @swagger
@@ -140,6 +152,7 @@ router.post('/', ProductController.save);
  *          summary: Update a product by id
  *          tags: [Products]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productId'
  *          requestBody:
  *              required: true
@@ -157,7 +170,7 @@ router.post('/', ProductController.save);
  *              500:
  *                  description: Something wrong with the request.
  */
-router.put('/:id', ProductController.update);
+router.put('/:id', verifyTokenMiddleware, ProductController.update);
 
 /**
  * @swagger
@@ -166,11 +179,12 @@ router.put('/:id', ProductController.update);
  *          summary: Delete a product by id
  *          tags: [Products]
  *          parameters:
+ *              - $ref: '#/components/parameters/token'
  *              - $ref: '#/components/parameters/productId'
  *          responses:
  *              200: 
  *                  description: the product was deleted
  */
-router.delete('/:id', ProductController.deleteOne);
+router.delete('/:id', verifyTokenMiddleware, ProductController.deleteOne);
 
 export default router;
