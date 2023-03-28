@@ -1,201 +1,136 @@
 <template>
-    <header class="w-100 bg-white py-4">
-        <h1>USUARIOS</h1>
-        <ul class="nav justify-content-center bg-white">
-            <li class="nav-item">
-                <a class="nav-link" href="../index.html">Inicio</a>
-            </li>
-        </ul>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Nuevo Usuario
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nuevo Usuario</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="text">Nombre:</label>
-                            <input type="text" class="form-control" id="email" v-model="name">
-                          </div>
-                          <div class="form-group">
-                            <label for="text">Usuario:</label>
-                            <input type="text" class="form-control" id="email" v-model="name">
-                          </div>
-                          <div class="form-group">
-                            <label for="text">Clave:</label>
-                            <input type="text" class="form-control" id="email" v-model="name">
-                          </div>
-                          <div class="form-group">
-                            <label for="text">Estado:</label>
-                            <input type="text" class="form-control" id="email" v-model="name">
-                          </div>
-                    </div> 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button id="btnAdd" type="button" class="btn btn-primary" @click="postMarcas">Agregar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section class="container">
-        <table class="table_">
-          <thead>
-            <tr>
-              <th id="first">Id</th>
-              <th>Nombre</th>
-              <th>Usuario</th>
-              <th>Clave</th>
-              <th>Estado</th>
-              <th>Eliminar</th>
-              <th id="last">Actualizar</th>
-            </tr>
-          </thead>
-    
-          <tbody>
-            <tr>
-              <td>Row uno</td>
-              <td>Row dos</td>
-              <td>Row tres</td>
-              <td>Row cuatro</td>
-              <td>Row tres</td>
-              <td><button>Eliminar</button></td>
-              <td><button>Actualizar</button></td>
-            </tr>
-    
-            <tr>
-              <td>Row uno</td>
-              <td>Row dos</td>
-              <td>Row tres</td>
-              <td>Row cuatro</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-</template>
-<script setup>
-import { onMounted, ref } from 'vue';
-import axios from "axios";
-
-const users = ref([]);
-const name = ref("")
-
-onMounted(()=>{
-     getUsers();
-     console.log(users.value);
-})
-
-
-async function getUsers() {
-    const res = await fetch("http://localhost:3000/api/v1/brand/all")
-    const data = await res.json();
-    marcas.value = data;
-}
-
-async function postMarcas() {
-    const res = await axios.post("http://localhost:3000/api/v1/brand/create", {name: name.value})
-}
-
-async function deleteMarca(id) {
-    const res = await axios.delete(`http://localhost:3000/api/v1/brand/delete/${id}`)
-}
-</script>
-<style>
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-
-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    border-radius: 15px;
-    page-break-after: 15 20px;
-    background-image: linear-gradient(to right (#b47474), (#f55d06));
-    color: #080808;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 3px 3px rgb(0, 0, 0, 0.4);
-}
-
-button:hover {
-    box-shadow: 6px 6px rgb(0, 0, 0, 0.8);
-}
-
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-
-}
-
-.table_ {
-    background-color: #FAFAFA10;
-    backdrop-filter: blur(0.7rem);
-    text-align: left;
-    border-collapse: collapse;
-    min-width: 600px;
-    border: 2px solid #fafafa10;
-    border-radius: 10px;
-    color: #000;
-    padding: 20px;
-    margin-top: 15px;
-    height: 50vh;
-    overflow: scroll;
-}
-
-#first {
-    border-radius: 10px 0 0 0;
-}
-
-#last {
-    border-radius: 0 10px 0 0;
-
-}
-
-.table_ th,
-td {
-    padding: 20px;
-}
-
-td img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.table_ thead {
-    background-color: #161a42;
-    background-image: linear-gradient(160deg, #cbcbd3 0%, #f0eded 100%);
-    border-bottom: solid 5px rgba(255, 255, 255, .5);
-}
-
-
-.table_ tr:nth-child(even) {
-    background: rgba(0, 0, 0, .1);
-}
-
-.table_ tr:hover td {
-
-    background: rgba(255, 255, 255, .3);
-}
-</style>
+    <h1>Pedidos</h1>
+  
+    <div
+      class="container w-300 h-120 d-flex flex-column justify-content-center align-items-center p-2"
+    >
+      <n-table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <TH>CLIENTES</TH>
+            <TH>DIRECCIÓN</TH>
+            <TH>TELÉFONO</TH>
+            <TH>OBSERVACIÓN</TH>
+            <TH>FECHA</TH>
+            <TH>VER</TH>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Oscar</td>
+            <td>Calle 22</td>
+            <td>31758220</td>
+            <td>Piso 2</td>
+            <td>4/7/2023</td>
+            <td>
+              <n-icon-wrapper
+                :size="30"
+                :border-radius="10"
+                @click="showModal = true"
+              >
+                <EyeSharp />
+              </n-icon-wrapper>
+              <n-modal
+                v-model:show="showModal"
+                preset="dialog"
+                style="width: 80%"
+              >
+                <template #header>
+                  <div>Toppings</div>
+                </template>
+                <n-table class="table table-striped table-hover table-bordered">
+                  <thead>
+                    <tr>
+                      <TH>IMAGEN</TH>
+                      <TH>NOMBRE</TH>
+                      <TH>CANTIDAD</TH>
+                      <TH>PRECIO</TH>
+                      <TH>TOPPING</TH>
+                      <TH>CANTIDAD</TH>
+                      <TH>PRECIO</TH>
+                      <TH>TOTAL</TH>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <n-avatar
+                          round
+                          size="medium"
+                          src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                        />
+                      </td>
+                      <td>Perra volteada</td>
+                      <td style="color: blue">2</td>
+                      <td style="color: green">5000</td>
+                      <td>Queso azul</td>
+                      <td style="color: blue">1</td>
+                      <td style="color: green">3000</td>
+                      <td style="color: red">13000</td>
+                    </tr>
+                  </tbody>
+                </n-table>
+              </n-modal>
+            </td>
+          </tr>
+        </tbody>
+      </n-table>
+    </div>
+  </template>
+  
+  <script>
+  import {
+    NList,
+    NListItem,
+    NButton,
+    NTable,
+    NModal,
+    NIconWrapper,
+    NAvatar,
+  } from "naive-ui";
+  import { EyeSharp } from "@vicons/ionicons5";
+  import { defineComponent, ref } from "vue";
+  
+  export default defineComponent({
+    setup() {
+      return {
+        showModal: ref(false),
+      };
+    },
+    name: "ListOrders",
+    components: {
+      NList,
+      NListItem,
+      NButton,
+      EyeSharp,
+      NTable,
+      NModal,
+      NIconWrapper,
+      NAvatar,
+    },
+    props: {
+      items: {
+        type: Array,
+        required: true,
+      },
+      del: {
+        type: Function,
+      },
+    },
+    return: {
+      showModal: false,
+    },
+  });
+  </script>
+  
+  <style>
+  .n-table {
+    text-align: center;
+  }
+  
+  h1{
+    margin-left: 2%;
+    margin-top: 2%;
+  }
+  </style>
+  
