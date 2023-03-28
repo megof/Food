@@ -5,7 +5,7 @@
 
 <script>
 
-import Lists from '../../../components/Lists.vue'
+import Lists from '../components/Lists.vue'
 
 import {
   NButton,

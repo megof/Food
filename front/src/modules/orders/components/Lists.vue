@@ -2,7 +2,8 @@
   <div
     class="container w-300 h-120 d-flex flex-column justify-content-center align-items-center p-2"
   >
-    <!-- Botón para crear -->
+
+  <!-- Botón para crear -->
     <n-button color="#ed7902" v-if="!items">
       <n-icon>
         <Create />
@@ -10,7 +11,7 @@
       Crear
     </n-button>
 
-    <!-- Tabla dinámica -->
+<!-- Tabla dinámica -->
     <n-table class="table table-striped table-hover table-bordered m-4">
       <thead>
         <tr>
@@ -52,15 +53,25 @@
             </td>
           </tr>
         </template>
+        
+<!-- cierre de template para copiar -->
 
-        <!-- cierre de template para copiar -->
       </tbody>
     </n-table>
   </div>
 </template>
 
 <script>
-import { NList, NListItem, NButton, NTable, NModal, NIcon, NAvatar, NSpace } from "naive-ui";
+import {
+  NList,
+  NListItem,
+  NButton,
+  NTable,
+  NModal,
+  NIcon,
+  NAvatar,
+  NSpace,
+} from "naive-ui";
 import { EyeSharp, Trash, Create, SyncCircle } from "@vicons/ionicons5";
 
 export default {
@@ -102,12 +113,12 @@ export default {
     //   },
   },
 
-  computed: {
-    formaDate() {
-      const date = new Date(Date(this.items.createdAt)).toLocaleDateString();
-      return date;
-    },
-  },
+  computed:{
+    formaDate(){
+        const date = new Date(Date(this.items.createdAt)).toLocaleDateString() 
+        return date
+    }
+  }
 };
 </script>
 
