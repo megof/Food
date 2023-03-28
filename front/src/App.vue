@@ -1,10 +1,19 @@
 <template>
-  <h2>Escribe tu ruta arriba</h2>
+  <Header />
   <RouterView />
+  <Footer />
 </template>
 
 <script>
-export default {};
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+
+export default {
+  components: {
+    Header,
+    Footer,
+  },
+};
 </script>
 
 <style></style>
