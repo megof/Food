@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-md container-fluid mt-5">
-      <h1 class="text-center my-4">Productos</h1>
+      <!-- <h1 class="text-center my-4">Productos</h1> -->
       <TableTitle title="Productos" id="offcanvasProduct"/>
       <!-- Filtro de búsqueda -->
      
