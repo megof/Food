@@ -2,42 +2,9 @@
   <div>
     <div class="container-md container-fluid mt-5">
       <h1 class="text-center my-4">Productos</h1>
-      <!-- <TableTitle title="Productos" id="offcanvasProduct"/> -->
+      <TableTitle title="Productos" id="offcanvasProduct"/>
       <!-- Filtro de búsqueda -->
-      <!-- <div class="input-group flex-nowrap w-75 mt-4 mb-4">
-            <span class="input-group-text bg-dark text-white" id="addon-wrapping"><i class="bi bi-search"></i></span>
-            <input type="text" class="form-control " placeholder="Buscar por nombre" aria-label="Username" aria-describedby="addon-wrapping" v-model="filter">
-         </div> -->
-<<<<<<< HEAD
-         <div class="mt-3">
-          <button @click="productCharacterization(0,0)" class="mx-2 mb-2  btn btn-outline-dark active" id="0">Todos</button>
-          <button v-for="type in productType" :key="type.id" @click='productCharacterization(type.id,type.id)' class="mx-2 mb-2  btn btn-outline-dark" :id="type.id" >{{ type.name }}</button>
-                
-          </div>
-         <!-- Fin del filtro de búsqueda -->
-         
-         <ProductOffCanvas/>
-           <table class="table  mt-3 " v-if="products.length!==0">
-             <thead >
-               <tr>
-                 <th scope="col" class=" d-none d-sm-table-cell col-1">Id</th>
-                 <th scope="col" class=" d-none d-sm-table-cell col-1">Id Producto</th>
-                 <!-- <th scope="col" class=" d-none d-sm-table-cell">Descripcion</th>
-                 <th scope="col" class=" d-none d-sm-table-cell">Descripcion General</th> -->
-                 <th scope="col" class="col-3">Nombre</th>
-                 <th scope="col" class="col-2">Precio</th>
-                 <!-- <th scope="col">Imagen</th> -->
-                 <th scope="col" class="col-2">Estado</th>
-                 <th scope="col" class="col-3">Action</th>
-               </tr>
-             </thead>
-             <tbody>
-               <tr v-for="product in characterizedProducts" :key="product.id"> 
-                 <td class=" d-none d-sm-table-cell">{{product.id}}</td>
-                 <td class=" d-none d-sm-table-cell">{{product.idTypeProduct}}</td>
-                 <td >{{product.name}}</td>
-                 <!-- <td class=" d-none d-sm-table-cell">{{product.description}}</td>
-=======
+     
       <div class="mt-3 d-flex justify-content-center">
         <button
           @click="productCharacterization(0, 0)"
@@ -59,18 +26,18 @@
       <!-- Fin del filtro de búsqueda -->
 
       <ProductOffCanvas />
-      <table class="table table-dark mt-3 table-bordered border-white" v-if="products.length !== 0">
+      <table class="table  mt-3 table-bordered" v-if="products.length !== 0">
         <thead>
           <tr>
             <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
             <th scope="col" class="d-none d-sm-table-cell col-1">Id Producto</th>
             <!-- <th scope="col" class=" d-none d-sm-table-cell">Descripcion</th>
                  <th scope="col" class=" d-none d-sm-table-cell">Descripcion General</th> -->
-            <th scope="col" class="col-4">Nombre</th>
+            <th scope="col" class="col-3">Nombre</th>
             <th scope="col" class="col-2">Precio</th>
             <!-- <th scope="col">Imagen</th> -->
             <th scope="col" class="col-2">Estado</th>
-            <th scope="col" class="col-2">Action</th>
+            <th scope="col" class="col-3">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +46,6 @@
             <td class="d-none d-sm-table-cell">{{ product.idTypeProduct }}</td>
             <td>{{ product.name }}</td>
             <!-- <td class=" d-none d-sm-table-cell">{{product.description}}</td>
->>>>>>> 6cca3b7a39dfd25944f149e0869ddbbd62359d1a
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
