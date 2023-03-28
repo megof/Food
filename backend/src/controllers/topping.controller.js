@@ -40,7 +40,7 @@ export const getOne = async (req, res) =>{
 export const save = async (req, res) =>{
     //verificar que el nombre no esté vacío
     const {name, price} = req.body
-    console.log(req.body)
+    console.log("console:",req.body)
     const edo = false
     if(!name || !price ){
         return res.status(400).send({
@@ -91,6 +91,7 @@ export const update = async (req, res) =>{
 
         await Topping.findByIdAndUpdate(req.params.id, req.body)
         const toppingUpdate = await Topping.findById(req.params.id)
+        console.log(req.body)
         res.status(200).json(toppingUpdate);
     } catch (error) {
         res.status(500).json({

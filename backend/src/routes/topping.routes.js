@@ -5,14 +5,18 @@ const router = Router();
 
 /**
  * @swagger
+ * tags:
+ *  name: Toppings
+ *  description: Toppings end points
+ */
+
+/**
+ * @swagger
  * components:
  *  schemas:
  *    Topping:
  *      type: object
- *      properties:
- *        id:
- *          type: string
- *          description: the auto-generate id 
+ *      properties: 
  *        name:
  *          type: string
  *          description: the Topping name
@@ -21,45 +25,165 @@ const router = Router();
  *          description: the Topping price
  *        edo:
  *          type: boolean
- *          description: the Topping state
- *      required:
- *         - name
- *         - price 
- *      example:
- *        id: 641dd942c6d2032098f8c56e
+ *          description: the Topping state  
+ *      required: 
+ *        - name 
+ *        - price 
+ *      example: 
  *        name: My topping
- *        price: 5000
+ *        price: 5000 
  *        edo: false
- * 
+ *    ToppingNotFound:
+ *      type: object
+ *      properties: 
+ *        msg:
+ *          type: string
+ *          description: not found topping
+ *      example:
+ *        msg: not found topping
+ *  parameters:
+ *      toppingId:
+ *          in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *              type: string
+ *              description: the topping_id
+ *  
 */
+
+
+/**
+ * @swagger
+ * /api/v1/topping/:
+ *  post:
+ *    summary: create a new Topping
+ *    tags: [Toppings]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Topping'   
+ *    responses:
+ *      200:
+ *        description: The toppings succesfully created
+ *        content:
+ *          application/json:
+ *            schema: 
+ *              items: 
+ *                $ref: '#/components/schemas/Topping'
+ * 
+ *      400: 
+ *        description: There are no registered toppings
+ */
+router.post('/', ToppingController.save);
+
 
 /**
  * @swagger
  * /api/v1/topping:
  *  get:
  *      summary: Return a Topping list
+ *      tags: [Toppings]
  *      responses:
  *          200:
  *              description: A list of toppings
  *              content:
  *                  application/json:
- *                      schema:
- *                              type: array
- *                              items: 
- *                                  $ref: '#/components/schemas/Topping'
+ *                      schema: 
+ *                          items: 
+ *                             $ref: '#/components/schemas/Topping'
  * 
  *          404: 
- *              description: A list of toppings
+ *              description: There are no registered toppings
+ * 
+ *          
  */
-
 router.get('/', ToppingController.getAll);
 
+/**
+ * @swagger
+ * /api/v1/topping/{id}:
+ *  get:
+ *      summary: Return a Topping by id 
+ *      tags: [Toppings]
+ *      parameters:
+ *          - $ref: '#/components/parameters/toppingId'
+ *      responses:
+ *          200:
+ *              description: A toppings content by id
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          items: 
+ *                              $ref: '#/components/schemas/Topping'
+ *          404:
+ *              description: The toppings not found
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/ToppingNotFound'
+ *       
+ */
 router.get('/:id', ToppingController.getOne);
 
-router.post('/', ToppingController.save);
 
+/**
+ * @swagger
+ * /api/v1/topping/{id}:
+ *  put:
+ *      summary: Update a Topping by id 
+ *      tags: [Toppings]
+ *      parameters:
+ *          - $ref: '#/components/parameters/toppingId'
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Topping'   
+ *      responses:
+ *          200:
+ *              description: updated topping
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/Topping'
+ *          404:
+ *              description: The toppings was not found
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/ToppingNotFound'
+ *       
+ */
 router.put('/:id', ToppingController.update);
 
+/**
+ * @swagger
+ * /api/v1/topping/{id}:
+ *  delete:
+ *      summary: Delete a Topping by id 
+ *      tags: [Toppings]
+ *      parameters:
+ *          - $ref: '#/components/parameters/toppingId'
+ *      responses:
+ *          200:
+ *              description: Deleted a toppings  
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          items: 
+ *                              $ref: '#/components/schemas/Topping'
+ *          404:
+ *              description: The toppings not found
+ *              content:
+ *                  application/json:
+ *                      schema: 
+ *                          $ref: '#/components/schemas/ToppingNotFound'
+ *       
+ */
 router.delete('/:id', ToppingController.deleteOne);
 
 export default router;

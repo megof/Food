@@ -3,15 +3,21 @@ import { Schema, model } from "mongoose";
 const toppingProductSchema = new Schema(
     {
         idProduct:{
-            type: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId, 
             ref: 'Product',
-            required: true
+            required: true,
+            trim: true,
         },
         idTopping:{
             type: Schema.Types.ObjectId,
             ref: 'Topping',
-            required: true
-        }
+            required: true,
+            trim: true,
+        },
+    },
+    {   
+        versionKey: false,
+        timestamps: false,
     }
 );
 
