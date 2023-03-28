@@ -7,7 +7,7 @@ const fetchData = async (
   data = {},
   headers = {
     "Content-Type": "application/json",
-    "x-access-token": `${localStorage.getItem("token") || ""}}`,
+    "x-access-token": `${localStorage.getItem("token") || ""}`,
   }
 ) => {
   try {
@@ -17,6 +17,7 @@ const fetchData = async (
       data,
       headers,
     });
+    console.log(headers);
     console.log("petición correcta");
     return response;
   } catch (error) {
