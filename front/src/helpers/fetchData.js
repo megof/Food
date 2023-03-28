@@ -8,7 +8,7 @@ const fetchData = async (url, method = "get", data = {}) => {
       url,
       data,
     });
-
+    console.log("petición correcta")
     return response;
   } catch (error) {
     Swal.fire("Error", `${error}`, "error");

@@ -11,7 +11,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <h2 class="text-center text-white">Bienvenido!</h2>
     <n-dropdown trigger="click" :options="options" @select="handleSelect">
       <n-avatar
         class="mx-3"
@@ -53,4 +53,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

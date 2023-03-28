@@ -1,7 +1,6 @@
 <template>
   <!-- ComponentAdmin -->
   <NavAdmin />
-  <h1 class="text-center">Administracion</h1>
   <router-view></router-view>
 </template>
 

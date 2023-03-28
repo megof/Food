@@ -19,19 +19,24 @@ const router = createRouter({
       component: () => import("@/modules/main/layouts/AdminLayout.vue"),
       children: [
         {
-          path: "users",
+          path: "",
           name: "admin-users",
-          component: () => import("@/modules/main/layouts/AdminLayout.vue"),
+          component: () => import("@/modules/users/views/UsersView.vue"),
         },
         {
           path: "products",
           name: "admin-products",
-          component: () => import("@/modules/main/layouts/AdminLayout.vue"),
+          component: () => import("@/modules/products/views/ProductsView.vue"),
+        },
+        {
+          path: "types",
+          name: "admin-types-products",
+          component: () => import("@/modules/productType/views/TypeOfProductView.vue"),
         },
         {
           path: "orders",
           name: "admin-orders",
-          component: () => import("@/modules/main/layouts/AdminLayout.vue"),
+          component: () => import("@/modules/orders/views/OrdersView.vue"),
         },
       ],
     },
