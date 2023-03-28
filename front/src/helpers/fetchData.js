@@ -17,7 +17,7 @@ const fetchData = async (
       data,
       headers,
     });
-    console.log(headers);
+    // console.log(headers);
     console.log("petición correcta");
     return response;
   } catch (error) {
