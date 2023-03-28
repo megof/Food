@@ -56,10 +56,7 @@ const userRouter = Router();
  *      type: 
  *       - object
  *       - array
- *      items:
- *       - $ref: '#/components/schemas/User'
- *       - $ref: '#/components/schemas/User'
- *      description: The data of the user or users
+ *      description: The data send by the server
  *    required:
  *     - status
  *     - message 
@@ -102,8 +99,6 @@ const userRouter = Router();
  *   description: Return a list of users
  *   tags:
  *   - Users
- *   parameters:
- *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Users found
@@ -114,6 +109,7 @@ const userRouter = Router();
  *        example:
  *         status: 200
  *         message: Users found
+ *         data: [...Users]
  *    500:
  *     description: Error getting users
  *     content: 
@@ -125,7 +121,7 @@ const userRouter = Router();
  *        message: Error getting users
  * 
  */
-userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
+userRouter.get('/', getAllUsersController);
 
 /**
  * @swagger
@@ -240,7 +236,6 @@ userRouter.post('/login', loginUserController);
  *   tags: 
  *    - Users
  *   parameters:
- *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   requestBody:
  *    required: true
@@ -280,7 +275,7 @@ userRouter.post('/login', loginUserController);
  *        message: Error updating user
  * 
  */ 
-userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
+userRouter.put('/:id', updateUserController);
 
 /**
  * @swagger
@@ -290,7 +285,6 @@ userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
  *   tags: 
  *    - Users
  *   parameters:
- *    - $ref: '#/components/parameters/token'
  *    - $ref: '#/components/parameters/id'
  *   responses:
  *    200:
@@ -321,7 +315,7 @@ userRouter.put('/:id', verifyTokenMiddleware, updateUserController);
  *        status: 500
  *        message: Error deleting user
  */ 
-userRouter.delete('/:id', verifyTokenMiddleware, deleteUserController);
+userRouter.delete('/:id', deleteUserController);
 
 
 // Exporting the router

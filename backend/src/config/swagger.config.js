@@ -16,7 +16,16 @@ const swaggerOptions = {
             version: '1.0.0',
             description: 'This is the documentation for the Food API'
         },
-        servers: [ { url: `http://localhost:${PORT || 3000}` } ],
+        servers: [ 
+            { 
+                url: `http://localhost:${PORT || 3000}` ,
+                description: 'Development server'
+            },
+            {
+                url: `https://food-api-market.onrender.com`,
+                description: 'Production server'
+            }
+        ],
     },
     apis: [ './src/routes/*.js' ],
 };
