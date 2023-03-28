@@ -5,7 +5,7 @@
 import { Router } from "express";
 import * as DetailTopping from '../controllers/detailTopping.controller.js'
 
-const router = Router();
+const detailToppingRoutes = Router();
 
 /**
  * @swagger
@@ -98,9 +98,9 @@ const router = Router();
  * 
  */
 
-router.get('/', DetailTopping.getAll);
+detailToppingRoutes.get('/', DetailTopping.getAll);
 
-router.get('/:id', DetailTopping.getOne);
+detailToppingRoutes.get('/:id', DetailTopping.getOne);
 
 /**
  * @swagger
@@ -145,7 +145,7 @@ router.get('/:id', DetailTopping.getOne);
  *        message: Error creating detail - topping
  */
 
-router.post('/', DetailTopping.save);
+detailToppingRoutes.post('/', DetailTopping.save);
 
 /**
  * @swagger
@@ -195,7 +195,7 @@ router.post('/', DetailTopping.save);
  * 
  */ 
 
-router.put('/:id', DetailTopping.update);
+detailToppingRoutes.put('/:id', DetailTopping.update);
 
 /**
  * @swagger
@@ -236,6 +236,6 @@ router.put('/:id', DetailTopping.update);
  *        message: Error deleting Detail - Topping
  */ 
 
-router.delete('/:id', DetailTopping.deleteOne);
+detailToppingRoutes.delete('/:id', DetailTopping.deleteOne);
 
-export default router;
+export default detailToppingRoutes;

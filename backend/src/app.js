@@ -26,6 +26,8 @@ import ProductRoutes from './routes/product.routes.js';
 import toppingRoutes from './routes/topping.routes.js'
 import toppingProductRoutes from './routes/toppingProduct.routes.js'
 import detailOrderRouter from './routes/detailOrder.routes.js';
+import detailToppingRoutes from './routes/detailTopping.routes.js';
+import couponRoutes from './routes/coupon.routes.js';
 
 
 // Creating an instance of express
@@ -48,6 +50,8 @@ app.use('/api/v1/types', ProductTypeRoutes);
 app.use('/api/v1/products', ProductRoutes);
 app.use('/api/v1/toppingProduct', toppingProductRoutes);
 app.use('/api/v1/detailOrders', detailOrderRouter);
+app.use('/api/v1/detailTopping', detailToppingRoutes);
+app.use('/api/v1/coupon', couponRoutes);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfiguration));
 
 // Exporting the app

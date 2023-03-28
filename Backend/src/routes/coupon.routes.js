@@ -11,7 +11,7 @@ import * as Coupon from '../controllers/coupon.controller.js'
 import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
 
 // Creating the router
-const router = Router();
+const couponRoutes = Router();
 
 /**
  * @swagger
@@ -125,9 +125,9 @@ const router = Router();
  * 
  */
 
-router.get('/', verifyTokenMiddleware, Coupon.getAll);
+couponRoutes.get('/', verifyTokenMiddleware, Coupon.getAll);
 
-router.get('/:id', verifyTokenMiddleware, Coupon.getOne);
+couponRoutes.get('/:id', verifyTokenMiddleware, Coupon.getOne);
 
 /**
  * @swagger
@@ -172,7 +172,7 @@ router.get('/:id', verifyTokenMiddleware, Coupon.getOne);
  *        message: Error creating coupon
  */
 
-router.post('/', Coupon.save);
+couponRoutes.post('/', Coupon.save);
 
 /**
  * @swagger
@@ -223,7 +223,7 @@ router.post('/', Coupon.save);
  * 
  */ 
 
-router.put('/:id', verifyTokenMiddleware, Coupon.update);
+couponRoutes.put('/:id', verifyTokenMiddleware, Coupon.update);
 
 /**
  * @swagger
@@ -265,6 +265,6 @@ router.put('/:id', verifyTokenMiddleware, Coupon.update);
  *        message: Error deleting coupon
  */ 
 
-router.delete('/:id', verifyTokenMiddleware, Coupon.deleteOne);
+couponRoutes.delete('/:id', verifyTokenMiddleware, Coupon.deleteOne);
 
-export default router;
+export default couponRoutes;
