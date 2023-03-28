@@ -27,6 +27,7 @@
             <td>{{ item.phone }}</td>
             <td>{{ item.obs }}</td>
             <td>{{ formaDate }}</td>
+            <td>{{ item.status }}</td>
 
             <td v-for="(column, index) in columns" :key="index">
               <template v-if="column === 'opciones'">
@@ -44,14 +45,19 @@
                 </n-space>
               </template>
               <template v-if="column === 'opcion'">
-                <n-button color="green">
+                <n-button color="green" >
                   <n-icon>
                     <EyeSharp />
                   </n-icon>
                 </n-button>
-              </template>
-            </td>
-          </tr>
+              </template>       
+
+             <template v-else>
+              {{ item[column] }}
+            </template>
+          </td>
+        </tr>
+
         </template>
         
 <!-- cierre de template para copiar -->
@@ -67,12 +73,12 @@ import {
   NListItem,
   NButton,
   NTable,
-  NModal,
   NIcon,
   NAvatar,
   NSpace,
 } from "naive-ui";
 import { EyeSharp, Trash, Create, SyncCircle } from "@vicons/ionicons5";
+
 
 export default {
   name: "Lists",
@@ -82,13 +88,13 @@ export default {
     NButton,
     EyeSharp,
     NTable,
-    NModal,
     NIcon,
     NAvatar,
     Trash,
     NSpace,
     Create,
     SyncCircle,
+    
   },
   props: {
     columns: {

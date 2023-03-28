@@ -22,7 +22,7 @@ export default {
   // },
   data() {
      return {
-     columns: ['Cliente', 'Dirección', 'teléfono', 'Observación', 'Fecha', 'opcion'],
+     columns: ['Cliente', 'Dirección', 'teléfono', 'Observación', 'Fecha', 'Estado','opcion'],
       items: [
              ],
     };
