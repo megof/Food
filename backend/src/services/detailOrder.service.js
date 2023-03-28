@@ -60,6 +60,8 @@ export const getOrderDetailById = async (id) => {
             message: "Error getting the order detail"
         };
     }
+    // Return the response object
+    return response;
 };
 
 // Create an order detail
@@ -113,6 +115,8 @@ export const updateOrderDetail = async (id, orderDetail) => {
             message: "Error updating the order detail"
         };
     }
+
+    return response;
 
 };
 

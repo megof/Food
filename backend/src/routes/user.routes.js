@@ -56,10 +56,7 @@ const userRouter = Router();
  *      type: 
  *       - object
  *       - array
- *      items:
- *       - $ref: '#/components/schemas/User'
- *       - $ref: '#/components/schemas/User'
- *      description: The data of the user or users
+ *      description: The data send by the server
  *    required:
  *     - status
  *     - message 
@@ -114,6 +111,7 @@ const userRouter = Router();
  *        example:
  *         status: 200
  *         message: Users found
+ *         data: [...Users]
  *    500:
  *     description: Error getting users
  *     content: 
@@ -134,6 +132,8 @@ userRouter.get('/', verifyTokenMiddleware, getAllUsersController);
  *   summary: Create new user
  *   tags:
  *    - Users
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   requestBody:
  *    required: true
  *    content:
@@ -215,11 +215,11 @@ userRouter.post('/', verifyTokenMiddleware, createUserController);
  *     description: User is not active
  *     content:
  *      application/json:
- *      schema:
- *       $ref: '#/components/schemas/Response'
- *      example:
- *       status: 401
- *       message: User is not active
+ *       schema:
+ *        $ref: '#/components/schemas/Response'
+ *       example:
+ *        status: 401
+ *        message: User is not active
  *    500:
  *     description: Error logging in
  *     content:
