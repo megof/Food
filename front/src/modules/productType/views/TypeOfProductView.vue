@@ -1,21 +1,21 @@
 <template>
   <div class="container-md container-fluid mt-5">
-    <h1 class="text-center my-4">Tipos Productos</h1>
-    <!-- <TableTitle title="Tipos de Producto" id="offcanvasTypes" /> -->
+    <!-- <h1 class="text-center my-4">Tipos Productos</h1> -->
+    <TableTitle title="Tipos de Producto" id="offcanvasTypes" />
     <TypeOfProductOffCanvas />
 
     <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="types.length !== 0">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
-          <th scope="col">Id</th>
+          
           <th scope="col">Nombre</th>
           <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="type in types" :key="type.id">
-          <td>{{ type._id }}</td>
+          
           <td>{{ type.name }}</td>
           <td>
             <button

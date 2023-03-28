@@ -3,11 +3,11 @@
          <h2>{{ title }}:</h2>
         <button
            @click="createAction"
-           class="btn btn-outline-dark"
+           class="btn btn-outline-dark d-flex align-items-center"
            data-bs-toggle="offcanvas"
            :data-bs-target='`#${id}`'
-           ><i class="bi bi-plus-circle-fill me-2 " style="font-size: 1.3em;"></i><span
-           class="d-none d-md-inline-block">Agregar
+           ><i class="bi bi-plus-circle-fill me-2 mb-3" style="font-size: 1.3em;"></i><span
+           class="d-none d-md-inline-block ">Agregar
            {{
            title
            }}</span>
