@@ -53,10 +53,14 @@ export default {
 
 <style scoped>
 .card {
-  width: 18rem !important;
+  word-break: keep-all;
+  width: 20rem !important;
+  height: 30rem !important;
   opacity: 0.9;
-  flex-grow: 1;
+  border: 0.125rem solid #e1e1e1;
+  box-shadow: 0 0.188rem 0.188rem 0 rgba(0, 0, 0, 0.07);
   transition: 0.5s ease-in-out;
+  overflow: hidden;
 }
 
 .card:hover {
