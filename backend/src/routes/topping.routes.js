@@ -120,7 +120,7 @@ router.get('/', ToppingController.getAll);
  *      summary: Return a Topping by id 
  *      tags: [Toppings]
  *      parameters:
- *         - $ref: '#/components/parameters/token'
+ *          - $ref: '#/components/parameters/token'
  *          - $ref: '#/components/parameters/toppingId'
  *      responses:
  *          200:
