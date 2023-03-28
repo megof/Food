@@ -25,7 +25,7 @@ export const getOne = async (req, res) =>{
 
 
 export const save = async (req, res) =>{
-    if(!req.body.name){
+    if(!req.body.client || !req.body.address || !req.body.phone || !req.body.total){
         return res.status(400).send({
             message: 'Content cannot be empty.'
         })
