@@ -15,6 +15,7 @@
   background-color: #000;
   z-index: 99;
   overflow: hidden;
+  animation: floating 3s ease-in-out infinite;
 }
 
 .content {
@@ -36,7 +37,6 @@
 .content span {
   font-size: 1rem;
   color: #fff;
-  animation: floating 3s ease-in-out infinite;
 }
 
 @keyframes floating {
@@ -44,13 +44,13 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(5deg);
+    transform: rotate(15deg);
   }
   50% {
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-5deg);
+    transform: rotate(-15deg);
   }
   100% {
     transform: rotate(-0deg);

@@ -18,7 +18,7 @@ export default {
 
   methods: {
     changeColorNav() {
-      console.log(this.$route.fullPath);
+      // console.log(this.$route.fullPath);
       navBarColor();
     },
   },
