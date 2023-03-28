@@ -46,7 +46,10 @@ export const save = async (req, res) =>{
         })
     }
     try {
-        const newToppingsPro= new ToppingProduct({idProduct, idTopping})
+        const newToppingsPro= new ToppingProduct({
+            idProduct: req.body.idProduct, 
+            idTopping: req.body.idTopping
+        })
         const ToppingProductSaved = await newToppingsPro.save()
         res.status(201).json(ToppingProductSaved)
 

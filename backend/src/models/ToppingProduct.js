@@ -9,11 +9,11 @@ const toppingProductSchema = new Schema(
             trim: true,
         },
         idTopping:{
-            type: Schema.Types.ObjectId, 
+            type: Schema.Types.ObjectId,
             ref: 'Topping',
             required: true,
             trim: true,
-        }
+        },
     },
     {   
         versionKey: false,
