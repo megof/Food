@@ -9,7 +9,7 @@ export const  useTypeStore=defineStore('types',{
     }),
     actions:{
         async getTypes(){
-            const {data}=await fetchData(URL);
+           const {data}=await fetchData(URL);
            this.types=data;
            this.sortById();
         },

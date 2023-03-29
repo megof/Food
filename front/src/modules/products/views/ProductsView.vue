@@ -16,9 +16,9 @@
         <button
           v-for="type in productType"
           :key="type.id"
-          @click="productCharacterization(type.id, type.id)"
+          @click="productCharacterization(type._id, type._id)"
           class="mx-2 mb-2 btn btn-outline-dark"
-          :id="type.id"
+          :id="type._id"
         >
           {{ type.name }}
         </button>
@@ -29,8 +29,8 @@
       <table class="table  mt-3 table-bordered" v-if="products.length !== 0">
         <thead>
           <tr>
-            <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
-            <th scope="col" class="d-none d-sm-table-cell col-1">Id Producto</th>
+            <!-- <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
+            <th scope="col" class="d-none d-sm-table-cell col-1">Id Producto</th> -->
             <!-- <th scope="col" class=" d-none d-sm-table-cell">Descripcion</th>
                  <th scope="col" class=" d-none d-sm-table-cell">Descripcion General</th> -->
             <th scope="col" class="col-3">Nombre</th>
@@ -42,8 +42,9 @@
         </thead>
         <tbody>
           <tr v-for="product in characterizedProducts" :key="product.id">
-            <td class="d-none d-sm-table-cell">{{ product.id }}</td>
-            <td class="d-none d-sm-table-cell">{{ product.idTypeProduct }}</td>
+          <!-- <tr v-for="product in products" :key="product.id"> -->
+            <!-- <td class="d-none d-sm-table-cell">{{ product._id }}</td>
+            <td class="d-none d-sm-table-cell">{{ product.id_tp_product.name }}</td> -->
             <td>{{ product.name }}</td>
             <!-- <td class=" d-none d-sm-table-cell">{{product.description}}</td>
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
@@ -96,15 +97,19 @@ const { getProducts, deleteProduct } = useProducts;
 // })
 const characterizedProducts = ref(products.value);
 const clearButtons = () => {
-  for (let i = 0; i <= productType.value.length; i++) {
-    document.getElementById(i).classList.remove("active");
+  const idTypeProduct=productType.value.map(el=>el._id);
+  
+  for (let i = 0; i <productType.value.length; i++) {
+    // console.log(idTypeProduct[i])
+    document.getElementById(idTypeProduct[i]).classList.remove("active");
   }
+  document.getElementById(0).classList.remove("active")
 };
 const productCharacterization = (idTypeProduct, idButton) => {
-  clearButtons();
+   clearButtons();
   if (idTypeProduct !== 0) {
     characterizedProducts.value = products.value.filter(
-      (product) => product.idTypeProduct === idTypeProduct
+      (product) => product.id_tp_product._id === idTypeProduct
     );
   } else {
     characterizedProducts.value = products.value;
