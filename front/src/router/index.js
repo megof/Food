@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../modules/users/views/view/UsersView.vue"),
+      component: () => import("../modules/users/views/UsersView.vue"),
     },
     {
       path: "/products",
@@ -26,7 +26,7 @@ const router = createRouter({
         {
           path: "",
           name: "admin-users",
-          component: () => import("@/modules/users/views/view/UsersView.vue"),
+          component: () => import("@/modules/users/views/UsersView.vue"),
         },
         {
           path: "products",

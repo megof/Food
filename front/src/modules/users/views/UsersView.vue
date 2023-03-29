@@ -18,7 +18,7 @@
           <td>{{user.username}}</td>
           <td>
             <button  class="btn btn-sm btn-secondary me-2"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTypes"  
-              @click="updateAction(user._id, user.name, user.username,  user.password)">
+              @click="updateAction(user._id, user.name, user.username,  user.password, user.state)">
               <i class="bi bi-arrow-repeat me-1"></i><span class="d-none d-md-inline-block">
                 Actualizar</span>
             </button>

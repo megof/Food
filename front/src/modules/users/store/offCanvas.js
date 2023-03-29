@@ -6,15 +6,17 @@ export const  useOffCanvasStore=defineStore('offcanvas',{
         name:'', 
         username:'', 
         password:'', 
+        state:true, 
         
     }),
     actions:{
-        updateAction(id, name, username, password){
+        updateAction(id, name, username, password, state){
             this.create=false
             this.id=id
             this.name=name 
             this.username=username 
             this.password=password 
+            this.state=state
         },
         createAction(){
             this.create=true

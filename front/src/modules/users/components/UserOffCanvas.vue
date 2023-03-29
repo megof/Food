@@ -28,7 +28,14 @@
                         <input type="password" class="form-control mt-2" id="name" placeholder="********" v-model="password">
                         <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
                     </div>
-                    
+                    <div class="form-group mb-2">
+                        <label for="name " >Estado:</label>
+                        <div class="form-check form-switch form-group mb-2"> 
+                            
+                            <input class="form-check-input" type="checkbox" role="switch" checked v-model="state">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">{{state ? "Activo":"Inactivo"}}</label>
+                        </div>
+                    </div>
                     <div class="form-group mb-2 mt-5"> 
                           <button
                           type="submit"
@@ -62,6 +69,7 @@
     const name=ref('');
     const username=ref('');
     const password=ref('');
+    const state=ref(true);
   
 
     //Funcionalidad del formulario.
@@ -93,16 +101,19 @@
                 name:name.value,
                 username: username.value,
                 password: password.value,
+                state: state.value,
             }
              
             addUser(user);
             name.value='';
             username.value = '';
             password.value = '';
+            state.value=true;
         }else{
             name.value='';
             username.value='';
             password.value = '';
+            state.value=true;
         }
         
     }
@@ -112,7 +123,9 @@
             name:name.value,
             username: username.value,
             password: password.value,
+            state: state.value,
         }
+        console.log(newUser)
         updateUser(id.value,newUser);
     }
 
@@ -124,11 +137,11 @@
         if(item){
             name.value=item.name,
             username.value = item.username,
-            password.value = item.password
+            password.value = item.password 
         }else{
             name.value='',
             username.value='';
-            password.value = '';
+            password.value = ''; 
         }
     })
 

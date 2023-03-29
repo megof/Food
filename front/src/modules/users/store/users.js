@@ -37,9 +37,10 @@ export const  useUserStore=defineStore('users',{
             //Petición HTTP...
             const url=`${URL}/${id}`;
             const data={
-                name:user.name,
-                username:user.username, 
-                password:user.password, 
+                name:newUser.name,
+                username:newUser.username, 
+                password:newUser.password, 
+                state: newUser.state
             };
             console.log(data);
             fetchData(url,'put',data); ///PUT
