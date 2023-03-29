@@ -41,6 +41,7 @@ export const save = async (req, res) =>{
     //verificar que el nombre no esté vacío
     const {name, price} = req.body
     console.log("console:",req.body)
+    //edo
     const edo = true
     if(!name || !price ){
         return res.status(400).send({
