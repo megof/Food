@@ -8,6 +8,8 @@ export const getAll = async (req, res) =>{
         .populate('id_tp_product')
         res.status(200).json(products)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the products.'
         })
@@ -21,6 +23,8 @@ export const getOne = async (req, res) =>{
         .populate('id_tp_product')
         res.json(product)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the product.'
         })
@@ -60,6 +64,8 @@ export const save = async (req, res) =>{
         const productSaved = await newProduct.save()
         res.status(201).json(productSaved)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong saving the product.'
         })
@@ -77,6 +83,8 @@ export const deleteOne = async (req, res) =>{
             message: `The product with id ${req.params.id} has been successfully removed.`
         });
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong deleting the product.'
         })
@@ -92,6 +100,8 @@ export const update = async (req, res) =>{
             message: `The product with id ${req.params.id} has been successfully updated.`
         });
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong updating the product.'
         })
