@@ -1,6 +1,6 @@
 <template>
   
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasTypes" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasToppings" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -14,6 +14,11 @@
                     <div class="form-group mb-2">
                         <label for="name " >Nombre:</label>
                         <input type="text" class="form-control mt-2" id="name" placeholder="Ingrese el nombre" v-model="name">
+                        <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="price" >Precio:</label>
+                        <input type="text" class="form-control mt-2" id="price" placeholder="Ingrese el precio" v-model="price">
                         <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
                     </div>
                     
@@ -38,7 +43,7 @@
     
     <script setup>
         import {ref,watch} from 'vue'
-        import {useTypeStore} from '../store/types.js';
+        import {useToppingStore} from '../store/toppings.js';
         import {useOffCanvasStore} from '../store/offCanvas.js'
         import { storeToRefs } from 'pinia';
        
@@ -46,10 +51,10 @@
         
 
 
-        const useType=useTypeStore();
+        const useTopping=useToppingStore();
        
-        const {types}=storeToRefs(useType);
-        const {getTypeById,addType,updateType}=useType;
+        const {toppings}=storeToRefs(useTopping);
+        const {getToppingById,addTopping,updateTopping}=useTopping;
 
         const useOffCanvas=useOffCanvasStore();
         const {create,id,title,buttonText}=storeToRefs(useOffCanvas);
@@ -57,6 +62,7 @@
         
         //Variables Reactivas...
         const name=ref('');
+        const price=ref('');
 
 
         //Funcionalidad del formulario.
@@ -67,38 +73,48 @@
                 updateItem();
             }
         }
+
+        //Hasta aquí se ha modificado...
         const createItem=()=>{
-            let flag=types.value.some(type=>type.name.toLowerCase()===name.value.toLowerCase())
+            let flag=toppings.value.some(topping=>topping.name.toLowerCase()===name.value.toLowerCase())
             if(!flag && name.value!==''){
              
-                const type={
-                _id:'641e1453e5181e37b4d9d32z',
+                const topping={
+                _id:'641e1453e5182227b4d9d32z',
                 name:name.value,
+                price:price.value,
+                edo:false
                 }
-                addType(type);
+                addTopping(topping);
                 name.value='';
+                price.value='';
             }else{
                 name.value='';
+                price.value='';
             }
             
         }
         const updateItem=()=>{
-            const newType={
+            const newTopping={
                 _id:id.value, 
-                name:name.value
+                name:name.value,
+                price:price.value,
+                edo:false
             }
-            updateType(id.value,newType);
+            updateTopping(id.value,newTopping);
         }
        
 
         //Este es el watch en composition API.
         watch(title,(newTitle,oldTitle)=>{
             
-              let item=getTypeById(id.value)
+              let item=getToppingById(id.value)
               if(item){
                 name.value=item.name
+                price.value=item.price
               }else{
                 name.value=''
+                price.value=''
               }
         })
     </script>
