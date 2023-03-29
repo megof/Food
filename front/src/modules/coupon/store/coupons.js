@@ -1,0 +1,65 @@
+import {defineStore} from 'pinia';
+//Importamos los helpers de las peticiones HTTP.
+//Importamos los helpers de las peticiones HTTP.
+import fetchData from '../../../helpers/fetchData.js';
+const URL= 'https://food-api-market.onrender.com/api/v1/Coupon';
+
+export const useCouponsStore=defineStore('coupons',{
+    state:()=>({
+        coupons:[],
+
+    }),
+    actions:{
+        async getCoupons(){
+           const {data}=await fetchData(URL);
+           this.coupons=data.data;
+           console.log(this.coupons)
+           this.sortById();
+        },
+        
+        getCouponById(id){
+            const index=this.coupons.map(el=>el.id).indexOf(id);
+            return this.coupons[index]; 
+        },
+        
+        addCoupon(coupon){
+            this.coupons.push(coupon);
+
+            const data={
+            name:coupon.name,
+            start_date:coupon.start_date, 
+            end_date: coupon.end_date,
+            value:coupon.value, 
+            min_purchase:coupon.min_purchase, 
+            status: coupon.status
+        }
+        fetchData(URL,'post',data);
+
+        },
+        updateProduct(id,newCoupon){ 
+            const index=this.coupons.map(el=>el.id).indexOf(id); //El índice que debo alterar.
+            this.coupons[index]=newCoupon;
+            const url=`${URL}/${id}`;
+            const data={
+                name:coupon.name,
+                start_date:coupon.start_date, 
+                end_date: coupon.end_date,
+                value:coupon.value, 
+                min_purchase:coupon.min_purchase, 
+                status: coupon.status 
+            };
+            console.log(data);
+            fetchData(url,'put',data); ///PUT
+        },
+        deleteProduct(id){
+            const index=this.coupons.map(el=>el.id).indexOf(id); //El índice que debo borrar.
+            this.coupons.splice(index,1);
+            const url=`${URL}/${id}`;
+            fetchData(url,'delete');
+        },
+        sortById(){
+        }
+
+    }
+    
+});
