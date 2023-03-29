@@ -4,11 +4,11 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
+import Loader from "./components/Loader.vue";
 
 export default {
   components: {
-    Loader: defineAsyncComponent(() => import("./components/Loader.vue")),
+    Loader,
   },
 
   data() {
@@ -20,7 +20,7 @@ export default {
   created() {
     setTimeout(() => {
       this.loader = false;
-    }, 200);
+    });
   },
 };
 </script>

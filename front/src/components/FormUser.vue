@@ -29,24 +29,26 @@ export default {
 
   methods: {
     async login() {
-      const url = `https://food-api-market.onrender.com/api/v1/users/login`;
-      const { data } = await fetchData(url, "post", {
-        username: this.username,
-        password: this.password,
-      });
-      // console.log(data.data.token);
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
+      try {
+        const url = `https://food-api-market.onrender.com/api/v1/users/login`;
+        const { data } = await fetchData(url, "post", {
           username: this.username,
           password: this.password,
-        })
-      );
-      localStorage.setItem("token", data.data.token);
-      setTimeout(() => {
+        });
+        console.log(data);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            username: this.username,
+            password: this.password,
+          })
+        );
+        localStorage.setItem("token", data.data.token);
         const route = this.$router.resolve({ name: "admin" });
         window.open(route.href, "_blank");
-      }, 1000);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

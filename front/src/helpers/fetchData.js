@@ -17,27 +17,10 @@ const fetchData = async (
       data,
       headers,
     });
-    // console.log(headers);
-    console.log("petición correcta", response.data.message);
-    if (response.data.message.includes("logged")) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: response.data.message,
-        showConfirmButton: false,
-        timer: 1000,
-      });
-      return response;
-    } else {
-      return response;
-    }
-  } catch (err) {
-    console.log("petición fallida" + err.response.data.message);
-    if (err.response.data.message.includes("Username")) {
-      Swal.fire("Error", `${err.response.data.message}`, "error");
-    } else {
-      Swal.fire("Error", `${err.message}`, "error");
-    }
+    console.log("petición correcta");
+    return response;
+  } catch (error) {
+    Swal.fire("Error", `${error}`, "error");
   }
 };
 
