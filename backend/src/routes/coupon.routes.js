@@ -101,8 +101,6 @@ const couponRoutes = Router();
  *   description: Return a list of coupons
  *   tags:
  *   - Coupons
- *   parameters:
- *    - $ref: '#/components/parameters/token'
  *   responses:
  *    200:
  *     description: Coupons found
@@ -125,9 +123,9 @@ const couponRoutes = Router();
  * 
  */
 
-couponRoutes.get('/', verifyTokenMiddleware, Coupon.getAll);
+couponRoutes.get('/', Coupon.getAll);
 
-couponRoutes.get('/:id', verifyTokenMiddleware, Coupon.getOne);
+couponRoutes.get('/:id', Coupon.getOne);
 
 /**
  * @swagger
@@ -136,6 +134,8 @@ couponRoutes.get('/:id', verifyTokenMiddleware, Coupon.getOne);
  *   summary: Create new coupon
  *   tags:
  *    - Coupons
+ *   parameters:
+ *    - $ref: '#/components/parameters/token'
  *   requestBody:
  *    required: true
  *    content:
@@ -172,7 +172,7 @@ couponRoutes.get('/:id', verifyTokenMiddleware, Coupon.getOne);
  *        message: Error creating coupon
  */
 
-couponRoutes.post('/', Coupon.save);
+couponRoutes.post('/', verifyTokenMiddleware, Coupon.save);
 
 /**
  * @swagger

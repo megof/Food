@@ -57,6 +57,14 @@ const detailToppingRoutes = Router();
  *    schema:
  *     type: string
  *    required: true
+ *   
+ *   token:
+ *    in: header
+ *    name: x-access-token
+ *    description: The token to access the API
+ *    schema:
+ *     type: string
+ *    required: true
  * 
  */
 
