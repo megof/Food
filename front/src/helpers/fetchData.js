@@ -7,7 +7,7 @@ const fetchData = async (
   data = {},
   headers = {
     "Content-Type": "application/json",
-    "x-access-token": `${localStorage.getItem("token") || ""}`,
+    "x-access-token": `${localStorage.getItem("token") || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODAwNjM3ODAsImV4cCI6MTY4MDE1MDE4MH0.fsZy_AFRhjoSkjgAbOlb153Ysm10vjal3vlgv9VAyzc"}`,
   }
 ) => {
   try {
