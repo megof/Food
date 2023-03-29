@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../modules/users/views/UsersView.vue"),
+      component: () => import("../modules/users/views/view/UsersView.vue"),
     },
     {
       path: "/products",
@@ -26,7 +26,7 @@ const router = createRouter({
         {
           path: "",
           name: "admin-users",
-          component: () => import("@/modules/users/views/UsersView.vue"),
+          component: () => import("@/modules/users/views/view/UsersView.vue"),
         },
         {
           path: "products",
@@ -50,7 +50,11 @@ const router = createRouter({
         },
       ],
     },
-    
+    {
+      path: "/form-user",
+      redirect: { name: "form-user" },
+      component: () => import("@/modules/users/views/components/ProductOffCanvas.vue"),
+    },
 
     // error - 404
     {
