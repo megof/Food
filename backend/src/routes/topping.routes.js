@@ -35,7 +35,7 @@ const router = Router();
  *      example: 
  *        name: My topping
  *        price: 5000 
- *        edo: false
+ *        edo: true
  *    ToppingNotFound:
  *      type: object
  *      properties: 
