@@ -18,21 +18,24 @@
         }}
       </h5>
       <div class="cart d-flex justify-content-center align-items-center gap-2">
-        <button class="btn btn-primary btn-first" :data-id="product._id">-</button>
+        <button class="btn btn-primary btn-first" :data-id="product._id" @click="decrement">
+          -
+        </button>
         <input
-          class="form-control text-center open-sans"
+          class="form-control text-center"
           type="number"
           placeholder="Cantidad"
           readonly
-          :value="product.units"
+          :value="units"
         />
-        <button class="btn btn-primary btn-first" :data-id="product._id">+</button>
+        <button class="btn btn-primary btn-first" :data-id="product._id" @click="increment">
+          +
+        </button>
       </div>
       <button
         class="btn btn-primary btn-first text-center w-100 my-3"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        :id="product.id"
+        :id="product._id"
+        @click="addToCart(product, units)"
       >
         Agregar Al Carrito
       </button>
@@ -41,11 +44,36 @@
 </template>
 
 <script>
+import { useCartStore } from "../stores/cart.js";
+
+const useCart = useCartStore();
+const { addItem } = useCart;
+
 export default {
   props: {
     product: {
       type: Object,
       required: true,
+    },
+  },
+
+  data() {
+    return {
+      units: 1,
+    };
+  },
+
+  methods: {
+    increment() {
+      this.units += 1;
+    },
+
+    decrement() {
+      this.units <= 1 ? (this.units = 1) : (this.units -= 1);
+    },
+
+    addToCart(product, units) {
+      addItem(product, units);
     },
   },
 };
@@ -78,5 +106,15 @@ export default {
 
 .btn-first:hover {
   opacity: 1;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>
