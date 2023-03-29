@@ -36,8 +36,9 @@ export const useCouponsStore=defineStore('coupons',{
         console.log(data)
 
         fetchData(URL,'post',data);
-
+        
         },
+        
         updateCoupon(id,newCoupon){ 
             const index=this.coupons.map(el=>el.id).indexOf(id); //El índice que debo alterar.
             this.coupons[index]=newCoupon;

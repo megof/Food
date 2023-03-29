@@ -124,26 +124,27 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useCouponsStore } from "../store/coupons.js";
-import { useOffCanvasStore } from "../store/offCanvas.js";
-import { storeToRefs } from "pinia";
+import {ref, watch} from "vue";
+import { useOffCanvasStore} from "../store/offCanvas";
+import { storeToRefs} from "pinia";
+import {useCouponsStore} from "../store/coupons.js"
+
 
 const useCoupon = useCouponsStore();
 const useOffCanvas = useOffCanvasStore();
+const {coupon} = storeToRefs(useCoupon)
 
-const { coupon } = storeToRefs(useCoupon);
-const { getCouponById, addCoupon, updateCoupon } = useCoupon;
+const { getCouponById, addCoupon, updateCoupon, deleteCoupon } = useCoupon;
 const { create, id, title, buttonText } = storeToRefs(useOffCanvas);
 
 //Variables Reactivas...
 const name = ref("");
-const start_date = ref("");
-const end_date = ref("");
-const value = ref("");
-const min_purchase = ref("");
+const start_date = ref(undefined);
+const end_date = ref(undefined);
+const value = ref(undefined);
+const min_purchase = ref(undefined);
 const status = ref(true);
-const dcto = ref("");
+const dcto = ref(undefined);
 
 //Funcionalidad del formulario.
 const formValidation = () => {
@@ -182,7 +183,7 @@ const createItem = () => {
     min_purchase.value !== ""  &&
     dcto.value !== ""
   ) {
-    const coupon = {
+    const ncoupon = {
       _id: "641e1453e5181e37b4d9d32z",
       name: name.value,
       start_date: start_date.value,
@@ -192,8 +193,8 @@ const createItem = () => {
       status: status.value,
       dcto: dcto.value 
     };
-    console.log(coupon);
-    addCoupon(coupon);
+    console.log(ncoupon);
+    addCoupon(ncoupon);
     name.value = "";
     start_date.value = undefined;
     end_date.value = undefined;
@@ -223,7 +224,6 @@ const updateItem = () => {
     min_purchase: min_purchase.value,
     status: status.value,
     dcto:dcto.value,
-
   };
 
   updateCoupon(id.value, newCoupon);
@@ -240,7 +240,7 @@ watch(title, (newTitle, oldTitle) => {
     min_purchase.value = item.min_purchase,
     status.value = item.status;
     dcto.value = item.dcto;
-} else {
+    }   else {
        name.value = "",
       start_date.value = undefined,
       end_date.value = undefined,
@@ -248,8 +248,7 @@ watch(title, (newTitle, oldTitle) => {
       min_purchase.value = undefined,
       status.value = true;
       dcto.value= undefined;
-
-  }
+    }
 });
 </script>
 
