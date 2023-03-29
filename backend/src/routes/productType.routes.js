@@ -4,6 +4,9 @@ import * as ProductTypeController from '../controllers/productType.controller.js
 // Importing the middlewares
 import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
 
+// Importing the file upload module
+import fileUpload from 'express-fileupload';
+
 const router = Router();
 
 /**
@@ -19,11 +22,15 @@ const router = Router();
  *              name:
  *                  type: string
  *                  description: name of the product type
+ *              image:
+ *                  type: file
+ *                  description: image of the product type
  *          required: 
  *              - name
  *          example:
  *              id: 6410bb953e324fcfd7f51221
  *              name: Hamburguesa
+ *              image: /C:/Users/jeanc/OneDrive/Escritorio/Programming/Trabajo/Frontend/restaurante/img/anvorguesa3.jpg
  *  parameters:
  *      productTypeId:
  *          in: path
@@ -111,7 +118,10 @@ router.get('/:id', ProductTypeController.getOne);
  *              404:
  *                  description: Product type was not found
  * */
-router.post('/', verifyTokenMiddleware, ProductTypeController.save);
+router.post('/', fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}), verifyTokenMiddleware, ProductTypeController.save);
 
 /**
  * @swagger

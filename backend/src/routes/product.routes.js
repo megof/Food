@@ -4,6 +4,9 @@ import * as ProductController from '../controllers/product.controller.js'
 // Importing the middlewares
 import verifyTokenMiddleware from '../middlewares/verifyToken.middleware.js';
 
+// Importing the file upload module
+import fileUpload from 'express-fileupload';
+
 const router = Router();
 
 /**
@@ -143,7 +146,11 @@ router.get('/:id', ProductController.getOne);
  *              404:
  *                  description: Product was not found
  * */
-router.post('/', verifyTokenMiddleware, ProductController.save);
+router.post('/', fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}),
+verifyTokenMiddleware, ProductController.save);
 
 /**
  * @swagger

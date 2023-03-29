@@ -1,4 +1,5 @@
 // Description: This is the main file for the application
+// Authors: Jean Carlos Carrillo, Andersson Rivera, David Ospina y Sebastián Gámez Ariza
 
 // Importing the express module
 import express from 'express';
@@ -8,9 +9,6 @@ import morgan from 'morgan';
 
 // Importing the cors module
 import cors from 'cors';
-
-// Importing the file upload module
-import fileUpload from 'express-fileupload';
 
 // Importing the swagger UI
 import swaggerUi from 'swagger-ui-express';
@@ -37,10 +35,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(fileUpload({
-    useTempFiles : true,
-    tempFileDir : './uploads'
-}));
 
 // Set the routes
 app.use('/api/v1/users', userRouter);

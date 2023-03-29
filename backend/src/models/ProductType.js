@@ -7,6 +7,10 @@ const productTypeSchema = new Schema(
             required: true,
             unique: true,
             trim: true
+        },
+        image: {
+            public_id: String,
+            secure_url: String
         }
     },
     {   
