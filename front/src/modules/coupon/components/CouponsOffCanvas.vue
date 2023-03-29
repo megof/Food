@@ -2,7 +2,7 @@
   <div
     class="offcanvas offcanvas-end text-bg-dark"
     tabindex="-1"
-    id="offcanvasProduct"
+    id="offcanvasTypes"
     aria-labelledby="offcanvasExampleLabel"
   >
     <div class="offcanvas-header">
@@ -33,7 +33,7 @@
               <div class="form-group mb-2">
                 <label for="name ">Fecha de inicio:</label>
                 <input
-                  type="text"
+                  type="date"
                   class="form-control mt-2"
                   id="name"
                   placeholder="Ingrese la fecha de validación"
@@ -45,7 +45,7 @@
               <div class="form-group mb-2">
                 <label for="name">Fecha de vencimiento:</label>
                 <input
-                  type="text"
+                  type="date"
                   class="form-control mt-2"
                   id="name"
                   placeholder="Ingrese la fecha de caducidad"
@@ -56,7 +56,7 @@
               <div class="form-group mb-2">
                 <label for="name ">Valor:</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control mt-2"
                   id="name"
                   placeholder="Ingrese el valor del cupón"
@@ -64,16 +64,45 @@
                 />
                 <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
               </div>
+              <div class="form-group mb-2">
+                <label for="name ">Descuento:</label>
+                <input
+                  type="number"
+                  class="form-control mt-2"
+                  id="name"
+                  placeholder="Ingrese el descuento del cupón"
+                  v-model="dcto"
+                />
+                <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
+              </div>
 
               <div class="form-group mb-2">
                 <label for="name">Mínimo de compra:</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control mt-2"
                   id="name"
                   placeholder="Ingrese el mínimo de compra"
                   v-model="min_purchase"
                 />
+              </div>
+
+              <div class="form-group mb-2">
+                <label for="name ">Estado:</label>
+                <div class="form-check form-switch form-group mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    checked
+                    v-model="status"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="flexSwitchCheckChecked"
+                    >{{ state ? "Activo" : "Inactivo" }}</label
+                  >
+                </div>
               </div>
 
               <div class="form-group mb-2 mt-5">
@@ -96,18 +125,15 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import { useCouponStore } from "../store/coupons.js";
-
+import { useCouponsStore } from "../store/coupons.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
 
-const useCoupon = useCouponStore();
+const useCoupon = useCouponsStore();
+const useOffCanvas = useOffCanvasStore();
 
 const { coupon } = storeToRefs(useCoupon);
-
 const { getCouponById, addCoupon, updateCoupon } = useCoupon;
-
-const useOffCanvas = useOffCanvasStore();
 const { create, id, title, buttonText } = storeToRefs(useOffCanvas);
 
 //Variables Reactivas...
@@ -116,6 +142,8 @@ const start_date = ref("");
 const end_date = ref("");
 const value = ref("");
 const min_purchase = ref("");
+const status = ref(true);
+const dcto = ref("");
 
 //Funcionalidad del formulario.
 const formValidation = () => {
@@ -126,7 +154,8 @@ const formValidation = () => {
     name.value === "" ||
     end_date.value === "" ||
     value.value === "" ||
-    min_purchase === ""
+    min_purchase.value === ""||
+    dcto.value === ""
   ) {
     flag = false;
   }
@@ -135,7 +164,11 @@ const formValidation = () => {
 };
 
 const processForm = () => {
-  create.value ? createItem() : updateItem();
+  if (create.value) {
+    createItem();
+  } else {
+    updateItem();
+  }
 };
 
 const createItem = () => {
@@ -146,42 +179,51 @@ const createItem = () => {
     start_date.value !== "" &&
     end_date.value !== "" &&
     value.value !== "" &&
-    min_purchase !== ""
+    min_purchase.value !== ""  &&
+    dcto.value !== ""
   ) {
     const coupon = {
       _id: "641e1453e5181e37b4d9d32z",
-      name: coupon.name,
-      start_date: coupon.start_date,
-      end_date: coupon.end_date,
-      value: coupon.value,
-      min_purchase: coupon.min_purchase,
-      status: coupon.status,
+      name: name.value,
+      start_date: start_date.value,
+      end_date: end_date.value,
+      value: value.value,
+      min_purchase: min_purchase.value,
+      status: status.value,
+      dcto: dcto.value 
     };
-
-    addUser(user);
+    console.log(coupon);
+    addCoupon(coupon);
     name.value = "";
-    start_date.value = "";
-    end_date.value = "";
-    value.value = "";
-    min_purchase = "";
+    start_date.value = undefined;
+    end_date.value = undefined;
+    value.value = undefined;
+    min_purchase.value = undefined;
+    status.value = true;
+    dcto.value = undefined;
   } else {
     name.value = "";
-    start_date.value = "";
-    end_date.value = "";
-    value.value = "";
-    min_purchase = "";
+    start_date.value = undefined;
+    end_date.value = undefined;
+    value.value = undefined;
+    min_purchase.value = undefined;
+    status.value = true;
+    dcto.value = undefined;
+
   }
 };
 
 const updateItem = () => {
   const newCoupon = {
     _id: id.value,
-    name: coupon.name,
-    start_date: coupon.start_date,
-    end_date: coupon.end_date,
-    value: coupon.value,
-    min_purchase: coupon.min_purchase,
-    status: coupon.status,
+    name: name.value,
+    start_date: start_date.value,
+    end_date: end_date.value,
+    value: value.value,
+    min_purchase: min_purchase.value,
+    status: status.value,
+    dcto:dcto.value,
+
   };
 
   updateCoupon(id.value, newCoupon);
@@ -189,39 +231,29 @@ const updateItem = () => {
 
 // //Este es el watch en composition API.
 watch(title, (newTitle, oldTitle) => {
-  let item = getCoupontById(id.value);
+  let item = getCouponById(id.value);
   if (item) {
-    (name.value = item.name),
-      (coupon.start_date = item.username),
-      (coupon.end_date = item.end_date);
-    coupon.value = item.value;
-    coupon.min_purchase = item.min_purchase;
-    coupon.status = item.status;
-  } else {
-    name.value = "";
-    start_date.value = "";
-    end_date.value = "";
-    value.value = "";
-    min_purchase = "";
+    name.value = item.name,
+    start_date.value = item.username,
+    end_date.value = item.end_date,
+    value.value = item.value,
+    min_purchase.value = item.min_purchase,
+    status.value = item.status;
+    dcto.value = item.dcto;
+} else {
+       name.value = "",
+      start_date.value = undefined,
+      end_date.value = undefined,
+      value.value = undefined,
+      min_purchase.value = undefined,
+      status.value = true;
+      dcto.value= undefined;
+
   }
 });
 </script>
 
 <style scoped>
-::-webkit-scrollbar {
-  width: 8px; /* Ancho de la barra de desplazamiento */
-  background-color: rgb(33, 37, 41); /* Color de fondo */
-}
-
-/* Estilos del thumb (control deslizante) de la barra de desplazamiento */
-::-webkit-scrollbar-thumb {
-  background-color: #6c757d; /* Color del thumb */
-  border-radius: 5px; /* Radio de la esquina */
-}
-
-.w-offcanvas {
-  width: 40%;
-}
 #registration-form .frm {
   float: right;
   height: 650px;
@@ -244,9 +276,6 @@ watch(title, (newTitle, oldTitle) => {
 }
 
 @media screen and (max-width: 700px) {
-  .w-offcanvas {
-    width: 100%;
-  }
   #registration-form .frm {
     width: 100%;
   }

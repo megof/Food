@@ -4,15 +4,15 @@ export const  useOffCanvasStore=defineStore('offcanvas',{
         create:true,
         id:null, 
         name:'', 
-        start_date:'',
-        end_date:'',   
-        value:null, 
-        min_purchase:'', 
+        start_date:undefined,
+        end_date: undefined,   
+        value:undefined, 
+        min_purchase:undefined, 
+        dcto:undefined,
         status:true
-        
     }),
     actions:{
-        updateAction(id,name, start_date, end_date,value, min_purchase, status){
+        updateAction(id,name, start_date, end_date,value, min_purchase, status, dcto){
             this.create=false
             this.id=id
             this.name=name
@@ -20,7 +20,8 @@ export const  useOffCanvasStore=defineStore('offcanvas',{
             this.end_date=end_date
             this.value= value
             this.min_purchase= min_purchase
-            this.status=status
+            this.status= status
+            this.dcto = dcto
         },
         createAction(){
             this.create=true
