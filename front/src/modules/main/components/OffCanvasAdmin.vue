@@ -52,6 +52,14 @@
         <span class="material-symbols-outlined"> category </span>
         Tipos Productos</router-link
       >
+      <router-link
+        class="btn d-flex justify-content-start align-items-center"
+        :to="{ name: 'admin-toppings' }"
+      >
+        <span class="material-symbols-outlined"> tapas </span>
+
+        Toppings</router-link
+      >
     </div>
   </div>
 </template>
