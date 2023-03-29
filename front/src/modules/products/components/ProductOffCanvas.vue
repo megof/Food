@@ -114,20 +114,21 @@
       
         const createItem=()=>{
                 const product={
-                    id:products.value[products.value.length-1]?.id+1 || 1,
-                    idTypeProduct:idTypeProduct.value,
+                    id:'641e1436e5181e37b4d9d326',
+                    id_tp_product:idTypeProduct.value,
                     name:name.value,
                     description:description.value,
-                    generalDescription:generalDescription.value,
+                    generalDescr:generalDescription.value,
                     price:price.value,
                     image:image.value,
+                    status:'Disponible'
                 }
                 //Aquí es que debo hacer la validacion ...
                 let correctForm=formValidation();
                 if(correctForm){
-                    product.state=true;
+                    product.edo=true;
                 }else{
-                    product.state=false;
+                    product.edo=false;
                 }
                 console.log(product)
                 addProduct(product);
@@ -143,19 +144,20 @@
                     
             const newProduct={
                 id:id.value,
-                idTypeProduct:idTypeProduct.value,
+                id_tp_product:idTypeProduct.value,
                 name:name.value,
                 description:description.value,
-                generalDescription:generalDescription.value,
+                generalDescr:generalDescription.value,
                 price:price.value,
                 image:image.value,
+                status:'Disponible'
             }
             //Aquí es que debo hacer la validacion ...
             let correctForm=formValidation();
                 if(correctForm){
-                    newProduct.state=true;
+                    newProduct.edo=true;
                 }else{
-                    newProduct.state=false;
+                    newProduct.edo=false;
                 }
             // console.log(`Data que recojo del formulario: ${JSON.stringify(newBrand)}`);
             console.log(newProduct);
@@ -168,10 +170,10 @@
             
               let item=getProductById(id.value)
               if(item){
-                idTypeProduct.value=item.id,
+                idTypeProduct.value=item.id_tp_product,
                 name.value=item.name,
                 description.value=item.description,
-                generalDescription.value=item.generalDescription,
+                generalDescription.value=item.generalDescr,
                 price.value=item.price,
                 image.value=item.image
 

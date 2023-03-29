@@ -105,18 +105,21 @@ export const useProductsStore=defineStore('products',{
         
         addProduct(product){
             this.products.push(product);
-            // //Petición HTTP...
-            // const data={
-            //     idProduct:product.idProduct,
-            //     name:product.name,
-            //     serial:product.serial,
-            //     description:product.description,
-            //     state:product.state,
-            //     brandsId:product.brandsId,
-            //     referencesId:product.referencesId
-            // }
-            // // console.log(`Data que va hacia el backend: ${JSON.stringify(data)}`);
-            // addData(URL,data); //POST
+            
+            //Petición HTTP...
+            const data={
+                id_tp_product:product.id_tp_product,
+                name:product.name,
+                description:product.description,
+                generalDescr:product.generalDescr,
+                price:product.price,
+                image:product.image,
+                status:product.status,
+                edo:product.edo
+            }
+            console.log('Data que va hacia el backend:');
+            console.log(data);
+            fetchData(URL,'post',data); //POST
             
         },
         updateProduct(id,newProduct){ 
@@ -133,14 +136,14 @@ export const useProductsStore=defineStore('products',{
             //     referencesId:newDevice.referencesId
             // }
             // // console.log(`Data que se envía al backend: ${JSON.stringify(data)}`);
-            // updateData(url,data); ///PUT
+            // fetchData(url,'put',data); ///PUT
         },
         deleteProduct(id){
             const index=this.products.map(el=>el.id).indexOf(id); //El índice que debo borrar.
             this.products.splice(index,1);
             // //Petición HTTP...
             // const url=`${URL}/${id}`;
-            // deleteData(url);
+            //  fetchData(url,'delete'); 
         },
         sortById(){
             this.products.sort((a,b)=>a.id-b.id);
