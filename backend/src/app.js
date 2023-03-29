@@ -1,5 +1,5 @@
 // Description: This is the main file for the application
-// Authors: Jean Carlos Carrillo, Andersson Rivera, David Ospina y Sebastián Gámez
+// Authors: Jean Carlos Carrillo, Andersson Rivera, David Ospina y Sebastián Gámez Ariza
 
 // Importing the express module
 import express from 'express';
