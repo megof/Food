@@ -43,7 +43,8 @@ export default {
         })
       );
       localStorage.setItem("token", data.data.token);
-      this.$router.push({ name: "admin" });
+      const route = this.$router.resolve({ name: "admin" });
+      window.open(route.href, "_blank");
     },
   },
 };

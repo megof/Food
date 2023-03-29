@@ -1,21 +1,32 @@
 <template>
-  <Header v-if="!$route.fullPath.startsWith('/admin')" />
-  <RouterView />
-  <Footer v-if="!$route.fullPath.startsWith('/admin')" />
+  <Loader v-if="loader" />
+  <RouterView v-else />
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
-import Loader from "@/components/Loader.vue";
+import { defineAsyncComponent } from "vue";
 
 export default {
   components: {
-    Header,
-    Footer,
-    Loader,
+    Loader: defineAsyncComponent(() => import("./components/Loader.vue")),
+  },
+
+  data() {
+    return {
+      loader: true,
+    };
+  },
+
+  created() {
+    setTimeout(() => {
+      this.loader = false;
+    }, 200);
   },
 };
 </script>
 
-<style></style>
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>

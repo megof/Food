@@ -1,11 +1,8 @@
 <template>
-  <!-- <div class="alert alert-danger col-md-10 mx-auto my-5 text-center" role="alert">
-    No Products Found
-  </div> -->
-  <div class="container my-5" id="ProductHome">
+  <Header v-if="!$route.fullPath.startsWith('/admin')" v-cloak />
+  <div class="container my-5" id="ProductHome" v-if="!$route.fullPath.startsWith('/admin')" v-cloak>
     <h2 class="text-center">Nuestros productos</h2>
     <hr />
-    <Loader v-if="loader" class="mx-auto my-5" />
     <div class="row mb-5 d-flex">
       <div class="col-md-2 text-center">
         <Category v-for="item in types" :key="item._id" :type="item" />
@@ -17,18 +14,21 @@
       </div>
     </div>
   </div>
+  <Footer v-if="!$route.fullPath.startsWith('/admin')" v-cloak />
 </template>
 
 <script>
 import fetchData from "../helpers/fetchData.js";
 import CardProduct from "../components/CardProduct.vue";
-import Loader from "../components/Loader.vue";
 import Category from "../components/Category.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
+    Header,
+    Footer,
     CardProduct,
-    Loader,
     Category,
   },
 
@@ -36,13 +36,11 @@ export default {
     return {
       products: [],
       types: [],
-      loader: false,
     };
   },
 
   methods: {
     async getData() {
-      this.loader = true;
       const urlProducts = "https://food-api-market.onrender.com/api/v1/products",
         urlTypesProducts = "https://food-api-market.onrender.com/api/v1/types";
 
@@ -51,7 +49,6 @@ export default {
       const [products, types] = await Promise.all(promiseArray);
       this.products = products.data;
       this.types = types.data;
-      this.loader = false;
     },
   },
 
@@ -61,4 +58,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+[v-cloak] {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+</style>

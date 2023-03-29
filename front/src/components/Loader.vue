@@ -9,13 +9,16 @@
 
 <style>
 .loader {
-  width: 17.5rem;
-  border-radius: 50%;
-  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
   background-color: #000;
-  z-index: 99;
+  z-index: 9999;
   overflow: hidden;
-  animation: floating 3s ease-in-out infinite;
 }
 
 .content {
@@ -37,6 +40,7 @@
 .content span {
   font-size: 1rem;
   color: #fff;
+  animation: floating 3s ease-in-out infinite;
 }
 
 @keyframes floating {
