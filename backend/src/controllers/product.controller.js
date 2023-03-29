@@ -59,8 +59,8 @@ export const save = async (req, res) =>{
                 secure_url: result.secure_url
             }
         }
-
-        await fs.unlink(req.files.image.tempFilePath)
+        console.log(req.files)
+        // await fs.unlink(req.files.image.tempFilePath)
         const productSaved = await newProduct.save()
         res.status(201).json(productSaved)
     } catch (error) {
