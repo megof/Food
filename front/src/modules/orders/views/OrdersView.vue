@@ -1,6 +1,6 @@
 <template>
   <h1>Pedidos</h1>
-  <Lists :columns="columns" :items="items"/>
+  <Lists :columns="columns" :items="items" :show-modal="showModal"/>
 </template>
 
 <script>
@@ -8,14 +8,14 @@
 import Lists from '../components/Lists.vue'
 
 import {
-  NButton,
+  NButton, NModal
 } from "naive-ui";
 
 import fetchData from '@/helpers/fetchData.js'
 
 export default {
   name: "ListOrders",
-  components: { Lists,NButton,
+  components: { Lists,NButton,NModal
   },
   // return: {
   //   showModal: false,
@@ -25,6 +25,7 @@ export default {
      columns: ['Cliente', 'Dirección', 'teléfono', 'Observación', 'Fecha', 'Estado','opcion'],
       items: [
              ],
+      showModal: false
     };
   },
     methods: {
