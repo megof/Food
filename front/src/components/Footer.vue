@@ -6,18 +6,15 @@
           <div
             class="col-md-12 text-center d-flex gap-1 justify-content-center align-items-center flex-md-row flex-column"
           >
-            <div class="box box-logo text-white mt-4 col-md-6">
+            <div
+              class="box box-logo text-white mt-4 col-md-6 d-flex flex-column justify-content-center"
+            >
               La
-              <router-link
-                :to="{ name: 'home' }"
-                class="navbar-brand fs-2 fw-bold text-uppercase p-3 fw-semibold"
-              >
-                <img class="logo mx-auto" src="../assets/img/B-2.png" alt="Logo"
-              /></router-link>
+              <img class="logo mx-auto" src="../assets/img/B-2.png" alt="Logo" />
             </div>
             <div class="box box-title z-3 col-md-6">
               <h2 class="z-3">The B Company ©</h2>
-              <span class="open-sans">La Mejo Opción En Comida Rapida</span>
+              <span class="open-sans">La Mejor Opción En Comida Rapida</span>
             </div>
           </div>
         </div>
@@ -90,6 +87,7 @@ export default {
 .logo {
   width: 8rem;
   z-index: 2;
+  margin: 0 auto;
 }
 
 .box-title {

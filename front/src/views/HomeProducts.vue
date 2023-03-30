@@ -1,35 +1,40 @@
 <template>
-  <!-- <div class="alert alert-danger col-md-10 mx-auto my-5 text-center" role="alert">
-    No Products Found
-  </div> -->
+  <Loader v-if="loader" />
+  <Header />
   <div class="container my-5" id="ProductHome">
     <h2 class="text-center">Nuestros productos</h2>
     <hr />
-    <Loader v-if="loader" class="mx-auto my-5" />
     <div class="row mb-5 d-flex">
-      <div class="col-md-2 text-center">
+      <div
+        class="col-md-2 text-center d-flex justify-content-start align-items-center flex-md-column flex-row flex-wrap mb-3"
+      >
         <Category v-for="item in types" :key="item._id" :type="item" />
       </div>
       <div
-        class="col-md-10 text-center d-flex justify-content-center align-items-start flex-wrap gap-3"
+        class="col-md-10 text-center d-flex justify-content-center justify-content-md-end align-items-md-start align-items-center flex-wrap gap-3 mb-3"
       >
         <CardProduct v-for="item in products" :key="item._id" :product="item" class="mb-3" />
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import fetchData from "../helpers/fetchData.js";
 import CardProduct from "../components/CardProduct.vue";
-import Loader from "../components/Loader.vue";
 import Category from "../components/Category.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import Loader from "@/components/Loader.vue";
 
 export default {
   components: {
+    Header,
+    Footer,
     CardProduct,
-    Loader,
     Category,
+    Loader,
   },
 
   data() {
@@ -42,12 +47,10 @@ export default {
 
   methods: {
     async getData() {
-      this.loader = true;
       const urlProducts = "https://food-api-market.onrender.com/api/v1/products",
         urlTypesProducts = "https://food-api-market.onrender.com/api/v1/types";
-
       const promiseArray = [fetchData(urlProducts), fetchData(urlTypesProducts)];
-
+      this.loader = true;
       const [products, types] = await Promise.all(promiseArray);
       this.products = products.data;
       this.types = types.data;
