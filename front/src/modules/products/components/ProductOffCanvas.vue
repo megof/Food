@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="image" class="mb-2">Cargue una imagen:</label>
-                        <input type="file" class="form-control w-100" id="image" @change="onFileSelected" >
+                        <input type="file" name="image" class="form-control w-100" id="image" @change="onFileSelected" >
                     </div>
                     
                     

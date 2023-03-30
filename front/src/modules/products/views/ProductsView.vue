@@ -56,12 +56,12 @@
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasProduct"
-                @click="updateAction(product.id, product.name)"
+                @click="updateAction(product._id, product.name)"
               >
                 <i class="bi bi-arrow-repeat me-1"></i
                 ><span class="d-none d-md-inline-block">Actualizar</span>
               </button>
-              <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">
+              <button class="btn btn-sm btn-danger" @click="deleteProduct(product._id)">
                 <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
               </button>
             </td>

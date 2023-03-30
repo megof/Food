@@ -2,6 +2,7 @@ import {defineStore} from 'pinia';
 //Importamos los helpers de las peticiones HTTP.
 //Importamos los helpers de las peticiones HTTP.
 import fetchData from '../../../helpers/fetchData.js';
+import fetchDataImg from '../../../helpers/fetchDataImg.js';
 const URL= 'https://food-api-market.onrender.com/api/v1/products';
 const URL2='https://food-api-market.onrender.com/api/v1/types';
 
@@ -99,7 +100,9 @@ export const useProductsStore=defineStore('products',{
         },
         
         getProductById(id){
-            const index=this.products.map(el=>el.id).indexOf(id);
+            const index=this.products.map(el=>el._id).indexOf(id);
+            // console.log(`Id recibido: ${id}`)
+            // console.log(`Indice: ${index}`)
             return this.products[index]; 
         },
         
@@ -117,33 +120,50 @@ export const useProductsStore=defineStore('products',{
                 status:product.status,
                 edo:product.edo
             }
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
             console.log('Data que va hacia el backend:');
-            console.log(data);
-            fetchData(URL,'post',data); //POST
+            console.log(formData);
+            fetchDataImg(URL,'post',formData); //POST
             
         },
         updateProduct(id,newProduct){ 
-            const index=this.products.map(el=>el.id).indexOf(id); //El índice que debo alterar.
+            const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.products[index]=newProduct;
-            // //Petición HTTP...
-            // const url=`${URL}/${id}`;
-            // const data={
-            //     name:newDevice.name,
-            //     serial:newDevice.serial,
-            //     description:newDevice.description,
-            //     state:newDevice.state,
-            //     brandsId:newDevice.brandsId,
-            //     referencesId:newDevice.referencesId
-            // }
-            // // console.log(`Data que se envía al backend: ${JSON.stringify(data)}`);
-            // fetchData(url,'put',data); ///PUT
+           
+            //Petición HTTP...
+            const url=`${URL}/${id}`;
+            const data={
+                id_tp_product:newProduct.id_tp_product,
+                name:newProduct.name,
+                description:newProduct.description,
+                generalDescr:newProduct.generalDescr,
+                price:newProduct.price,
+                image:newProduct.image,
+                status:newProduct.status,
+                edo:newProduct.edo
+            }
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+            console.log('Data que va hacia el backend:');
+            console.log(data)
+            console.log('Esta es la URL...')
+            console.log(url)
+            // // console.log(formData);
+              
+             fetchDataImg(url,'put',formData); ///PUT
         },
         deleteProduct(id){
-            const index=this.products.map(el=>el.id).indexOf(id); //El índice que debo borrar.
+            const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.products.splice(index,1);
             // //Petición HTTP...
-            // const url=`${URL}/${id}`;
-            //  fetchData(url,'delete'); 
+             const url=`${URL}/${id}`;
+             console.log(id)
+             fetchData(url,'delete'); 
         },
         sortById(){
             this.products.sort((a,b)=>a.id-b.id);
