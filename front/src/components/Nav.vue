@@ -32,10 +32,6 @@
             class="text-decoration-none w-50 d-flex justify-content-center"
             ><span class="material-symbols-outlined"> login </span>Login</a
           >
-          <li>
-            <router-link to="/admin/users"  class="network-name">Admin Users</router-link>
-        </li>
-          <a href="#" class="text-decoration-none w-50 d-flex justify-content-center shopping">
           <a
             href="#cart"
             data-bs-toggle="offcanvas"
@@ -75,11 +71,9 @@ export default {
   z-index: 999;
   transition: all 0.3s ease-in;
 }
-
 .navbar-scroll {
   background-color: #a90b30;
 }
-
 .nav-bar-links a {
   font-family: "Open Sans", sans-serif;
   color: #fff0ff !important;
@@ -88,80 +82,65 @@ export default {
   border-bottom: 0.25rem solid transparent;
   transition: all 0.3s ease-in;
 }
-
 .nav-bar-links a:hover {
   transform: scale(1.1);
   color: var(--color-2) !important;
   border-bottom: 0.25rem solid var(--color-2);
 }
-
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
-
   50% {
     transform: scale(1.1);
   }
-
   100% {
     transform: scale(1);
   }
 }
-
 .logo-container {
   width: 100%;
   letter-spacing: 2px;
 }
-
 .logo {
   width: 100%;
   max-width: 8rem;
 }
-
 .logo:hover {
   animation: pulse 1.5s linear infinite;
 }
-
 .logo-container:hover + .logo {
   animation: pulse 1.5s linear infinite;
 }
-
 .item-in-cart {
   font-family: "Open Sans", sans-serif !important;
   color: var(--color-2);
   font-weight: 700;
   background-color: var(--color5) !important;
 }
-
 .shopping {
   border: 2px solid transparent;
   background-color: var(--black);
   padding: 0.5rem 1.5rem !important;
   border-radius: 0.5rem !important;
 }
-
 @keyframes pulse-black {
   0% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
   }
-
   70% {
     transform: scale(1.2);
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
-
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
-
 .shopping-active {
   animation: pulse-black 1.25s ease infinite;
 }
-
 /* media screen */
 @media (max-width: 768px) {
   .logo {
