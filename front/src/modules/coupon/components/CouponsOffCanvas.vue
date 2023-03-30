@@ -46,6 +46,7 @@
                 <label for="name">Fecha de vencimiento:</label>
                 <input
                   type="date"
+                  :min="start_date"
                   class="form-control mt-2"
                   id="name"
                   placeholder="Ingrese la fecha de caducidad"
@@ -136,14 +137,13 @@ const useOffCanvas = useOffCanvasStore();
 const { create, id, title, buttonText } = storeToRefs(useOffCanvas);
 
 //Variables Reactivas...
-const name = ref('');
-const start_date = ref('');
-const end_date = ref('');
-const value = ref('');
-const min_purchase = ref('');
+const name = ref("");
+const start_date = ref("");
+const end_date = ref("");
+const value = ref("");
+const min_purchase = ref("");
 const status = ref(true);
-const dcto = ref('');
-
+const dcto = ref("");
 
 const processForm = () => {
   if (create.value) {
@@ -194,7 +194,6 @@ const createItem = () => {
   }
 };
 
-
 //Funcionalidad del formulario.
 const formValidation = () => {
   let flag = true;
@@ -212,7 +211,6 @@ const formValidation = () => {
   //TODO: Aquí van las demás validaciones que consideremos necesarias.
   return flag;
 };
-
 
 const updateItem = () => {
   const newCoupon = {
@@ -234,23 +232,28 @@ watch(title, (newTitle, oldTitle) => {
   let item = getCouponById(id.value);
   console.log(item);
   if (item) {
-    (name.value = item.name),
-      (start_date.value = item.username),
-      (end_date.value = item.end_date),
-      (value.value = item.value),
-      (min_purchase.value = item.min_purchase),
-      (status.value = item.status);
+    name.value = item.name,
+      start_date.value = formatDate(item.start_date),
+      end_date.value = formatDate(item.end_date),
+      value.value = item.value,
+      min_purchase.value = item.min_purchase,
+      status.value = item.status,
     dcto.value = item.dcto;
   } else {
-    (name.value = ""),
-      (start_date.value = ""),
-      (end_date.value = ""),
-      (value.value = ""),
-      (min_purchase.value = ""),
-      (status.value = true);
+    name.value = "",
+      start_date.value = "",
+      end_date.value = "",
+      value.value = "",
+      min_purchase.value = "",
+      status.value = true,
     dcto.value = "";
   }
 });
+
+function formatDate(fecha) {
+  const date = new Date(fecha);
+  return date.toISOString().slice(0,10);
+}
 </script>
 
 <style scoped>

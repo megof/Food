@@ -3,7 +3,10 @@
     <TableTitle title="Cupones" id="offcanvasTypes" />
     <CouponsOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100 text-center" v-if="true">
+    <table
+      class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
+      v-if="true"
+    >
       <thead>
         <tr>
           <th scope="col">Nombre</th>
@@ -13,7 +16,7 @@
           <th scope="col">Descuento</th>
           <th scope="col">Mínimo de compra</th>
           <th scope="col">Estado</th>
-          <th scope="col">Action</th>
+          <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -84,9 +87,8 @@ onMounted(() => {
 
 function formatDate(fecha) {
   const date = new Date(fecha);
-  return date.toLocaleDateString();
-}
-
+  return date.toISOString().slice(0,10);
+  }
 </script>
 
 <style scoped></style>
