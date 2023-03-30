@@ -100,7 +100,7 @@
                   <label
                     class="form-check-label"
                     for="flexSwitchCheckChecked"
-                    >{{ state ? "Activo" : "Inactivo" }}</label
+                    >{{ status ? "Activo" : "Inactivo" }}</label
                   >
                 </div>
               </div>
@@ -124,45 +124,26 @@
 </template>
 
 <script setup>
-import {ref, watch} from "vue";
-import { useOffCanvasStore} from "../store/offCanvas";
-import { storeToRefs} from "pinia";
-import {useCouponsStore} from "../store/coupons.js"
-
+import { ref, watch } from "vue";
+import { useCouponsStore } from "../store/coupons.js";
+import { useOffCanvasStore } from "../store/offCanvas";
+import { storeToRefs } from "pinia";
 
 const useCoupon = useCouponsStore();
-const useOffCanvas = useOffCanvasStore();
-const {coupon} = storeToRefs(useCoupon)
-
+const { coupon } = storeToRefs(useCoupon);
 const { getCouponById, addCoupon, updateCoupon, deleteCoupon } = useCoupon;
+const useOffCanvas = useOffCanvasStore();
 const { create, id, title, buttonText } = storeToRefs(useOffCanvas);
 
 //Variables Reactivas...
-const name = ref("");
-const start_date = ref(undefined);
-const end_date = ref(undefined);
-const value = ref(undefined);
-const min_purchase = ref(undefined);
+const name = ref('');
+const start_date = ref('');
+const end_date = ref('');
+const value = ref('');
+const min_purchase = ref('');
 const status = ref(true);
-const dcto = ref(undefined);
+const dcto = ref('');
 
-//Funcionalidad del formulario.
-const formValidation = () => {
-  let flag = true;
-  //Validación si hay algún campo vacío...
-  if (
-    start_date.value === "" ||
-    name.value === "" ||
-    end_date.value === "" ||
-    value.value === "" ||
-    min_purchase.value === ""||
-    dcto.value === ""
-  ) {
-    flag = false;
-  }
-  //TODO: Aquí van las demás validaciones que consideremos necesarias.
-  return flag;
-};
 
 const processForm = () => {
   if (create.value) {
@@ -180,7 +161,7 @@ const createItem = () => {
     start_date.value !== "" &&
     end_date.value !== "" &&
     value.value !== "" &&
-    min_purchase.value !== ""  &&
+    min_purchase.value !== "" &&
     dcto.value !== ""
   ) {
     const ncoupon = {
@@ -191,28 +172,47 @@ const createItem = () => {
       value: value.value,
       min_purchase: min_purchase.value,
       status: status.value,
-      dcto: dcto.value 
+      dcto: dcto.value,
     };
     console.log(ncoupon);
     addCoupon(ncoupon);
     name.value = "";
-    start_date.value = undefined;
-    end_date.value = undefined;
-    value.value = undefined;
-    min_purchase.value = undefined;
+    start_date.value = "";
+    end_date.value = "";
+    value.value = "";
+    min_purchase.value = "";
     status.value = true;
-    dcto.value = undefined;
+    dcto.value = "";
   } else {
     name.value = "";
-    start_date.value = undefined;
-    end_date.value = undefined;
-    value.value = undefined;
-    min_purchase.value = undefined;
+    start_date.value = "";
+    end_date.value = "";
+    value.value = "";
+    min_purchase.value = "";
     status.value = true;
-    dcto.value = undefined;
-
+    dcto.value = "";
   }
 };
+
+
+//Funcionalidad del formulario.
+const formValidation = () => {
+  let flag = true;
+  //Validación si hay algún campo vacío...
+  if (
+    start_date.value === "" ||
+    name.value === "" ||
+    end_date.value === "" ||
+    value.value === "" ||
+    min_purchase.value === "" ||
+    dcto.value === ""
+  ) {
+    flag = false;
+  }
+  //TODO: Aquí van las demás validaciones que consideremos necesarias.
+  return flag;
+};
+
 
 const updateItem = () => {
   const newCoupon = {
@@ -223,7 +223,7 @@ const updateItem = () => {
     value: value.value,
     min_purchase: min_purchase.value,
     status: status.value,
-    dcto:dcto.value,
+    dcto: dcto.value,
   };
 
   updateCoupon(id.value, newCoupon);
@@ -232,23 +232,24 @@ const updateItem = () => {
 // //Este es el watch en composition API.
 watch(title, (newTitle, oldTitle) => {
   let item = getCouponById(id.value);
+  console.log(item);
   if (item) {
-    name.value = item.name,
-    start_date.value = item.username,
-    end_date.value = item.end_date,
-    value.value = item.value,
-    min_purchase.value = item.min_purchase,
-    status.value = item.status;
+    (name.value = item.name),
+      (start_date.value = item.username),
+      (end_date.value = item.end_date),
+      (value.value = item.value),
+      (min_purchase.value = item.min_purchase),
+      (status.value = item.status);
     dcto.value = item.dcto;
-    }   else {
-       name.value = "",
-      start_date.value = undefined,
-      end_date.value = undefined,
-      value.value = undefined,
-      min_purchase.value = undefined,
-      status.value = true;
-      dcto.value= undefined;
-    }
+  } else {
+    (name.value = ""),
+      (start_date.value = ""),
+      (end_date.value = ""),
+      (value.value = ""),
+      (min_purchase.value = ""),
+      (status.value = true);
+    dcto.value = "";
+  }
 });
 </script>
 

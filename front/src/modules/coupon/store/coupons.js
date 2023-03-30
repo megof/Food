@@ -17,7 +17,7 @@ export const useCouponsStore=defineStore('coupons',{
         },
         
         getCouponById(id){
-            const index=this.coupons.map(el=>el.id).indexOf(id);
+            const index=this.coupons.map(el=>el._id).indexOf(id);
             return this.coupons[index]; 
         },
         
@@ -40,7 +40,7 @@ export const useCouponsStore=defineStore('coupons',{
         },
         
         updateCoupon(id,newCoupon){ 
-            const index=this.coupons.map(el=>el.id).indexOf(id); //El índice que debo alterar.
+            const index=this.coupons.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.coupons[index]=newCoupon;
             const url=`${URL}/${id}`;
             const data={
@@ -53,11 +53,10 @@ export const useCouponsStore=defineStore('coupons',{
                 dcto: newCoupon.dcto
 
             };
-            console.log(data);
             fetchData(url,'put',data); ///PUT
         },
         deleteCoupon(id){
-            const index=this.coupons.map(el=>el.id).indexOf(id); //El índice que debo borrar.
+            const index=this.coupons.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.coupons.splice(index,1);
             const url=`${URL}/${id}`;
             fetchData(url,'delete');
