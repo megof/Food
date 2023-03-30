@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia';
 //Importamos los helpers de las peticiones HTTP.
 import fetchData from '../../../helpers/fetchData.js';
+import fetchDataImg from '../../../helpers/fetchDataImg.js';
 
 const URL= 'https://food-api-market.onrender.com/api/v1/types';
 export const  useTypeStore=defineStore('types',{
@@ -22,8 +23,16 @@ export const  useTypeStore=defineStore('types',{
         addType(type){
             this.types.push(type);
             //Petición HTTP...
-             const data={name:type.name}
-             fetchData(URL,'post',data);
+             const data={
+                name:type.name,
+                image:type.image
+            }
+            console.log(data);
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+             fetchDataImg(URL,'post',formData);
             
         },
         updateType(id,newType){ 

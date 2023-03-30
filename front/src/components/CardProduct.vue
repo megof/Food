@@ -1,6 +1,14 @@
 <template>
   <div class="card h-100" v-if="product">
-    <img :src="product.image.secure_url" class="card-img-top" :alt="product.name" />
+    <img
+      :src="
+        product.image
+          ? product.image.secure_url
+          : 'https://tradebharat.in/assets/catalogue/img/no-product-found.png'
+      "
+      class="card-img-top"
+      :alt="product.name"
+    />
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text open-sans">
@@ -95,6 +103,7 @@ export default {
   transform: scale(1.05);
   opacity: 1;
   filter: contrast(120%);
+  cursor: pointer;
 }
 
 .btn-first {

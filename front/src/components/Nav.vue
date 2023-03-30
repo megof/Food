@@ -26,13 +26,21 @@
             <span class="material-symbols-outlined"> restaurant_menu </span>Productos</a
           >
 
-          <a href="#" class="text-decoration-none w-50 d-flex justify-content-center"
+          <a
+            href="#users"
+            data-bs-toggle="offcanvas"
+            class="text-decoration-none w-50 d-flex justify-content-center"
             ><span class="material-symbols-outlined"> login </span>Login</a
           >
           <li>
             <router-link to="/admin/users"  class="network-name">Admin Users</router-link>
         </li>
           <a href="#" class="text-decoration-none w-50 d-flex justify-content-center shopping">
+          <a
+            href="#cart"
+            data-bs-toggle="offcanvas"
+            class="text-decoration-none w-50 d-flex justify-content-center shopping"
+          >
             <span
               class="material-symbols-outlined d-flex justify-content-center align-items-center"
             >
@@ -46,10 +54,17 @@
       </div>
     </div>
   </div>
+  <OffCanvas id="users" title="Login" />
+  <OffCanvas id="cart" position="end" title="Tu Carrito" />
 </template>
 
 <script>
-export default {};
+import OffCanvas from "@/components/OffCanvas.vue";
+export default {
+  components: {
+    OffCanvas,
+  },
+};
 </script>
 
 <style scoped>

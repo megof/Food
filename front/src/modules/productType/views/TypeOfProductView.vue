@@ -17,6 +17,7 @@
         <tr v-for="type in types" :key="type.id">
           
           <td>{{ type.name }}</td>
+          
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"

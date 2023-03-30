@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import isAuthGuard from "./auth-guard.js";
 // import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -21,6 +22,7 @@ const router = createRouter({
     {
       path: "/admin",
       name: "admin",
+      beforeEnter: [isAuthGuard],
       component: () => import("@/modules/main/layouts/AdminLayout.vue"),
       children: [
         {
@@ -47,6 +49,11 @@ const router = createRouter({
           path: "orders",
           name: "admin-orders",
           component: () => import("@/modules/orders/views/OrdersView.vue"),
+        },
+        {
+          path: "coupon",
+          name: "admin-coupon",
+          component: () => import("@/modules/coupon/views/Coupon.vue"),
         },
       ],
     },
