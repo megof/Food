@@ -1,6 +1,6 @@
 <template>
   <div
-    class="offcanvas offcanvas-start bg-dark z-2"
+    class="offcanvas offcanvas-start bg-dark z-2 container-fluid"
     data-bs-scroll="true"
     data-bs-backdrop="false"
     tabindex="-1"
@@ -56,8 +56,14 @@
         :to="{ name: 'admin-toppings' }"
       >
         <span class="material-symbols-outlined"> tapas </span>
-
         Toppings</router-link
+      >
+      <router-link
+        class="btn d-flex justify-content-start align-items-center"
+        :to="{ name: 'admin-coupon' }"
+      >
+        <span class="material-symbols-outlined"> loyalty </span>
+        Cupones</router-link
       >
     </div>
   </div>
