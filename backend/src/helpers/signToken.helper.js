@@ -5,13 +5,13 @@
 import jwt from 'jsonwebtoken';
 
 // Importing the jsonwebtoken password
-import JWT_PASSWORD from '../config.js';
+import { JWT_PASSWORD } from '../config/env.config.js';
 
 // Sign token method
-export const signToken = (user) => {
+const signToken = (user) => {
     try {
         // Create the token
-        const token = jwt.sign(user, JWT_PASSWORD || 'secretPassword!');
+        const token = jwt.sign(user, JWT_PASSWORD, { expiresIn: '168h' });
         // Return the token
         return token;
     // Catch the error
@@ -20,3 +20,6 @@ export const signToken = (user) => {
         throw error;
     }
 }
+
+// Export the sign token method
+export default signToken;
