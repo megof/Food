@@ -11,15 +11,15 @@ const fetchData = async (
   }
 ) => {
   try {
-    const response = await axios({
+    const res = await axios({
       method,
       url,
       data,
       headers,
     });
-    console.log("petición correcta");
-    return response;
+    return res;
   } catch (error) {
+    console.log(error);
     Swal.fire("Error", `${error}`, "error");
   }
 };

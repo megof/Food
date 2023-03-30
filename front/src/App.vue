@@ -1,6 +1,6 @@
 <template>
   <Loader v-if="loader" />
-  <RouterView v-else />
+  <RouterView />
 </template>
 
 <script>
@@ -18,15 +18,9 @@ export default {
   },
 
   created() {
-    setTimeout(() => {
-      this.loader = false;
-    });
+    this.loader = false;
   },
 };
 </script>
 
-<style>
-[v-cloak] {
-  display: none;
-}
-</style>
+<style></style>

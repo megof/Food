@@ -4,20 +4,26 @@
       <label class="form-label" for="users"
         ><i class="fa-solid fa-user d-inline-block me-1"></i>Nombre Usuario</label
       >
-      <input v-model="username" class="form-control form-user" type="text" id="users" />
+      <input v-model="username" class="form-control form-user" type="text" id="users" required />
     </div>
     <div class="mb-3">
       <label class="form-label" for="password"
         ><i class="fa-solid fa-key me-1"></i>Contraseña</label
       >
-      <input v-model="password" class="form-control form-password" type="password" id="password" />
+      <input
+        v-model="password"
+        class="form-control form-password"
+        type="password"
+        id="password"
+        required
+      />
     </div>
     <button type="submit" class="btn btn-primary btn-buy">Entrar</button>
   </form>
 </template>
 
 <script>
-import fetchData from "../helpers/fetchData";
+import loginData from "../helpers/loginData";
 
 export default {
   data() {
@@ -29,26 +35,24 @@ export default {
 
   methods: {
     async login() {
-      try {
-        const url = `https://food-api-market.onrender.com/api/v1/users/login`;
-        const { data } = await fetchData(url, "post", {
+      const url = `https://food-api-market.onrender.com/api/v1/users/login`;
+      const { data } = await loginData(url, "post", {
+        username: this.username,
+        password: this.password,
+      });
+      // console.log(data);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
           username: this.username,
           password: this.password,
-        });
-        console.log(data);
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            username: this.username,
-            password: this.password,
-          })
-        );
-        localStorage.setItem("token", data.data.token);
+        })
+      );
+      localStorage.setItem("token", data.data.token);
+      setTimeout(() => {
         const route = this.$router.resolve({ name: "admin" });
         window.open(route.href, "_blank");
-      } catch (err) {
-        console.log(err);
-      }
+      }, 500);
     },
   },
 };

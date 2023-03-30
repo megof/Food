@@ -1,6 +1,6 @@
 <template>
   <div
-    class="offcanvas offcanvas-start bg-dark z-2 show"
+    class="offcanvas offcanvas-start bg-dark z-2"
     data-bs-scroll="true"
     data-bs-backdrop="false"
     tabindex="-1"
@@ -15,7 +15,6 @@
           Administracion
         </h5>
       </div>
-
       <button
         type="button"
         class="btn-close btn-close-white"

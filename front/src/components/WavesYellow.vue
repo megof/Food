@@ -12,7 +12,7 @@
 .waves {
   transform: translateY(-12rem);
   z-index: 0;
-  margin-top: -3rem;
+  margin-top: -2.5rem;
   margin-bottom: -1.5rem;
 }
 
