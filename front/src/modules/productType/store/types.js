@@ -40,9 +40,17 @@ export const  useTypeStore=defineStore('types',{
             this.types[index]=newType;
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            const data={name:newType.name};
+            const data={
+                name:newType.name,
+                image:newType.image
+            };
             console.log(data);
-            fetchData(url,'put',data); ///PUT
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+             fetchDataImg(url,'put',formData);
+            
         },
         deleteType(id){
             const index=this.types.map(el=>el._id).indexOf(id); //El índice que debo borrar.
