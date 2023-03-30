@@ -16,7 +16,7 @@
           <th scope="col">Descuento</th>
           <th scope="col">Mínimo de compra</th>
           <th scope="col">Estado</th>
-          <th scope="col">Acción</th>
+          <th scope="col">Opciones</th>
         </tr>
       </thead>
       <tbody>
