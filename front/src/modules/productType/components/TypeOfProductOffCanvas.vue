@@ -16,6 +16,10 @@
                         <input type="text" class="form-control mt-2" id="name" placeholder="Ingrese el nombre" v-model="name">
                         <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
                     </div>
+                    <div class="form-group mb-2">
+                        <label for="image" class="mb-2">Cargue una imagen:</label>
+                        <input type="file" name="image" class="form-control w-100" id="image" @change="onFileSelected" >
+                    </div>
                     
                     <div class="form-group mb-2 mt-5">
                         
@@ -57,8 +61,14 @@
         
         //Variables Reactivas...
         const name=ref('');
+        const image=ref('');
 
-
+        const onFileSelected=(e)=>{
+            console.log("Entró a cargar el archivo...")
+            image.value = e.target.files[0];
+            console.log("archivo cargado");
+            console.log(image.value);
+        }
         //Funcionalidad del formulario.
         const processForm=()=>{
             if(create.value){
@@ -74,18 +84,22 @@
                 const type={
                 _id:'641e1453e5181e37b4d9d32z',
                 name:name.value,
+                image:image.value
                 }
                 addType(type);
                 name.value='';
+                image.value='';
             }else{
                 name.value='';
+                image.value='';
             }
             
         }
         const updateItem=()=>{
             const newType={
                 _id:id.value, 
-                name:name.value
+                name:name.value,
+                image:image.value
             }
             updateType(id.value,newType);
         }
@@ -96,9 +110,11 @@
             
               let item=getTypeById(id.value)
               if(item){
-                name.value=item.name
+                name.value=item.name,
+                image.value=item.image
               }else{
                 name.value=''
+                image.value=''
               }
         })
     </script>

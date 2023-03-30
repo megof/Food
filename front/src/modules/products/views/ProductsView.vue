@@ -50,18 +50,18 @@
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
-            <td>{{ product.state }}</td>
+            <td>{{ product.edo}}</td>
             <td>
               <button
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasProduct"
-                @click="updateAction(product.id, product.name)"
+                @click="updateAction(product._id, product.name)"
               >
                 <i class="bi bi-arrow-repeat me-1"></i
                 ><span class="d-none d-md-inline-block">Actualizar</span>
               </button>
-              <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">
+              <button class="btn btn-sm btn-danger" @click="deleteProduct(product._id)">
                 <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
               </button>
             </td>
@@ -81,7 +81,7 @@ import LoadingSpinner from "../components/LoadingSpinner.vue";
 import { useProductsStore } from "../store/products.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
-import { ref, onMounted } from "vue";
+import { ref, onMounted,watch } from "vue";
 
 const useProducts = useProductsStore();
 const useOffCanvas = useOffCanvasStore();
@@ -96,12 +96,13 @@ const { getProducts, deleteProduct } = useProducts;
 //   return products.value.filter(el=>el.name.toLowerCase().includes(filter.value.toLowerCase()));
 // })
 const characterizedProducts = ref(products.value);
+
 const clearButtons = () => {
-  const idTypeProduct=productType.value.map(el=>el._id);
+  const idTypeProducts=productType.value.map(el=>el._id);
   
   for (let i = 0; i <productType.value.length; i++) {
     // console.log(idTypeProduct[i])
-    document.getElementById(idTypeProduct[i]).classList.remove("active");
+    document.getElementById(idTypeProducts[i]).classList.remove("active");
   }
   document.getElementById(0).classList.remove("active")
 };
@@ -116,7 +117,9 @@ const productCharacterization = (idTypeProduct, idButton) => {
   }
   document.getElementById(idButton).classList.add("active");
 };
-
+watch(products,(newProducts,oldProducts)=>{
+  characterizedProducts.value=newProducts;
+})
 onMounted(() => {
   getProducts();
 });

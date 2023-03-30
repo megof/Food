@@ -21,6 +21,10 @@
                         <input type="text" class="form-control mt-2" id="price" placeholder="Ingrese el precio" v-model="price">
                         <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
                     </div>
+                    <!-- <div class="form-group mb-2">
+                        <label for="image" class="mb-2">Cargue una imagen:</label>
+                        <input type="file" name="image" class="form-control w-100" id="image" @change="onFileSelected" >
+                    </div> -->
                     
                     <div class="form-group mb-2 mt-5">
                         
@@ -63,6 +67,7 @@
         //Variables Reactivas...
         const name=ref('');
         const price=ref('');
+        const image=ref('');
 
 
         //Funcionalidad del formulario.
@@ -74,7 +79,12 @@
             }
         }
 
-        //Hasta aquí se ha modificado...
+        const onFileSelected=(e)=>{
+            console.log("Entró a cargar el archivo...")
+            image.value = e.target.files[0];
+            console.log("archivo cargado");
+            console.log(image.value);
+        }
         const createItem=()=>{
             let flag=toppings.value.some(topping=>topping.name.toLowerCase()===name.value.toLowerCase())
             if(!flag && name.value!==''){
@@ -83,14 +93,17 @@
                 _id:'641e1453e5182227b4d9d32z',
                 name:name.value,
                 price:price.value,
+                image:image.value,
                 edo:false
                 }
                 addTopping(topping);
                 name.value='';
                 price.value='';
+                image.value='';
             }else{
                 name.value='';
                 price.value='';
+                image.value='';
             }
             
         }
@@ -99,6 +112,7 @@
                 _id:id.value, 
                 name:name.value,
                 price:price.value,
+                image:image.value,
                 edo:false
             }
             updateTopping(id.value,newTopping);
@@ -112,9 +126,11 @@
               if(item){
                 name.value=item.name
                 price.value=item.price
+                image.value=item.image
               }else{
                 name.value=''
                 price.value=''
+                image.value=''
               }
         })
     </script>
