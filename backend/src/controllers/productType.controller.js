@@ -28,7 +28,7 @@ export const getOne = async (req, res) =>{
 
 
 export const save = async (req, res) =>{
-    if(!req.body.name){
+    if(!req.body.name || !req.files){
         return res.status(400).send({
             message: 'Content cannot be empty.'
         })
@@ -45,7 +45,7 @@ export const save = async (req, res) =>{
                 secure_url: result.secure_url
             }
         }
-        // await fs.unlink(req.files.image.tempFilePath)
+        await fs.unlink(req.files.image.tempFilePath)
         const productTypeSaved = await newProductType.save()
         res.status(201).json(productTypeSaved)
     } catch (error) {
@@ -75,7 +75,22 @@ export const deleteOne = async (req, res) =>{
 
 export const update = async (req, res) =>{
     try {
-        await ProductType.findByIdAndUpdate(req.params.id, req.body)
+        //Update the image in cloudinary
+        if(req.files?.image){
+            const result = await uploadImage(req.files.image.tempFilePath);
+            req.body.image = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+            }
+        }
+        //Delete temporal files
+        await fs.unlink(req.files.image.tempFilePath)
+
+        const typeUpdated = await ProductType.findByIdAndUpdate(req.params.id, req.body)
+        //Delete old image in cloudinary
+        if(typeUpdated){
+            await deleteImage(typeUpdated.image.public_id)
+        }
         res.status(200).json({ 
             message: `The product type with id ${req.params.id} has been successfully updated.`
         });

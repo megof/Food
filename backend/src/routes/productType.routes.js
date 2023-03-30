@@ -148,7 +148,10 @@ router.post('/', fileUpload({
  *              500:
  *                  description: Something wrong with the request.
  */
-router.put('/:id', verifyTokenMiddleware, ProductTypeController.update);
+router.put('/:id', fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}), verifyTokenMiddleware, ProductTypeController.update);
 
 /**
  * @swagger

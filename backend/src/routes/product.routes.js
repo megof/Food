@@ -177,7 +177,10 @@ verifyTokenMiddleware, ProductController.save);
  *              500:
  *                  description: Something wrong with the request.
  */
-router.put('/:id', verifyTokenMiddleware, ProductController.update);
+router.put('/:id', fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}), verifyTokenMiddleware, ProductController.update);
 
 /**
  * @swagger
