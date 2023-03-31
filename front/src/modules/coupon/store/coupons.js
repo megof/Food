@@ -27,7 +27,7 @@ export const useCouponsStore = defineStore('coupons', {
             return this.coupons[index];
         },
 
-        addCoupon(coupon) {
+        async addCoupon(coupon) {
             //this.coupons.push(coupon);
             console.log(coupon)
             const data = {
@@ -40,12 +40,12 @@ export const useCouponsStore = defineStore('coupons', {
                 dcto: coupon.dcto
             }
             console.log("new cupon",data) 
-            fetchData(URL, 'post', data);  
+            await fetchData(URL, 'post', data);  
             this.getCoupons()
             console.log(this.coupons)
         },
 
-        updateCoupon(id, newCoupon) {
+        async updateCoupon(id, newCoupon) {
             const index = this.coupons.map(el => el._id).indexOf(id); //El índice que debo alterar.
             this.coupons[index] = newCoupon;
             const url = `${URL}/${id}`;
@@ -60,15 +60,15 @@ export const useCouponsStore = defineStore('coupons', {
 
             };
             console.log(id)
-            fetchData(url, 'put', data); ///PUT
+            await fetchData(url, 'put', data); ///PUT
             
             this.getCoupons()
         },
-        deleteCoupon(id) {
+        async deleteCoupon(id) {
             const index = this.coupons.map(el => el._id).indexOf(id); //El índice que debo borrar.
             this.coupons.splice(index, 1);
             const url = `${URL}/${id}`;
-            fetchData(url, 'delete');
+           await fetchData(url, 'delete');
         },
         sortById() {}
 
