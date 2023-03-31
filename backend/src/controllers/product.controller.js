@@ -8,6 +8,8 @@ export const getAll = async (req, res) =>{
         .populate('id_tp_product')
         res.status(200).json(products)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the products.'
         })
@@ -21,6 +23,8 @@ export const getOne = async (req, res) =>{
         .populate('id_tp_product')
         res.json(product)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the product.'
         })
@@ -29,7 +33,7 @@ export const getOne = async (req, res) =>{
 
 
 export const save = async (req, res) =>{
-    if(!req.body.id_tp_product || !req.body.name || !req.body.description || !req.body.generalDescr || !req.body.price || !req.body.status || !req.body.edo){
+    if(!req.body.id_tp_product || !req.body.name || !req.body.description || !req.body.generalDescr || !req.body.price || !req.body.status || !req.body.edo || !req.files){
         return res.status(400).send({
             message: 'Content cannot be empty.'
         })
@@ -55,11 +59,12 @@ export const save = async (req, res) =>{
                 secure_url: result.secure_url
             }
         }
-
         await fs.unlink(req.files.image.tempFilePath)
         const productSaved = await newProduct.save()
         res.status(201).json(productSaved)
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong saving the product.'
         })
@@ -77,6 +82,8 @@ export const deleteOne = async (req, res) =>{
             message: `The product with id ${req.params.id} has been successfully removed.`
         });
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong deleting the product.'
         })
@@ -86,12 +93,30 @@ export const deleteOne = async (req, res) =>{
 
 export const update = async (req, res) =>{
     try {
-        await Product.findByIdAndUpdate(req.params.id, req.body)
+        //Update the image in cloudinary
+        if(req.files?.image){
+            const result = await uploadImage(req.files.image.tempFilePath);
+            req.body.image = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+            }
+        }
+        //Delete temporal files
+        await fs.unlink(req.files.image.tempFilePath)
+        //Update the product
+        const productUpdated = await Product.findByIdAndUpdate(req.params.id, req.body)
         .populate('id_tp_product')
+        //Delete old image in cloudinary
+        if(productUpdated){
+            await deleteImage(productUpdated.image.public_id)
+        }
+        
         res.status(200).json({ 
             message: `The product with id ${req.params.id} has been successfully updated.`
         });
     } catch (error) {
+        // Log the error
+        console.log(error);
         res.status(500).json({
             message: error.message || 'Something goes wrong updating the product.'
         })

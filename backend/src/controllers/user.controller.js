@@ -10,6 +10,9 @@ import jwt from 'jsonwebtoken';
 // Import the JWT password
 import { JWT_PASSWORD } from '../config/env.config.js';
 
+// Import the sign token helper
+import signToken from '../helpers/signToken.helper.js';
+
 // Import the user service
 import {
 	getAllUsers,
@@ -54,7 +57,7 @@ export const loginUserController = async (req, res) => {
         }
 
         // Sign the token
-        const token = jwt.sign({id: userDb.id}, JWT_PASSWORD, { expiresIn: '24h' });
+        const token = signToken({userId: userDb.data._id});
 
         // Return the response
         return res.status(200).json({

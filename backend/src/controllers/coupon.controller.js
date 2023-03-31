@@ -5,6 +5,7 @@ export const getAll = async (req, res) => {
         const coupons = await Coupon.find()
         res.status(200).json(coupons)
     } catch (error) {
+        console.log(error)
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the coupons.'
         })
@@ -16,6 +17,7 @@ export const getOne = async (req, res) => {
         const coupons = await Coupon.findById(req.params.id)
         res.json(coupons)
     } catch (error) {
+        console.log(error)
         res.status(404).json({
             message: error.message || 'Something goes wrong retrieving the coupons.'
         })
@@ -41,6 +43,7 @@ export const save = async (req, res) => {
         const couponsSaved = await newCoupons.save()
         res.status(201).json(couponsSaved)
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: error.message || 'Something goes wrong saving the coupon.'
         })
@@ -54,6 +57,7 @@ export const deleteOne = async (req, res) => {
             message: `The coupon with id ${req.params.id} has been successfully removed.`
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: error.message || 'Something goes wrong deleting the coupon.'
         })
@@ -67,6 +71,7 @@ export const update = async (req, res) => {
             message: `The coupon with id ${req.params.id} has been successfully updated.`
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: error.message || 'Something goes wrong updating the coupon.'
         })
