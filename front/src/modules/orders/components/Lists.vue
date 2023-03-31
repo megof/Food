@@ -3,12 +3,7 @@
     class="container w-300 h-120 d-flex flex-column justify-content-center align-items-center p-2"
   >
     <!-- Botón para crear -->
-    <n-button color="#ed7902" v-if="!items" @click="show = true">
-       <n-drawer v-model:show="show" :width="502">
-    <n-drawer-content title="Stoner" closable>
-      Stoner is a 1965 novel by the American writer John Williams.
-    </n-drawer-content>
-  </n-drawer>
+    <n-button color="#ed7902" v-if="!top2" @click="show = true">
       <n-icon>
         <Create />
       </n-icon>
@@ -24,112 +19,62 @@
       </thead>
       <tbody>
         <!-- Copian hasta el template que cierra este comentario y rendericen los datos que necesiten -->
-        <template v-if="items">
-          <tr v-for="item in items" :key="item._id">
-            <td>{{ item.client }}</td>
-            <td>{{ item.address }}</td>
-            <td>{{ item.phone }}</td>
-            <td>{{ item.obs }}</td>
-            <td>{{ formaDate(item.createdAt) }}</td>
-            <td>{{ item.status }}</td>
+        <template v-if="top2">
+          <tr v-for="top in top2" :key="top._id">
+            <td>{{ top.id_det_order.idOrder.client }}</td>
+            <td>{{ top.id_det_order.idOrder.address }}</td>
+            <td>{{ top.id_det_order.idOrder.phone }}</td>
+            <td>{{ top.id_det_order.idOrder.obs }}</td>
+             <td>{{ formaDate(top.id_det_order.idOrder.createdAt) }}</td>
+            <td>{{ top.id_det_order.idOrder.status }}</td>
 
-            <td v-for="(column, index) in columns" :key="index">
-              <template v-if="column === 'opciones'">
-                <n-space>
-                  <n-button color="#0066b2">
-                    <n-icon>
-                      <SyncCircle />
-                    </n-icon>
-                  </n-button>
-                  <n-button color="#a90b30">
-                    <n-icon>
-                      <Trash />
-                    </n-icon>
-                  </n-button>
-                </n-space>
-              </template>
-              <template v-if="column === 'opcion'">
-                <n-button color="green" @click="showModal = true">
-                  <n-icon>
-                    <EyeSharp />
-                  </n-icon>
-                </n-button>
+            <td>
+              <n-button @click="showModals(top._id)" size="large" color=gray>
+                <n-icon size="30" style="margin-top: -6px;">
+                  <EyeSharp />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left:4px">ver</span>
+             
+              </n-button>
 
-                <n-modal
-                  v-model:show="showModal"
-                  preset="dialog"
-                  style="width: 80%"
-                >
-                  <template #header>
-                    <div>Toppings</div>
-                  </template>
-                  <n-table
-                    class="table table-striped table-hover table-bordered"
-                  >
-                    <thead>
-                      <tr>
-                        <TH>IMAGEN</TH>
-                        <TH>NOMBRE</TH>
-                        <TH>CANTIDAD</TH>
-                        <TH>PRECIO</TH>
-                        <TH>TOPPING</TH>
-                        <TH>CANTIDAD</TH>
-                        <TH>PRECIO</TH>
-                        <TH>TOTAL</TH>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr tr v-for="item in items" :key="item._id">
-                        <td>
-                          <n-avatar
-                            round
-                            size="medium"
-                            src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-                          />
-                        </td>
-                        <td>Perra volteada</td>
-                        <td style="color: blue">2</td>
-                        <td style="color: green">{{ item.total }}</td>
-                        <td>Queso azul</td>
-                        <td style="color: blue">1</td>
-                        <td style="color: green">{{ item.total }}</td>
-                        <td style="color: red">13000</td>
-                      </tr>
-                    </tbody>
-                  </n-table>
-                </n-modal>
-              </template>
-            </td>
-          </tr>
-        </template>
-
-        <!-- cierre de template para copiar -->
-
-        <!-- Copian hasta el template que cierra este comentario y rendericen los datos que necesiten -->
-        <template v-if="coupons">
-          <tr v-for="coupon in coupons" :key="coupon._id">
-            <td>{{ coupon.name }}</td>
-            <td>{{ formaDate(coupon.start_date) }}</td>
-            <td>{{ formaDate(coupon.end_date) }}</td>
-            <td>{{ coupon.value }}</td>
-            <td>{{ coupon.dcto }}</td>
-            <td>{{ coupon.min_purchase }}</td>
-            <td>{{ coupon.status }}</td>
-            <td v-for="(column, index) in columns" :key="index">
-              <template v-if="column === 'opciones'">
-                <n-space >
-                  <n-button color="#0066b2">
-                    <n-icon>
-                      <SyncCircle />
-                    </n-icon>
-                  </n-button>
-                  <n-button color="#a90b30">
-                    <n-icon>
-                      <Trash />
-                    </n-icon>
-                  </n-button>
-                </n-space>
-              </template>
+              <n-modal
+                v-model:show="showModal"
+                preset="dialog"
+                style="width: 100%"
+              >
+                <template #header>
+                  <div>detalles del pedido</div>
+                </template>
+                <n-table class="table table-striped table-hover table-bordered">
+                  <thead>
+                    <tr>
+                      <TH>Nombre</TH>
+                      <TH>Descripción</TH>
+                      <TH>CANTIDAD</TH>
+                      <TH>PRECIO</TH>
+                      <TH>TOPPING</TH>
+                      <TH>CANTIDAD</TH>
+                      <TH>PRECIO</TH>
+                      <TH>TOTAL</TH>
+                    </tr>
+                  </thead>
+                  <tbody v-for="top in top2" :key="top._id">
+                    <tr v-if="objectId === top._id">
+                      <td>{{ top.id_det_order.idProduct.name }}</td>
+                      <td>{{ top.id_det_order.idProduct.generalDescr }}</td>
+                      
+                      <td style="color: blue">{{ top.id_det_order.cant }}</td>
+                      <td style="color: green">{{ top.id_det_order.idProduct.price }}</td>
+                      <td>{{ top.id_topping.name }}</td>
+                      <td style="color: blue">{{ top.id_det_order.cant }}</td>
+                      <td style="color: green">{{ top.id_topping.price }}</td>
+                      <td style="color: red">
+                        {{ (top.id_det_order.cant *top.id_topping.price) + (top.id_det_order.idProduct.price*top.id_det_order.cant) }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </n-table>
+              </n-modal>
             </td>
           </tr>
         </template>
@@ -149,7 +94,7 @@ import {
   NAvatar,
   NSpace,
   NDrawer,
-  NDrawerContent
+  NDrawerContent,
 } from "naive-ui";
 import { EyeSharp, Trash, Create, SyncCircle } from "@vicons/ionicons5";
 
@@ -169,21 +114,18 @@ export default {
     Create,
     SyncCircle,
     NDrawer,
-    NDrawerContent
+    NDrawerContent,
   },
   props: {
     columns: {
       type: Array,
       required: true,
     },
-    items: {
-      type: Array,
-    },
     del: {
       type: Function,
     },
-    coupons: {
-      type: Array,
+    top2: {
+      type: Object,
     },
   },
 
@@ -192,14 +134,19 @@ export default {
       const date = new Date(Date(fecha)).toLocaleDateString();
       return date;
     },
-   
+    showModals(id){
+      this.showModal = true
+      this.objectId = id
+      console.log(id)
+    }
   },
 
   computed: {},
   data() {
     return {
       showModal: false,
-      show:false
+      show: false,
+      objectId:undefined
     };
   },
 };

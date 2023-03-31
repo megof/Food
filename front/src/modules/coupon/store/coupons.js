@@ -1,6 +1,8 @@
 import {
     defineStore
 } from 'pinia';
+
+import {ref} from 'vue'
 //Importamos los helpers de las peticiones HTTP.
 //Importamos los helpers de las peticiones HTTP.
 import fetchData from '../../../helpers/fetchData.js';
@@ -26,7 +28,7 @@ export const useCouponsStore = defineStore('coupons', {
         },
 
         addCoupon(coupon) {
-            this.coupons.push(coupon);
+            //this.coupons.push(coupon);
             console.log(coupon)
             const data = {
                 name: coupon.name,
@@ -37,10 +39,10 @@ export const useCouponsStore = defineStore('coupons', {
                 status: coupon.status,
                 dcto: coupon.dcto
             }
-            console.log(data)
-
-            fetchData(URL, 'post', data);
-
+            console.log("new cupon",data) 
+            fetchData(URL, 'post', data);  
+            this.getCoupons()
+            console.log(this.coupons)
         },
 
         updateCoupon(id, newCoupon) {
@@ -57,7 +59,10 @@ export const useCouponsStore = defineStore('coupons', {
                 dcto: newCoupon.dcto
 
             };
+            console.log(id)
             fetchData(url, 'put', data); ///PUT
+            
+            this.getCoupons()
         },
         deleteCoupon(id) {
             const index = this.coupons.map(el => el._id).indexOf(id); //El índice que debo borrar.
@@ -70,3 +75,4 @@ export const useCouponsStore = defineStore('coupons', {
     }
 
 });
+

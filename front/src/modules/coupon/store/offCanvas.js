@@ -25,6 +25,7 @@ export const useOffCanvasStore = defineStore('offcanvas', {
             this.min_purchase = min_purchase
             this.status = status
             this.dcto = dcto
+            console.log(this.name)
         },
         createAction() {
             this.create = true
