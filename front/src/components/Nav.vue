@@ -36,13 +36,14 @@
             href="#cart"
             data-bs-toggle="offcanvas"
             class="text-decoration-none w-50 d-flex justify-content-center shopping"
+            :class="onAnimation"
           >
             <span
               class="material-symbols-outlined d-flex justify-content-center align-items-center"
             >
               shopping_cart
               <!-- <sup class="text-center item-in-cart">{{ ordersPlaced.length }}</sup> -->
-              <sup class="text-center item-in-cart">0</sup>
+              <sup class="text-center item-in-cart">{{ count }}</sup>
               <!--- La funcion de agregar el carrito debe cambiar la cantidad ------>
             </span>
           </a>
@@ -56,9 +57,31 @@
 
 <script>
 import OffCanvas from "@/components/OffCanvas.vue";
+
+import { useCartStore } from "../stores/cart";
+import { storeToRefs } from "pinia";
+const useCart = useCartStore();
+
+// const { itemsCart, totalItems } = useCart;
+const { totalItems, itemsCart } = storeToRefs(useCart);
+
 export default {
   components: {
     OffCanvas,
+  },
+
+  data() {
+    return {
+      ordersPlaced: itemsCart,
+      count: totalItems,
+    };
+  },
+
+  computed: {
+    //Esta propieda computada devuelve una clase que ya habia definido css y se activa unicamente cuando el carrito de compras cambia.
+    onAnimation() {
+      return this.ordersPlaced.length > 0 ? "shopping-active" : "shopping";
+    },
   },
 };
 </script>
