@@ -11,6 +11,7 @@ const URL = 'https://food-api-market.onrender.com/api/v1/coupon'
 export const useCouponsStore = defineStore('coupons', {
     state: () => ({
         coupons: [],
+        cargando:false
     }),
     actions: {
         async getCoupons() {
@@ -20,6 +21,7 @@ export const useCouponsStore = defineStore('coupons', {
             this.coupons = data;
             console.log(data)
             this.sortById();
+            this.cargando=false
         },
 
         getCouponById(id) {
@@ -40,6 +42,7 @@ export const useCouponsStore = defineStore('coupons', {
                 dcto: coupon.dcto
             }
             console.log("new cupon",data) 
+            this.cargando=true
             await fetchData(URL, 'post', data);  
             this.getCoupons()
             console.log(this.coupons)
@@ -60,6 +63,7 @@ export const useCouponsStore = defineStore('coupons', {
 
             };
             console.log(id)
+            this.cargando=true
             await fetchData(url, 'put', data); ///PUT
             
             this.getCoupons()
@@ -68,6 +72,7 @@ export const useCouponsStore = defineStore('coupons', {
             const index = this.coupons.map(el => el._id).indexOf(id); //El índice que debo borrar.
             this.coupons.splice(index, 1);
             const url = `${URL}/${id}`;
+            this.cargando=true
            await fetchData(url, 'delete');
         },
         sortById() {}

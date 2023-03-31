@@ -55,7 +55,6 @@
                       <TH>TOPPING</TH>
                       <TH>CANTIDAD</TH>
                       <TH>PRECIO</TH>
-                      <TH>TOTAL</TH>
                     </tr>
                   </thead>
                   <tbody v-for="top in top2" :key="top._id">
@@ -68,9 +67,6 @@
                       <td>{{ top.id_topping.name }}</td>
                       <td style="color: blue">{{ top.id_det_order.cant }}</td>
                       <td style="color: green">{{ top.id_topping.price }}</td>
-                      <td style="color: red">
-                        {{ (top.id_det_order.cant *top.id_topping.price) + (top.id_det_order.idProduct.price*top.id_det_order.cant) }}
-                      </td>
                     </tr>
                   </tbody>
                 </n-table>

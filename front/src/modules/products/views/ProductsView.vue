@@ -72,7 +72,10 @@
       </table>
       <LoadingSpinner v-else />
     </div>
+
   </div>
+      <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; background-color: aliceblue; width: 10vw; padding: 2vh; border-radius: 20px; box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);">
+      <LoadingSpinner/></div>
 </template>
 
 <script setup>
@@ -88,7 +91,7 @@ import { ref, onMounted,watch } from "vue";
 const useProducts = useProductsStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { products, productType } = storeToRefs(useProducts);
+const { products, productType, cargando } = storeToRefs(useProducts);
 const { getProducts, deleteProduct } = useProducts;
 
 //Variable reactiva para el filtro de búsqueda ....

@@ -9,7 +9,8 @@ const URL2='https://food-api-market.onrender.com/api/v1/types';
 export const useProductsStore=defineStore('products',{
     state:()=>({
         productType:[],
-        products:[]
+        products:[],
+        cargando:false
         // productType:[
         //     {
         //         id:1,
@@ -95,6 +96,7 @@ export const useProductsStore=defineStore('products',{
            this.products=data;
            this.productType=typesData.data;
            this.sortById();
+           this.cargando=false
         //    console.log(this.products);
         //    console.log(this.productType);
         },
@@ -126,6 +128,7 @@ export const useProductsStore=defineStore('products',{
             }
             console.log('Data que va hacia el backend:');
             console.log(formData);
+            this.cargando=true
            await fetchDataImg(URL,'post',formData); //POST
            this.getProducts()
         },
@@ -154,7 +157,7 @@ export const useProductsStore=defineStore('products',{
             console.log('Esta es la URL...')
             console.log(url)
             // // console.log(formData);
-              
+            this.cargando=true
              await fetchDataImg(url,'put',formData); ///PUT
              this.getProducts()
         },
@@ -164,6 +167,7 @@ export const useProductsStore=defineStore('products',{
             // //Petición HTTP...
              const url=`${URL}/${id}`;
              console.log(id)
+             this.cargando=true
             await fetchData(url,'delete'); 
             this.getProducts()
         },
