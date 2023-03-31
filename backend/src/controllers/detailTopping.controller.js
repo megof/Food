@@ -2,9 +2,7 @@ import DetailTopping from '../models/DetailTopping.js'
 
 export const getAll = async (req, res) => {
     try {
-        const details = await DetailTopping.find()
-        .populate('id_det_order')
-        .populate('id_topping')
+        const details = await DetailTopping.find().populate('id_det_order').populate('id_topping')
         res.status(200).json(details)
     } catch (error) {
         res.status(404).json({
@@ -15,9 +13,7 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
     try {
-        const details = await DetailTopping.findById(req.params.id)
-        .populate('id_det_order')
-        .populate('id_topping')
+        const details = await DetailTopping.findById(req.params.id).populate('id_det_order').populate('id_topping')
         res.json(details)
     } catch (error) {
         res.status(404).json({
