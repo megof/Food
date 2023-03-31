@@ -5,15 +5,24 @@ export const getAll = async (req, res) => {
         const details = await DetailTopping.find()
         .populate({
             path: 'id_det_order',
+            model: 'DetailOrder',
             populate: {
                 path: 'idOrder',
                 model: 'Order'
-            },
+            }
+        })
+        .populate({
+            path: 'id_det_order',
             populate: {
                 path: 'idProduct',
+                populate: {
+                    path: 'id_tp_product',
+                    model: 'ProductType'
+                },
                 model: 'Product'
             }
-        }).populate('id_topping')
+        })
+        .populate('id_topping')
         res.status(200).json(details)
     } catch (error) {
         res.status(404).json({
@@ -25,17 +34,8 @@ export const getAll = async (req, res) => {
 export const getOne = async (req, res) => {
     try {
         const details = await DetailTopping.findById(req.params.id)
-        .populate({
-            path: 'id_det_order',
-            populate: {
-                path: 'idOrder',
-                model: 'Order'
-            },
-            populate: {
-                path: 'idProduct',
-                model: 'Product'
-            }
-        }).populate('id_topping')
+        .populate('id_det_order')
+        .populate('id_topping')
         res.json(details)
     } catch (error) {
         res.status(404).json({
