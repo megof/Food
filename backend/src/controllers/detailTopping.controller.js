@@ -3,6 +3,8 @@ import DetailTopping from '../models/DetailTopping.js'
 export const getAll = async (req, res) => {
     try {
         const details = await DetailTopping.find()
+        .populate('id_det_order')
+        .populate('id_topping')
         res.status(200).json(details)
     } catch (error) {
         res.status(404).json({
@@ -14,6 +16,8 @@ export const getAll = async (req, res) => {
 export const getOne = async (req, res) => {
     try {
         const details = await DetailTopping.findById(req.params.id)
+        .populate('id_det_order')
+        .populate('id_topping')
         res.json(details)
     } catch (error) {
         res.status(404).json({
@@ -59,6 +63,8 @@ export const deleteOne = async (req, res) => {
 export const update = async (req, res) => {
     try {
         await DetailTopping.findByIdAndUpdate(req.params.id, req.body)
+        .populate('id_det_order')
+        .populate('id_topping')
         res.status(200).json({
             message: `The topping detail with id ${req.params.id} has been successfully updated.`
         });
