@@ -15,7 +15,7 @@ const router = createRouter({
     {
       path: "/payment",
       name: "payment-steps",
-      component: () => import("@/modules/payments/views/Payment.vue"),
+      component: () => import("@/modules/payments/views/PaymentView.vue"),
       children:[
         {
           path: "step1",

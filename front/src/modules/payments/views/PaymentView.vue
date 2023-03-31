@@ -1,12 +1,10 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-6">
-                <h2>Aquí va a ir el componente steps de Naive</h2>
+            <div class="col-5">
                 <Steps/>
             </div>
-            <div class="col-6">
-                <h2>Aquí van a ir el router link con las rutas hijas</h2>
+            <div class="col-7">
                 <RouterView/>
             </div>
         </div>

@@ -2,22 +2,19 @@
     <n-space vertical>
       <n-steps vertical :current="(current )" :status="currentStatus">
         <n-step
-          title="I Me Mine"
-          description="All through the day, I me mine I me mine, I me mine"
+          title="Forma de Pago:"
+          description="Llene los datos para el pago electrónico."
         />
         <n-step
-          title="Let It Be"
-          description="When I find myself in times of trouble Mother Mary comes to me"
+          title="Datos de envío:"
+          description="Díganos a donde quiere que llevemos su pedido"
         />
-        <n-step title="Break" />
+        
         <n-step
-          title="Come Together"
-          description="Here come old flat top He come grooving up slowly"
+          title="Agradecimientos por la compra:"
+          description="Su pedido va en camino..."
         />
-        <n-step
-          title="Something"
-          description="Something in the way she moves Attracts me like no other lover"
-        />
+     
       </n-steps>
       <n-space>
         <n-button-group>
@@ -75,7 +72,7 @@
         next() {
           if (currentRef.value === null)
             currentRef.value = 1;
-          else if (currentRef.value >= 5)
+          else if (currentRef.value >= 3)
             currentRef.value = null;
           else
             currentRef.value++;
