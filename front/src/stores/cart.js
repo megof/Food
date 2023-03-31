@@ -26,5 +26,28 @@ export const useCartStore = defineStore("cart", {
       localStorage.setItem("totalItems", this.totalItems);
       localStorage.setItem("cart", JSON.stringify(this.itemsCart));
     },
+
+    deleteItem(id) {
+      // console.log("deleteItem");
+      const index = this.itemsCart.findIndex((item) => item._id === id);
+
+      this.total -= this.itemsCart[index].price * this.itemsCart[index].units;
+      this.totalItems -= this.itemsCart[index].units;
+      this.itemsCart.splice(index, 1);
+
+      localStorage.setItem("total", this.total);
+      localStorage.setItem("totalItems", this.totalItems);
+      localStorage.setItem("cart", JSON.stringify(this.itemsCart));
+    },
+
+    cancelOrders() {
+      // console.log("deleteOrders");
+      this.itemsCart = [];
+      this.total = 0;
+      this.totalItems = 0;
+      localStorage.removeItem("cart");
+      localStorage.removeItem("total");
+      localStorage.removeItem("totalItems");
+    },
   },
 });

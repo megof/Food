@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav flex-column">
+  <ul class="nav flex-column" v-if="orders.length > 0">
     <ul class="list-group list-group">
       <div v-for="order in orders" :key="order._id">
         <li class="list-group-item d-flex align-items-center">
@@ -21,7 +21,7 @@
               </div>
             </div>
           </div>
-          <button @click="deleteOrderItem(order.id)" type="button" class="btn btn-danger ms-2">
+          <button @click="deleteOrderItem(order._id)" type="button" class="btn btn-danger ms-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -52,12 +52,27 @@
         }}
         COP
       </div>
-      <button class="btn btn-primary btn-buy" @click="buy">PAGAR CARRITO</button>
+      <button class="btn btn-primary btn-buy mb-2" @click="buy">PAGAR CARRITO</button>
+      <button class="btn btn-primary btn-cancel" @click="removeCart">CANCELAR CARRITO</button>
     </ul>
   </ul>
+
+  <div class="container text-center" v-else>
+    <div class="row">
+      <div class="col-md-12 my-4">
+        <div class="alert alert-danger" role="alert">No hay compras en el carrito</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { useCartStore } from "../stores/cart";
+
+const useCart = useCartStore();
+
+const { cancelOrders, deleteItem } = useCart;
+
 export default {
   props: {
     orders: {
@@ -78,8 +93,16 @@ export default {
   },
 
   methods: {
-    buy() {
-      this.$router.push({ name: "payment-steps" });
+    // buy() {
+    //   this.$router.push({ name: "payment-steps" });
+    // },
+
+    removeCart() {
+      cancelOrders();
+    },
+
+    deleteOrderItem(id) {
+      deleteItem(id);
     },
   },
 };

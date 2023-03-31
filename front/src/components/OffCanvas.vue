@@ -29,7 +29,7 @@ import { useCartStore } from "../stores/cart";
 import { storeToRefs } from "pinia";
 const useCart = useCartStore();
 
-// const {  } = useCart;
+const { cancelOrders } = useCart;
 const { totalItems, itemsCart, total } = storeToRefs(useCart);
 
 export default {
