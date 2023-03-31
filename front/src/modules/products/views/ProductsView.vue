@@ -50,13 +50,15 @@
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
-            <td>{{ product.edo}}</td>
+            <td>{{ product.edo ? "Activo":"Inactivo"}}</td>
+            
             <td>
               <button
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasProduct"
-                @click="updateAction(product._id, product.name)"
+                @click="updateAction(
+                  product._id,product.name,product.description,product.edo,product.generalDescr,product.id_tp_product,product.image,product.price,product.status)"
               >
                 <i class="bi bi-arrow-repeat me-1"></i
                 ><span class="d-none d-md-inline-block">Actualizar</span>

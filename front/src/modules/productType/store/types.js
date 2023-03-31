@@ -20,8 +20,8 @@ export const  useTypeStore=defineStore('types',{
             return this.types[index]; 
         },
         
-        addType(type){
-            this.types.push(type);
+       async addType(type){
+            // this.types.push(type);
             //Petición HTTP...
              const data={
                 name:type.name,
@@ -32,10 +32,10 @@ export const  useTypeStore=defineStore('types',{
             for (const key in data) {
                 formData.append(key, data[key]);
             }
-             fetchDataImg(URL,'post',formData);
-            
+           await  fetchDataImg(URL,'post',formData);
+           this.getTypes()
         },
-        updateType(id,newType){ 
+       async  updateType(id,newType){ 
             const index=this.types.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.types[index]=newType;
             //Petición HTTP...
@@ -49,15 +49,16 @@ export const  useTypeStore=defineStore('types',{
             for (const key in data) {
                 formData.append(key, data[key]);
             }
-             fetchDataImg(url,'put',formData);
-            
+            await fetchDataImg(url,'put',formData);
+            this.getTypes()
         },
-        deleteType(id){
+        async deleteType(id){
             const index=this.types.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.types.splice(index,1);
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            fetchData(url,'delete');
+           await  fetchData(url,'delete');
+           this.getTypes()
         },
         sortById(){
             // this.types.sort((a,b)=>a.id-b.id);

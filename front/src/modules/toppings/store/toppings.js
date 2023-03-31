@@ -40,13 +40,12 @@ export const useToppingStore=defineStore('toppings',{
             return this.toppings[index];
         },
         
-        addTopping(topping){
-            this.toppings.push(topping);
+        async addTopping(topping){
+            // this.toppings.push(topping);
             //Petición HTTP...
              const data={
                 name:topping.name,
                 price:topping.price,
-                image:topping.image
              }
              console.log(data);
 
@@ -55,10 +54,11 @@ export const useToppingStore=defineStore('toppings',{
             //      formData.append(key, data[key]);
             //  }
 
-             fetchData(URL,'post',data);
-            
+            await fetchData(URL,'post',data);
+            this.getToppings()
         },
-        updateTopping(id,newTopping){ 
+       
+        async updateTopping(id,newTopping){ 
             const index=this.toppings.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.toppings[index]=newTopping;
             ////Petición HTTP...
@@ -66,17 +66,20 @@ export const useToppingStore=defineStore('toppings',{
             const data={
                 name:newTopping.name,
                 price:newTopping.price,
-                edo:true
+                edo:newTopping.edo
              };
             console.log(data);
-            fetchData(url,'put',data); ///PUT
+           await fetchData(url,'put',data); ///PUT
+           this.getToppings()
         },
-        deleteTopping(id){
+        
+        async deleteTopping(id){
             const index=this.toppings.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.toppings.splice(index,1);
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            fetchData(url,'delete');
+          await  fetchData(url,'delete');
+          this.getToppings()
            
         },
         sortById(){

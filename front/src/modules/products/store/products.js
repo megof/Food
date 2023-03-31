@@ -106,8 +106,8 @@ export const useProductsStore=defineStore('products',{
             return this.products[index]; 
         },
         
-        addProduct(product){
-            this.products.push(product);
+        async addProduct(product){
+            // this.products.push(product);
             
             //Petición HTTP...
             const data={
@@ -126,10 +126,10 @@ export const useProductsStore=defineStore('products',{
             }
             console.log('Data que va hacia el backend:');
             console.log(formData);
-            fetchDataImg(URL,'post',formData); //POST
-            
+           await fetchDataImg(URL,'post',formData); //POST
+           this.getProducts()
         },
-        updateProduct(id,newProduct){ 
+        async updateProduct(id,newProduct){ 
             const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.products[index]=newProduct;
            
@@ -155,15 +155,17 @@ export const useProductsStore=defineStore('products',{
             console.log(url)
             // // console.log(formData);
               
-             fetchDataImg(url,'put',formData); ///PUT
+             await fetchDataImg(url,'put',formData); ///PUT
+             this.getProducts()
         },
-        deleteProduct(id){
+        async deleteProduct(id){
             const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.products.splice(index,1);
             // //Petición HTTP...
              const url=`${URL}/${id}`;
              console.log(id)
-             fetchData(url,'delete'); 
+            await fetchData(url,'delete'); 
+            this.getProducts()
         },
         sortById(){
             this.products.sort((a,b)=>a.id-b.id);

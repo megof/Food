@@ -25,6 +25,24 @@
                         <label for="image" class="mb-2">Cargue una imagen:</label>
                         <input type="file" name="image" class="form-control w-100" id="image" @change="onFileSelected" >
                     </div> -->
+
+                    
+              <div class="form-group mb-2">
+                <label for="name ">Estado:</label>
+                <div class="form-check form-switch form-group mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    checked
+                    v-model="edo"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="flexSwitchCheckChecked"
+                    >{{ edo ? "Activo" : "Inactivo" }}</label>
+                </div>
+              </div>
                     
                     <div class="form-group mb-2 mt-5">
                         
@@ -68,7 +86,7 @@
         const name=ref('');
         const price=ref('');
         const image=ref('');
-
+        const edo = ref(true)
 
         //Funcionalidad del formulario.
         const processForm=()=>{
@@ -94,16 +112,18 @@
                 name:name.value,
                 price:price.value,
                 image:image.value,
-                edo:false
+                edo:edo.value
                 }
                 addTopping(topping);
                 name.value='';
                 price.value='';
                 image.value='';
+                edo.value=true
             }else{
                 name.value='';
                 price.value='';
                 image.value='';
+                edo.value=true
             }
             
         }
@@ -113,9 +133,10 @@
                 name:name.value,
                 price:price.value,
                 image:image.value,
-                edo:false
+                edo:edo.value
             }
             updateTopping(id.value,newTopping);
+            console.log(edo.value)
         }
        
 
@@ -127,10 +148,12 @@
                 name.value=item.name
                 price.value=item.price
                 image.value=item.image
+                edo.value=item.edo
               }else{
                 name.value=''
                 price.value=''
                 image.value=''
+                edo.value=true
               }
         })
     </script>
