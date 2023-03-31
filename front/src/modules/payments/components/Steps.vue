@@ -7,7 +7,7 @@
         />
         <n-step
           title="Datos de envío:"
-          description="Díganos a donde quiere que llevemos su pedido"
+          description="Díganos a donde quiere que llevemos su pedido."
         />
         
         <n-step
@@ -17,7 +17,7 @@
      
       </n-steps>
       <n-space>
-        <n-button-group>
+        <!-- <n-button-group>
           <n-button @click="prev">
             <template #icon>
               <n-icon>
@@ -32,7 +32,7 @@
               </n-icon>
             </template>
           </n-button>
-        </n-button-group>
+        </n-button-group> -->
         <n-radio-group
           v-model:value="currentStatus"
           size="medium"

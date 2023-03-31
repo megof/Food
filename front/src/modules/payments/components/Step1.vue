@@ -64,7 +64,13 @@
 </template>
 
 <script setup >
-import {ref} from 'vue';
+  import { useRouter } from 'vue-router';
+
+  import {ref} from 'vue';
+  import {useStepsStore} from '../store/steps.js'
+  const useSteps=useStepsStore();
+  const{prevPinia,nextPinia}=useSteps;
+  const router = useRouter();
   const paymentMethod=ref('');
   //Estas son variables para la validación
   const cardNameOk=ref(true);
@@ -124,7 +130,8 @@ import {ref} from 'vue';
       const rightInformation=validateData()
       if(rightInformation){
         
-        
+        nextPinia();
+        router.push('/payment/step2');
         //Hecha con éxito la transacción, se procede a borrar el formulario y resetear el formulario.
         cardName.value='' 
         cardNumber.value=''
@@ -138,7 +145,8 @@ import {ref} from 'vue';
     };
     const makePaymentPaypal=()=>{
       //Por ahora sin validaciones en Paypal, hace la compra directamente.
-      
+      nextPinia();
+      router.push('/payment/step2');
        //Hecha con éxito la transacción, se procede a borrar el formulario y resetear el formulario.
        cardName.value='' 
        cardNumber.value=''
@@ -158,25 +166,6 @@ import {ref} from 'vue';
     padding: 50px;
     border-radius: 10px;
   }
-  select option {
-  padding-left: 20px; /* Ajusta la distancia de la imagen con respecto al texto */
-  background-repeat: no-repeat;
-  background-position: left center;
-}
-
-select option[data-icon] {
-  padding-left: 40px; /* Ajusta la distancia de la imagen con respecto al borde */
-  background-image: url(''); /* Establece un fondo vacío para ocultar el texto original */
-}
-
-/* Establece la imagen para cada opción */
-select option[data-icon="1"] {
-  background-image: url('../assets/card.png');
-}
-
-select option[data-icon="2"] {
-  background-image: url('../assets/paypal.png');
-}
-
+  
 
 </style>

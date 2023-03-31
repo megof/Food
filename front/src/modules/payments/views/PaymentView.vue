@@ -1,14 +1,14 @@
 <template>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-5">
+            <div class="col-md-5 col-12">
                 <Steps/>
             </div>
-            <div class="col-7">
-                <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="col-md-7 col-12">
+                <!-- <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-dark" @click="prevPinia">Preview</button>
                     <button type="button" class="btn btn-dark" @click="nextPinia">Next</button>
-                </div>
+                </div> -->
                 <RouterView/>
             </div>
         </div>

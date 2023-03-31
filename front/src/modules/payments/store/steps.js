@@ -2,7 +2,7 @@ import {defineStore} from 'pinia';
 
 export const useStepsStore=defineStore('steps',{
     state:()=>({
-        currentRefPinia:3
+        currentRefPinia:null
         
     }),
     actions:{
