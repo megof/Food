@@ -58,6 +58,8 @@
   <script>
   import { defineComponent, ref } from "vue";
   import { MdArrowRoundBack, MdArrowRoundForward } from "@vicons/ionicons4";
+  import {useStepsStore} from '../store/steps.js';
+  import {storeToRefs} from 'pinia';
   
   export default defineComponent({
     components: {
@@ -65,10 +67,15 @@
       MdArrowRoundForward
     },
     setup() {
+      const useSteps= useStepsStore();
+      const {currentRefPinia}=storeToRefs(useSteps);
       const currentRef = ref(1);
       return {
         currentStatus: ref("process"),
-        current: currentRef,
+        current: currentRefPinia, //Aquí debo asignar directamente la variable reactiva de pinia
+
+        //Al final lo que tienes que hacer en el store de pinia es afectar el currentRef.
+        //Pasos: 1. El current 
         next() {
           if (currentRef.value === null)
             currentRef.value = 1;

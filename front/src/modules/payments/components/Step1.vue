@@ -2,8 +2,7 @@
   <div class="my-component">
     <div class="w-50">
         <p class="fw-bold">Total:</p>
-        <!-- <p class="fw-bold">Valor: ${{valuePickles.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</p> -->
-        <p class="fw-bold">Valor: $60.000</p>
+        <p class="fw-bold">Valor: ${{total.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</p>
     </div>
     <div class="w-25">
         <!-- <img src="./assets/img/pepinillo.jpg" alt="pickle" class="w-50">
@@ -25,7 +24,7 @@
         <p>
           ⚠️ Lo sentimos, PayPal no procesa pagos en COP. Por tanto, tu compra se hará en USD.
           <span class="fw-bold">
-              PayPal te cobrará un importe de {{(valuePickles/4820).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
+              PayPal te cobrará un importe de {{(total/4645).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
           </span>
           
         </p>
@@ -78,6 +77,8 @@ import {ref} from 'vue';
   const cvcNumber=ref('')
   const expirationDate=ref('')
 
+  //Esta es la variable del total de la compra
+  const total=ref(50000);
   
 
 
