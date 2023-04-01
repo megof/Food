@@ -93,9 +93,9 @@ export default {
   },
 
   methods: {
-    // buy() {
-    //   this.$router.push({ name: "payment-steps" });
-    // },
+    buy() {
+      this.$router.push({ name: "payment-steps" });
+    },
 
     removeCart() {
       cancelOrders();

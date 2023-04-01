@@ -8,19 +8,16 @@ export const useCartStore = defineStore("cart", {
   }),
 
   actions: {
-    addItem(product, units) {
+    addItem(product = {}, units = 0) {
       product.units = units;
-      this.total += product.price * product.units;
-      const exist = this.itemsCart.find((item) => item._id === product._id);
-      // if (exist) {
-      //   exist.units += product.units;
-      //   console.log(exist.units);
-      // } else {
-      //   this.itemsCart.push(product);
-      // }
 
-      this.itemsCart.push(product);
+      this.itemsCart.push({ ...product, units });
+      this.total += product.price * product.units;
       this.totalItems += units;
+
+      this.itemsCart = this.itemsCart.map((el) => {});
+
+      console.log(this.itemsCart);
 
       localStorage.setItem("total", this.total);
       localStorage.setItem("totalItems", this.totalItems);

@@ -43,7 +43,7 @@
       <button
         class="btn btn-primary btn-first text-center w-100 my-3"
         :id="product._id"
-        @click="addToCart(product, units)"
+        @click="addToCart({ ...product }, units)"
       >
         Agregar Al Carrito
       </button>
