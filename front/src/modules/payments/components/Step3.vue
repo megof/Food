@@ -26,7 +26,7 @@
 
   const router = useRouter();
   const finish=()=>{
-    router.push('/payment')
+    router.push('/')
     nextPinia();
     
   }

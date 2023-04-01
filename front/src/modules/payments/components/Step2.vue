@@ -14,10 +14,10 @@
         <label for="person" class="form-label fw-bold">Persona Quien Recibe:</label>
         <input type="text" class="form-control" id="person">
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="mensaje" class="fw-bold" >Observaciones:</label>
         <textarea id="mensaje" name="mensaje" rows="4" cols="50" resize="false"></textarea>
-      </div>
+      </div> -->
       
     
      
@@ -37,6 +37,13 @@
   const processForm=()=>{
     //Aquí deberían ir las validaciones si es que hay...
     nextPinia();
+    //Una vex hecho el pago reseteamos el localStorage
+    localStorage.removeItem('total');
+    localStorage.removeItem('totalItems');
+
+    //TODO: Ojo que esta es la info del carrito y podría requerirse a la hora de registrar la orden.
+    localStorage.removeItem('cart');
+
     router.push('/payment/step3');
   }
 

@@ -1,8 +1,11 @@
 <template>
   <div class="my-component">
     <div class="w-50">
-        <p class="fw-bold">Total:</p>
-        <p class="fw-bold">Valor: ${{total.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</p>
+       
+        <p class="fw-bold">Cuenta: ${{currencyFormat(total)}}</p>
+        <p class="fw-bold">Valor Envío: ${{currencyFormat(shippingCost ) }}</p>
+        <p class="fw-bold">Total: ${{currencyFormat(total+shippingCost)}}</p>
+
     </div>
     <div class="w-25">
         <!-- <img src="./assets/img/pepinillo.jpg" alt="pickle" class="w-50">
@@ -24,7 +27,7 @@
         <p>
           ⚠️ Lo sentimos, PayPal no procesa pagos en COP. Por tanto, tu compra se hará en USD.
           <span class="fw-bold">
-              PayPal te cobrará un importe de {{(total/4645).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
+              PayPal te cobrará un importe de {{((total+shippingCost)/4645).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
           </span>
           
         </p>
@@ -66,7 +69,7 @@
 <script setup >
   import { useRouter } from 'vue-router';
 
-  import {ref,onMounted} from 'vue';
+  import {ref,onMounted,computed} from 'vue';
   import {useStepsStore} from '../store/steps.js'
   const useSteps=useStepsStore();
   const{prevPinia,nextPinia,stepByNumber}=useSteps;
@@ -84,8 +87,19 @@
   const expirationDate=ref('')
 
   //Esta es la variable del total de la compra
-  const total=ref(50000);
-  
+  const total=ref(49000);
+  //Propiedades computadas...
+  const shippingCost=computed(()=>{
+    if(total.value>=50000){
+      return 0
+    }else{
+      return 5000
+    }
+  });
+
+  const currencyFormat=(value)=>{
+    return value.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0});
+  }
 
 
   const validateData=()=>{
@@ -160,6 +174,7 @@
 
     onMounted(()=>{
       stepByNumber(1);
+      total.value=Number(localStorage.getItem('total'));
     })
 </script>
 

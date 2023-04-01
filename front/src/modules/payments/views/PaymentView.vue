@@ -4,7 +4,7 @@
             <div class="col-md-5 col-12">
                 <Steps/>
             </div>
-            <div class="col-md-7 col-12">
+            <div class="col-md-7 col-12 height">
                 <!-- <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-dark" @click="prevPinia">Preview</button>
                     <button type="button" class="btn btn-dark" @click="nextPinia">Next</button>
@@ -25,6 +25,9 @@
     const{prevPinia,nextPinia}=useSteps;
 </script>
 
-<style>
-
+<style scoped>
+    .height{
+       
+        min-height: 1000px !important;
+    }
 </style>
