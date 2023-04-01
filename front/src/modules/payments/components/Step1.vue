@@ -56,7 +56,7 @@
            
       </div>
       <div class="mb-3 mt-3 w-100">
-              <input type="submit" value="Pagar" class="btn btn-dark w-100">
+              <input type="submit" value="Pagar" class="btn btn-dark w-100" v-if="paymentMethod!==''">
       </div>
     </form>
   </div>
