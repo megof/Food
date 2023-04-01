@@ -15,10 +15,6 @@ export const useCartStore = defineStore("cart", {
       this.total += product.price * product.units;
       this.totalItems += units;
 
-      this.itemsCart = this.itemsCart.map((el) => {});
-
-      console.log(this.itemsCart);
-
       localStorage.setItem("total", this.total);
       localStorage.setItem("totalItems", this.totalItems);
       localStorage.setItem("cart", JSON.stringify(this.itemsCart));
