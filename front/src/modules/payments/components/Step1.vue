@@ -1,11 +1,10 @@
 <template>
   <div class="my-component">
     <div class="w-50">
-       
-        <p class="fw-bold">Cuenta: ${{currencyFormat(total)}}</p>
-        <p class="fw-bold">Valor Envío: ${{currencyFormat(shippingCost ) }}</p>
-        <p class="fw-bold">Total: ${{currencyFormat(total+shippingCost)}}</p>
-
+        
+        <p class="fw-bold">Valor: ${{format(total)}}</p>
+        <p class="fw-bold">Precio del Envío: ${{format(shippingPrice)}}</p>
+        <p class="fw-bold">Total a Pagar: ${{format(total+shippingPrice)}}</p>
     </div>
     <div class="w-25">
         <!-- <img src="./assets/img/pepinillo.jpg" alt="pickle" class="w-50">
@@ -27,7 +26,7 @@
         <p>
           ⚠️ Lo sentimos, PayPal no procesa pagos en COP. Por tanto, tu compra se hará en USD.
           <span class="fw-bold">
-              PayPal te cobrará un importe de {{((total+shippingCost)/4645).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
+              PayPal te cobrará un importe de {{((total+shippingPrice)/4645).toLocaleString('eu-EU',{style:'currency',currency:'USD',maximumFractionDigits: 2})}}.
           </span>
           
         </p>
@@ -87,19 +86,18 @@
   const expirationDate=ref('')
 
   //Esta es la variable del total de la compra
-  const total=ref(49000);
-  //Propiedades computadas...
-  const shippingCost=computed(()=>{
+  const total=ref(0);
+  const shippingPrice=computed(()=>{
     if(total.value>=50000){
-      return 0
+      return 0;
     }else{
-      return 5000
+      return 5000;
     }
   });
-
-  const currencyFormat=(value)=>{
-    return value.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0});
+  const format=(value)=>{
+    return value.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})
   }
+  
 
 
   const validateData=()=>{
@@ -174,7 +172,7 @@
 
     onMounted(()=>{
       stepByNumber(1);
-      total.value=Number(localStorage.getItem('total'));
+      total.value=Number(localStorage.getItem("total"));
     })
 </script>
 

@@ -37,14 +37,12 @@
   const processForm=()=>{
     //Aquí deberían ir las validaciones si es que hay...
     nextPinia();
-    //Una vex hecho el pago reseteamos el localStorage
-    localStorage.removeItem('total');
-    localStorage.removeItem('totalItems');
-
-    //TODO: Ojo que esta es la info del carrito y podría requerirse a la hora de registrar la orden.
-    localStorage.removeItem('cart');
-
     router.push('/payment/step3');
+    //Se Borra el carrito de compras una vez exitodo este paso.
+    localStorage.removeItem("total");
+    localStorage.removeItem("totalItems");
+    localStorage.removeItem("cart"); //TODO: Ojo procesar antes de borrar si se necesita.
+
   }
 
   onMounted(()=>{
