@@ -5,19 +5,25 @@
         <li class="list-group-item d-flex align-items-center">
           <div class="flex-grow-1">
             <div class="horizontal-item">
-              <img class="img-small" :src="order.image ? order.image.secure_url : ''" />
+              <div class="container container-img">
+                <img class="img-fluid img-small" :src="order.image ? order.image.secure_url : ''" />
+              </div>
 
               <div class="vertical-item">
-                <div class="fw-light">{{ order.units }} {{ order.name }}</div>
-                Precio Unitario:
-                {{
-                  Number(order.price).toLocaleString("es-ES", {
-                    style: "currency",
-                    currency: "COP",
-                    maximumFractionDigits: 0,
-                  })
-                }}
-                COP
+                <div class="open-sans-bold">
+                  <span>{{ order.units }} {{ order.name }}</span>
+                </div>
+                <span>
+                  <span class="open-sans-bold"> Precio Unitario:</span>
+                  ${{
+                    Number(order.price).toLocaleString("es-ES", {
+                      style: "currency",
+                      currency: "COP",
+                      maximumFractionDigits: 0,
+                    })
+                  }}
+                  COP
+                </span>
               </div>
             </div>
           </div>
@@ -113,12 +119,17 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 1rem;
+}
+
+.container-img {
+  max-width: 50%;
+  object-fit: cover;
 }
 
 .img-small {
-  width: 20%;
-  height: 20%;
-  margin-right: 15px;
+  margin-right: 0.938rem;
+  border-radius: 0.25rem;
 }
 
 .btn-buy,

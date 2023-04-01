@@ -12,9 +12,9 @@ export const useCartStore = defineStore("cart", {
       product.units = units;
 
       this.itemsCart.push({ ...product, units });
+
       this.total += product.price * product.units;
       this.totalItems += units;
-
       localStorage.setItem("total", this.total);
       localStorage.setItem("totalItems", this.totalItems);
       localStorage.setItem("cart", JSON.stringify(this.itemsCart));

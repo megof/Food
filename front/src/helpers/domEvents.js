@@ -6,6 +6,7 @@ export const navBarColor = () => {
       $navbar.classList.add("navbar-scroll");
     }
   });
+
   window.addEventListener("scroll", () => {
     if (window.scrollY >= 32) {
       $navbar.classList.add("navbar-scroll");
