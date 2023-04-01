@@ -66,10 +66,10 @@
 <script setup >
   import { useRouter } from 'vue-router';
 
-  import {ref} from 'vue';
+  import {ref,onMounted} from 'vue';
   import {useStepsStore} from '../store/steps.js'
   const useSteps=useStepsStore();
-  const{prevPinia,nextPinia}=useSteps;
+  const{prevPinia,nextPinia,stepByNumber}=useSteps;
   const router = useRouter();
   const paymentMethod=ref('');
   //Estas son variables para la validación
@@ -157,6 +157,10 @@
     const makePayment=()=>{
       (paymentMethod.value==='card')?makePaymentCard():makePaymentPaypal()
     };
+
+    onMounted(()=>{
+      stepByNumber(1);
+    })
 </script>
 
 <style scoped>

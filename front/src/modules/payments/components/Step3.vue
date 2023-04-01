@@ -18,10 +18,11 @@
 </template>
 
 <script setup>
+  import { onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import {useStepsStore} from '../store/steps.js'
   const useSteps=useStepsStore();
-  const{prevPinia,nextPinia}=useSteps;
+  const{prevPinia,nextPinia,stepByNumber}=useSteps;
 
   const router = useRouter();
   const finish=()=>{
@@ -29,6 +30,10 @@
     nextPinia();
     
   }
+
+  onMounted(()=>{
+      stepByNumber(3);
+  })
 
 </script>
 

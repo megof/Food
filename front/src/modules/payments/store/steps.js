@@ -23,6 +23,10 @@ export const useStepsStore=defineStore('steps',{
             }else{
                 this.currentRefPinia--;
             }
+        },
+        //Este es el que me lleva al paso que debe estar
+        stepByNumber(number){
+            this.currentRefPinia=number;
         }
             
     }

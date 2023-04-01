@@ -14,7 +14,6 @@
     const startPayment=()=>{
         router.push('/payment/step1')
         nextPinia();
-        
     }
 </script>
 
