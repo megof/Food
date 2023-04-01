@@ -27,7 +27,7 @@
           <td>{{ coupon.value }}</td>
           <td>{{ coupon.dcto }}</td>
           <td>{{ coupon.min_purchase }}</td>
-          <td>{{ coupon.status }}</td>
+          <td>{{ coupon.status ? "Activo" : "Inactivo" }}</td>
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"
@@ -72,7 +72,7 @@ import LoadingSpinner from "../components/LoadingSpinner.vue";
 import { useCouponsStore } from "../store/coupons.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, onUpdated  } from "vue";
 
 const useCoupon = useCouponsStore();
 const useOffCanvas = useOffCanvasStore();
@@ -84,6 +84,8 @@ const { getCoupons, deleteCoupon } = useCoupon;
 onMounted(() => {
   getCoupons();
 });
+
+ 
 
 function formatDate(fecha) {
   const date = new Date(fecha);
