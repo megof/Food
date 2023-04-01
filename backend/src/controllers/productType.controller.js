@@ -82,10 +82,9 @@ export const update = async (req, res) =>{
                 public_id: result.public_id,
                 secure_url: result.secure_url
             }
+            //Delete temporal files
+            await fs.unlink(req.files.image.tempFilePath)
         }
-        //Delete temporal files
-        await fs.unlink(req.files.image.tempFilePath)
-
         const typeUpdated = await ProductType.findByIdAndUpdate(req.params.id, req.body)
         //Delete old image in cloudinary
         if(typeUpdated){

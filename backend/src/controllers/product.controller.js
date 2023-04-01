@@ -100,9 +100,9 @@ export const update = async (req, res) =>{
                 public_id: result.public_id,
                 secure_url: result.secure_url
             }
+            //Delete temporal files
+            await fs.unlink(req.files.image.tempFilePath)
         }
-        //Delete temporal files
-        await fs.unlink(req.files.image.tempFilePath)
         //Update the product
         const productUpdated = await Product.findByIdAndUpdate(req.params.id, req.body)
         .populate('id_tp_product')
