@@ -6,7 +6,8 @@ import fetchDataImg from '../../../helpers/fetchDataImg';
 const URL= 'https://food-api-market.onrender.com/api/v1/topping';
 export const useToppingStore=defineStore('toppings',{
     state:()=>({
-        toppings:[]
+        toppings:[],
+        cargando:false
         // toppings:[
         //     {
         //         _id:1,
@@ -33,6 +34,7 @@ export const useToppingStore=defineStore('toppings',{
            const {data}=await fetchData(URL);
            this.toppings=data;
            this.sortById();
+           this.cargando=false
         },
         
         getToppingById(id){
@@ -40,13 +42,12 @@ export const useToppingStore=defineStore('toppings',{
             return this.toppings[index];
         },
         
-        addTopping(topping){
-            this.toppings.push(topping);
+        async addTopping(topping){
+            // this.toppings.push(topping);
             //Petición HTTP...
              const data={
                 name:topping.name,
                 price:topping.price,
-                image:topping.image
              }
              console.log(data);
 
@@ -54,11 +55,12 @@ export const useToppingStore=defineStore('toppings',{
             //  for (const key in data) {
             //      formData.append(key, data[key]);
             //  }
-
-             fetchData(URL,'post',data);
-            
+            this.cargando=true
+            await fetchData(URL,'post',data);
+            this.getToppings()
         },
-        updateTopping(id,newTopping){ 
+       
+        async updateTopping(id,newTopping){ 
             const index=this.toppings.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.toppings[index]=newTopping;
             ////Petición HTTP...
@@ -66,17 +68,22 @@ export const useToppingStore=defineStore('toppings',{
             const data={
                 name:newTopping.name,
                 price:newTopping.price,
-                edo:true
+                edo:newTopping.edo
              };
             console.log(data);
-            fetchData(url,'put',data); ///PUT
+            this.cargando=true
+           await fetchData(url,'put',data); ///PUT
+           this.getToppings()
         },
-        deleteTopping(id){
+        
+        async deleteTopping(id){
             const index=this.toppings.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.toppings.splice(index,1);
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            fetchData(url,'delete');
+            this.cargando=true
+          await  fetchData(url,'delete');
+          this.getToppings()
            
         },
         sortById(){

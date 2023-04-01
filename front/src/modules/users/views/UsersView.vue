@@ -33,6 +33,8 @@
     </table>
     <LoadingSpinner v-else />
   </div>
+  <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; background-color: aliceblue; width: 10vw; padding: 2vh; border-radius: 20px; box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);">
+      <LoadingSpinner/></div>
 </template>
 
 <script setup> 
@@ -49,7 +51,7 @@
   const useOffCanvas = useOffCanvasStore();
 
   const { updateAction } = useOffCanvas;
-  const { users } = storeToRefs(useUser);
+  const { users,cargando } = storeToRefs(useUser);
   const { getUsers, deleteUser } = useUser;
 
 onMounted(() => {

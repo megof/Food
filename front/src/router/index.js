@@ -12,6 +12,33 @@ const router = createRouter({
       name: "home",
       component: () => import("@/views/HomeProducts.vue"),
     },
+    {
+      path: "/payment",
+      name: "payment-steps",
+      component: () => import("@/modules/payments/views/PaymentView.vue"),
+      children:[
+        {
+          path: "",
+          name: "step-home",
+          component: () => import("@/modules/payments/components/HomeStep.vue"),
+        },
+        {
+          path: "step1",
+          name: "step-1",
+          component: () => import("@/modules/payments/components/Step1.vue"),
+        },
+        {
+          path: "step2",
+          name: "step-2",
+          component: () => import("@/modules/payments/components/Step2.vue"),
+        },
+        {
+          path: "step3",
+          name: "step-3",
+          component: () => import("@/modules/payments/components/Step3.vue"),
+        },
+      ]
+    },
 
     // ruta admin
     {

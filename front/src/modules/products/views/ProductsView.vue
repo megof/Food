@@ -50,13 +50,15 @@
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
-            <td>{{ product.edo}}</td>
+            <td>{{ product.edo ? "Activo":"Inactivo"}}</td>
+            
             <td>
               <button
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasProduct"
-                @click="updateAction(product._id, product.name)"
+                @click="updateAction(
+                  product._id,product.name,product.description,product.edo,product.generalDescr,product.id_tp_product,product.image,product.price,product.status)"
               >
                 <i class="bi bi-arrow-repeat me-1"></i
                 ><span class="d-none d-md-inline-block">Actualizar</span>
@@ -70,7 +72,10 @@
       </table>
       <LoadingSpinner v-else />
     </div>
+
   </div>
+      <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; background-color: aliceblue; width: 10vw; padding: 2vh; border-radius: 20px; box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);">
+      <LoadingSpinner/></div>
 </template>
 
 <script setup>
@@ -86,7 +91,7 @@ import { ref, onMounted,watch } from "vue";
 const useProducts = useProductsStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { products, productType } = storeToRefs(useProducts);
+const { products, productType, cargando } = storeToRefs(useProducts);
 const { getProducts, deleteProduct } = useProducts;
 
 //Variable reactiva para el filtro de búsqueda ....

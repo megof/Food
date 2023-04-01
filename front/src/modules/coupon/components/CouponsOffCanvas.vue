@@ -101,8 +101,7 @@
                   <label
                     class="form-check-label"
                     for="flexSwitchCheckChecked"
-                    >{{ status ? "Activo" : "Inactivo" }}</label
-                  >
+                    >{{ status ? "Activo" : "Inactivo" }}</label>
                 </div>
               </div>
 

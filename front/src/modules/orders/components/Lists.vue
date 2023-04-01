@@ -25,16 +25,15 @@
             <td>{{ top.id_det_order.idOrder.address }}</td>
             <td>{{ top.id_det_order.idOrder.phone }}</td>
             <td>{{ top.id_det_order.idOrder.obs }}</td>
-             <td>{{ formaDate(top.id_det_order.idOrder.createdAt) }}</td>
+            <td>{{ formaDate(top.id_det_order.idOrder.createdAt) }}</td>
             <td>{{ top.id_det_order.idOrder.status }}</td>
 
             <td>
-              <n-button @click="showModals(top._id)" size="large" color=gray>
-                <n-icon size="30" style="margin-top: -6px;">
+              <n-button @click="showModals(top._id)" size="large" color="gray">
+                <n-icon size="30" style="margin-top: -6px">
                   <EyeSharp />
                 </n-icon>
-                <span style="margin-top: 5px; margin-left:4px">ver</span>
-             
+                <span style="margin-top: 5px; margin-left: 4px">ver</span>
               </n-button>
 
               <n-modal
@@ -55,22 +54,23 @@
                       <TH>TOPPING</TH>
                       <TH>CANTIDAD</TH>
                       <TH>PRECIO</TH>
-                      <TH>TOTAL</TH>
                     </tr>
                   </thead>
                   <tbody v-for="top in top2" :key="top._id">
                     <tr v-if="objectId === top._id">
                       <td>{{ top.id_det_order.idProduct.name }}</td>
                       <td>{{ top.id_det_order.idProduct.generalDescr }}</td>
-                      
+
                       <td style="color: blue">{{ top.id_det_order.cant }}</td>
-                      <td style="color: green">{{ top.id_det_order.idProduct.price }}</td>
-                      <td>{{ top.id_topping.name }}</td>
-                      <td style="color: blue">{{ top.id_det_order.cant }}</td>
-                      <td style="color: green">{{ top.id_topping.price }}</td>
-                      <td style="color: red">
-                        {{ (top.id_det_order.cant *top.id_topping.price) + (top.id_det_order.idProduct.price*top.id_det_order.cant) }}
+                      <td style="color: green">
+                        {{ top.id_det_order.idProduct.price }}
                       </td>
+                      <td v-if="top.id_topping">{{ top.id_topping.name }}</td>
+                      <td v-else>Ninguno</td>
+                      <td v-if="top.id_topping" style="color: blue">{{ top.id_det_order.cant }}</td>
+                      <td v-else style="color: blue">0</td>
+                      <td v-if="top.id_topping" style="color: blue">{{ top.id_topping.price }}</td>
+                      <td v-else style="color: green">0</td>
                     </tr>
                   </tbody>
                 </n-table>
@@ -134,11 +134,11 @@ export default {
       const date = new Date(Date(fecha)).toLocaleDateString();
       return date;
     },
-    showModals(id){
-      this.showModal = true
-      this.objectId = id
-      console.log(id)
-    }
+    showModals(id) {
+      this.showModal = true;
+      this.objectId = id;
+      console.log(id);
+    },
   },
 
   computed: {},
@@ -146,7 +146,7 @@ export default {
     return {
       showModal: false,
       show: false,
-      objectId:undefined
+      objectId: undefined,
     };
   },
 };

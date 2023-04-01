@@ -7,12 +7,14 @@ const URL= 'https://food-api-market.onrender.com/api/v1/types';
 export const  useTypeStore=defineStore('types',{
     state:()=>({
         types:[],
+        cargando:false
     }),
     actions:{
         async getTypes(){
            const {data}=await fetchData(URL);
            this.types=data;
            this.sortById();
+           this.cargando=false
         },
         
         getTypeById(id){
@@ -20,8 +22,8 @@ export const  useTypeStore=defineStore('types',{
             return this.types[index]; 
         },
         
-        addType(type){
-            this.types.push(type);
+       async addType(type){
+            // this.types.push(type);
             //Petición HTTP...
              const data={
                 name:type.name,
@@ -32,24 +34,36 @@ export const  useTypeStore=defineStore('types',{
             for (const key in data) {
                 formData.append(key, data[key]);
             }
-             fetchDataImg(URL,'post',formData);
-            
+            this.cargando=true
+           await  fetchDataImg(URL,'post',formData);
+           this.getTypes()
         },
-        updateType(id,newType){ 
+       async  updateType(id,newType){ 
             const index=this.types.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.types[index]=newType;
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            const data={name:newType.name};
+            const data={
+                name:newType.name,
+                image:newType.image
+            };
             console.log(data);
-            fetchData(url,'put',data); ///PUT
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+            this.cargando=true
+            await fetchDataImg(url,'put',formData);
+            this.getTypes()
         },
-        deleteType(id){
+        async deleteType(id){
             const index=this.types.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.types.splice(index,1);
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            fetchData(url,'delete');
+            this.cargando=true
+           await  fetchData(url,'delete');
+           this.getTypes()
         },
         sortById(){
             // this.types.sort((a,b)=>a.id-b.id);

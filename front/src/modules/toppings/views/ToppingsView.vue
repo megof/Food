@@ -20,13 +20,13 @@
           
           <td>{{ topping.name }}</td>
           <td>{{ topping.price }}</td>
-          <td>{{ topping.edo}}</td> <!--*****************Quitar esta negación cuando ya todo corra normal-->
+          <td>{{ topping.edo ? "Activo": "Inactivo"}}</td> <!--*****************Quitar esta negación cuando ya todo corra normal-->
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasToppings"
-              @click="updateAction(topping._id, topping.name)"
+              @click="updateAction(topping._id, topping.name, topping.edo)"
             >
               <i class="bi bi-arrow-repeat me-1"></i
               ><span class="d-none d-md-inline-block">Actualizar</span>
@@ -40,6 +40,8 @@
     </table>
     <LoadingSpinner v-else />
   </div>
+  <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; background-color: aliceblue; width: 10vw; padding: 2vh; border-radius: 20px; box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);">
+      <LoadingSpinner/></div>
 </template>
 
 <script setup>
@@ -55,7 +57,7 @@ import { onMounted } from "vue";
 const useTopping = useToppingStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { toppings } = storeToRefs(useTopping);
+const { toppings, cargando } = storeToRefs(useTopping);
 const { getToppings, deleteTopping } = useTopping;
 
 onMounted(() => {

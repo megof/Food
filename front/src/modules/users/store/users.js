@@ -6,6 +6,7 @@ const URL= 'https://food-api-market.onrender.com/api/v1/users';
 export const  useUserStore=defineStore('users',{
     state:()=>({
         users:[],
+        cargando:false
     }),
     actions:{
         async getUsers(){
@@ -13,6 +14,7 @@ export const  useUserStore=defineStore('users',{
            
            this.users=data.data; 
            this.sortById();
+           this.cargando=false
         },
         
         getUserById(id){
@@ -29,6 +31,10 @@ export const  useUserStore=defineStore('users',{
                 password:user.password,
             } 
             fetchData(URL,'post',data);
+            this.cargando=true
+            await fetchData(URL,'post',data);
+            this.getUsers()
+            console.log("getett")
             
         },
         updateUser(id,newUser){ 
