@@ -15,6 +15,7 @@ export const useCouponsStore = defineStore('coupons', {
     }),
     actions: {
         async getCoupons() {
+            this.cargando=true;
             const {
                 data
             } = await fetchData(URL);
@@ -30,7 +31,7 @@ export const useCouponsStore = defineStore('coupons', {
         },
 
         async addCoupon(coupon) {
-            //this.coupons.push(coupon);
+            this.cargando=true
             console.log(coupon)
             const data = {
                 name: coupon.name,
@@ -41,11 +42,13 @@ export const useCouponsStore = defineStore('coupons', {
                 status: coupon.status,
                 dcto: coupon.dcto
             }
+            this.cargando=true
             console.log("new cupon",data) 
             this.cargando=true
             await fetchData(URL, 'post', data);  
             this.getCoupons()
             console.log(this.coupons)
+            this.cargando=true;
         },
 
         async updateCoupon(id, newCoupon) {

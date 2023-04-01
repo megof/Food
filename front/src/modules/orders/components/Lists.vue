@@ -11,7 +11,7 @@
     </n-button>
 
     <!-- Tabla dinámica -->
-    <n-table class="table table-striped table-hover table-bordered m-4">
+    <n-table class="table bg-white bg-opacity-75 mt-3 w-100">
       <thead>
         <tr>
           <th v-for="(column, index) in columns" :key="index">{{ column }}</th>
