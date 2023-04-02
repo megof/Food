@@ -125,9 +125,9 @@ const couponRoutes = Router();
  * 
  */
 
-couponRoutes.get('/', verifyTokenMiddleware, Coupon.getAll);
+couponRoutes.get('/', Coupon.getAll);
 
-couponRoutes.get('/:id', verifyTokenMiddleware, Coupon.getOne);
+couponRoutes.get('/:id', Coupon.getOne);
 
 /**
  * @swagger
