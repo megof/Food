@@ -15,14 +15,7 @@
                 </div>
                 <span>
                   <span class="open-sans-bold"> Precio Unitario:</span>
-                  ${{
-                    Number(order.price).toLocaleString("es-ES", {
-                      style: "currency",
-                      currency: "COP",
-                      maximumFractionDigits: 0,
-                    })
-                  }}
-                  COP
+                  {{ formaterCop(order.price) }}
                 </span>
               </div>
             </div>
@@ -48,15 +41,7 @@
         </li>
       </div>
       <div class="container text-center my-3">
-        TOTAL A PAGAR: $
-        {{
-          total.toLocaleString("es-ES", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          })
-        }}
-        COP
+        <span> TOTAL A PAGAR: {{ formaterCop(total) }}</span>
       </div>
       <button class="btn btn-primary btn-buy mb-2" @click="buy">PAGAR CARRITO</button>
       <button class="btn btn-primary btn-cancel" @click="removeCart">CANCELAR CARRITO</button>
@@ -100,6 +85,7 @@ export default {
 
   methods: {
     buy() {
+      // this.$router.push({ name: "payment-steps" });
       this.$router.push({ name: "payment-steps" });
     },
 
@@ -109,6 +95,15 @@ export default {
 
     deleteOrderItem(id) {
       deleteItem(id);
+    },
+
+    formaterCop(value) {
+      const formatterPeso = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      });
+      return formatterPeso.format(value);
     },
   },
 };

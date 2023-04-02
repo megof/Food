@@ -16,15 +16,7 @@
       </p>
     </div>
     <div class="card-footer">
-      <h5 class="card-text text-center">
-        ${{
-          product.price.toLocaleString("es-ES", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          })
-        }}
-      </h5>
+      <h5 class="card-text text-center">{{ formaterCop(product.price) }}</h5>
       <div class="cart d-flex justify-content-center align-items-center gap-2">
         <button class="btn btn-primary btn-first" :data-id="product._id" @click="decrement">
           -
@@ -72,6 +64,15 @@ export default {
   },
 
   methods: {
+    formaterCop(value) {
+      const formatterPeso = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      });
+      return formatterPeso.format(value);
+    },
+
     increment() {
       this.units += 1;
     },
