@@ -16,9 +16,8 @@ const router = createRouter({
       path: "/payment",
       name: "payment-steps",
       component: () => import("@/modules/payments/views/PaymentView.vue"),
-      redirect:'/payment/step1',
-      children:[
-       
+      redirect: "/payment/step1",
+      children: [
         {
           path: "step1",
           name: "step-1",
@@ -34,7 +33,7 @@ const router = createRouter({
           name: "step-3",
           component: () => import("@/modules/payments/components/Step3.vue"),
         },
-      ]
+      ],
     },
 
     // ruta admin
