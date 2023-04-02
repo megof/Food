@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import isAuthGuard from "./auth-guard.js";
 // import HomeView from '../views/HomeView.vue'
+// import PaymentView from '../modules/payments/views/PaymentView.vue';
+// import Step1 from '../modules/payments/components/Step1.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +24,7 @@ const router = createRouter({
           path: "step1",
           name: "step-1",
           component: () => import("@/modules/payments/components/Step1.vue"),
+          // component: Step1,
         },
         {
           path: "step2",
