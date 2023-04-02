@@ -1,53 +1,63 @@
 <template>
   <div class="my-component">
+    <form @submit.prevent="processForm">
+      <div class="mb-3">
+        <label for="address" class="form-label fw-bold">Dirección de Envío:</label>
+        <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
+        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label fw-bold">Teléfono:</label>
+        <input type="tel" class="form-control" id="phone">
+      </div>
+      <div class="mb-3">
+        <label for="person" class="form-label fw-bold">Persona Quien Recibe:</label>
+        <input type="text" class="form-control" id="person">
+      </div>
+      <!-- <div class="mb-3">
+        <label for="mensaje" class="fw-bold" >Observaciones:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" cols="50" resize="false"></textarea>
+      </div> -->
+      
     
-    <h2>Gracias por su compra...</h2>
-    <div class="d-flex">
-      <img src="../../../assets/img/B-2.png" alt="" class="w-25 ">
-      <p class="font p-2 fw-bold">
-        Nuestros envíos pueden demorar entre 5 y 30 min dependiendo de la distancia hacia
-        el sitio de entrega. Si pasados 30 minutos aún no cuenta con su pedido, el domicilio
-        es completamente gratis.
-      </p>
-    </div>
-    <button class="btn btn-dark w-100 mt-4" @click="finish">Terminar</button>
-   
-    
-  </div>
-  
+     
+      <button type="submit" class="btn btn-dark w-100">Confirmar</button>
+    </form>
+</div>
 </template>
 
 <script setup>
-  import { onMounted } from 'vue';
+  import {onMounted} from 'vue';
   import { useRouter } from 'vue-router';
   import {useStepsStore} from '../store/steps.js'
   const useSteps=useStepsStore();
   const{prevPinia,nextPinia,stepByNumber}=useSteps;
 
   const router = useRouter();
-  const finish=()=>{
-    router.push('/')
+  const processForm=()=>{
+    //Aquí deberían ir las validaciones si es que hay...
     nextPinia();
-    
+    router.push('/payment/step4');
+    //Se Borra el carrito de compras una vez exitodo este paso.
+    localStorage.removeItem("total");
+    localStorage.removeItem("totalItems");
+    localStorage.removeItem("cart"); //TODO: Ojo procesar antes de borrar si se necesita.
+
   }
 
   onMounted(()=>{
       stepByNumber(3);
   })
-
 </script>
 
 <style scoped>
-  .font{
-    font-weight: 300 !important;
-    font-size: small !important;
-   
-  }
-  
-  .my-component{
+   .my-component{
     font-family:Arial, Helvetica, sans-serif;
     background-color: white;
     padding: 50px;
     border-radius: 10px;
   }
+  textarea {
+  resize: none;
+}
 </style>
