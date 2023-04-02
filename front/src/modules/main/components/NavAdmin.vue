@@ -21,16 +21,13 @@
       />
     </n-dropdown>
   </nav>
-  <OffCanvasAdmin />
 </template>
 
 <script>
-import OffCanvasAdmin from "./OffCanvasAdmin.vue";
 import { NAvatar, NDropdown } from "naive-ui";
 
 export default {
   components: {
-    OffCanvasAdmin,
     NAvatar,
     NDropdown,
   },
