@@ -3,21 +3,23 @@
     <form @submit.prevent="processForm">
       <div class="mb-3">
         <label for="address" class="form-label fw-bold">Dirección de Envío:</label>
-        <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
-        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        <input type="text" class="form-control" id="address" v-model="address">
+        <div  class=" text-danger fw-normal" v-if="!addressOk">Recuerde proporcionarnos la dirreción del envío.</div>
       </div>
       <div class="mb-3">
         <label for="phone" class="form-label fw-bold">Teléfono:</label>
-        <input type="tel" class="form-control" id="phone">
+        <input type="tel" class="form-control" id="phone" v-model="phone">
+        <div  class=" text-danger fw-normal" v-if="!phoneOk">No olvide ingresar su teléfono.</div>
       </div>
       <div class="mb-3">
-        <label for="person" class="form-label fw-bold">Persona Quien Recibe:</label>
-        <input type="text" class="form-control" id="person">
+        <label for="name" class="form-label fw-bold">Persona Quien Recibe:</label>
+        <input type="text" class="form-control" id="name" v-model="name">
+        <div  class=" text-danger fw-normal" v-if="!nameOk">Por favor llene este campo.</div>
       </div>
-      <!-- <div class="mb-3">
-        <label for="mensaje" class="fw-bold" >Observaciones:</label>
-        <textarea id="mensaje" name="mensaje" rows="4" cols="50" resize="false"></textarea>
-      </div> -->
+      <div class="mb-3">
+        <label for="mensaje" class="fw-bold mb-2 d-block" >Observaciones:</label>
+        <textarea id="mensaje" name="message" rows="4" cols="50" v-model="message"></textarea>
+      </div>
       
     
      
@@ -27,26 +29,85 @@
 </template>
 
 <script setup>
-  import {onMounted} from 'vue';
+  import fetchData from '../../../helpers/fetchData.js';
+  import {ref,onMounted} from 'vue';
   import { useRouter } from 'vue-router';
   import {useStepsStore} from '../store/steps.js'
   const useSteps=useStepsStore();
   const{prevPinia,nextPinia,stepByNumber}=useSteps;
 
   const router = useRouter();
-  const processForm=()=>{
+  //Defino las variables reactivas del formulario.
+  const address=ref('');
+  const phone=ref('');
+  const name=ref('');
+  const addressOk=ref(true);
+  const phoneOk=ref(true);
+  const nameOk=ref(true);
+  const message=ref('');
+  const total=ref('');
+
+  const validateForm=()=>{
+    let flag=true;
+    addressOk.value=true;
+    phoneOk.value=true;
+    nameOk.value=true;
+
+    if(address.value===''  ){
+      flag=false;
+      addressOk.value=false;
+    }
+
+    if(phone.value===''){
+      flag=false;
+      phoneOk.value=false;
+    }
+
+    if( name.value===''){
+      flag=false;
+      nameOk.value=false;
+    }
+
+    return flag;
+  }
+  const processForm=async()=>{
     //Aquí deberían ir las validaciones si es que hay...
-    nextPinia();
-    router.push('/payment/step4');
-    //Se Borra el carrito de compras una vez exitodo este paso.
-    localStorage.removeItem("total");
-    localStorage.removeItem("totalItems");
-    localStorage.removeItem("cart"); //TODO: Ojo procesar antes de borrar si se necesita.
+    const rightInformation=validateForm();
+    if(rightInformation){
+        //Aquí armo la data que voy a llevar a la peticiones.
+        const order={
+        client:name.value,
+        address:address.value,
+        phone:phone.value,
+        obs:message.value || 'Ninguno',
+        total:total.value,
+        status:'En preparación'
+      }
+
+      console.log(order)
+      fetchData("https://food-api-market.onrender.com/api/v1/orders",'post',order);
+
+      nextPinia();
+      router.push('/payment/step4');
+      //Se Borra el carrito de compras una vez exitodo este paso.
+      localStorage.removeItem("total");
+      localStorage.removeItem("totalItems");
+      localStorage.removeItem("cart"); //TODO: Ojo procesar antes de borrar si se necesita.
+
+    }
+   
+
+
+
+
+
+   
 
   }
 
   onMounted(()=>{
       stepByNumber(3);
+      total.value=Number(localStorage.getItem("total"));
   })
 </script>
 

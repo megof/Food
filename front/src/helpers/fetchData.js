@@ -17,9 +17,11 @@ const fetchData = async (
       data,
       headers,
     });
+    console.log("Petición correcta");
     return res;
   } catch (error) {
     console.log(error);
+    console.log(data);
     Swal.fire("Error", `${error}`, "error");
   }
 };
