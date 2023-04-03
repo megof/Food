@@ -52,3 +52,55 @@ body {
   overflow: hidden;
   text-align: center !important;
 }
+
+@media (max-width: 992px) {
+  .table {
+    max-width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center !important;
+    font-size: 0.8rem;
+  }
+  .table button {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.8rem;
+    margin: 0.3rem auto !important;
+  }
+  .table button i {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    max-width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center !important;
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .table {
+    max-width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center !important;
+    font-size: 0.5rem;
+  }
+
+  .table button {
+    width: 100%;
+    font-size: 0.5rem;
+    padding: 0.4rem;
+    margin: 0.2rem auto !important;
+  }
+  .table button > i {
+    font-size: 0.4rem !important;
+  }
+}
