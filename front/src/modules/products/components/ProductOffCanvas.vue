@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="price" class="mb-2">Precio:</label>
-                        <input type="number" class="form-control w-100" id="price" placeholder="Ingrese la descripción del equipo." v-model="price">
+                        <input type="number" class="form-control w-100" id="price" placeholder="Ingrese el precio del producto." v-model="price">
                     </div>
                     <div class="form-group mb-2">
                         <label for="image" class="mb-2">Cargue una imagen:</label>
