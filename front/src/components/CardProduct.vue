@@ -100,8 +100,8 @@ export default {
   opacity: 0.9;
   border: 0.125rem solid #e1e1e1;
   box-shadow: 0 0.188rem 0.188rem 0 rgba(0, 0, 0, 0.07);
-  transition: 0.5s ease-in-out;
   overflow: hidden;
+  transition: 0.5s ease-in-out;
 }
 
 .card:hover {
@@ -125,6 +125,13 @@ export default {
   font-family: "Bungee", cursive !important;
   font-size: 0.8rem;
   font-weight: 300;
+}
+
+.card img {
+  width: 300px !important;
+  height: 225px !important;
+  max-width: 100% !important;
+  max-height: auto !important;
 }
 
 .btn-first {
