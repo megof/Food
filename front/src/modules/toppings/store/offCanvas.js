@@ -4,13 +4,15 @@ export const  useOffCanvasStore=defineStore('offcanvas',{
         create:true,
         id:null,
         name:'',
+        edo:null
         
     }),
     actions:{
-        updateAction(id,name){
+        updateAction(id,name, edo){
             this.create=false
             this.id=id
             this.name=name
+            this.edo = edo
         },
         createAction(){
             this.create=true

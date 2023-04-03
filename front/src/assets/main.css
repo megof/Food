@@ -1,46 +1,25 @@
 :root {
-  --color-1: #ec1c24;
-  --color-2: #fdbd10;
-  --color-3: #0066b2;
-  --color-4: #ed7902;
-  --color5: #a90b30;
-  --white: #fff;
-  --black: #000;
-}
-
-body {
-  font-family: "Bungee", cursive;
-  background-color: #f2f3f8;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-
-.open-sans {
-  font-family: "Open Sans";
-}
-
-.open-sans-bold {
-  font-family: "Open Sans";
-  font-weight: 500;
-}
-
-.shopping-active {
-  animation: pulse-black 1.25s ease infinite;
-}
-
-@keyframes pulse-black {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    --color-1: #ec1c24;
+    --color-2: #fdbd10;
+    --color-3: #0066b2;
+    --color-4: #ed7902;
+    --color5: #a90b30;
+    --white: #fff;
+    --black: #000;
   }
-
-  70% {
-    transform: scale(1.2);
-    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  
+  body {
+    font-family: "Bungee", cursive;
+    background-color: #f2f3f8;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
-
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  
+  .open-sans {
+    font-family: "Open Sans";
   }
-}
+  
+  .open-sans-bold {
+    font-family: "Open Sans";
+    font-weight: 500;
+  }

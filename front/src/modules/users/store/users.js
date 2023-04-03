@@ -6,13 +6,22 @@ const URL= 'https://food-api-market.onrender.com/api/v1/users';
 export const  useUserStore=defineStore('users',{
     state:()=>({
         users:[],
+        vacio:false
     }),
     actions:{
         async getUsers(){
             const {data}=await fetchData(URL);
            
-           this.users=data.data; 
-           this.sortById();
+            if(data.length ===0){
+                console.log(data)
+                this.vacio = true
+                this.users = []
+            }else{
+                console.log(data)
+                this.vacio = false
+                this.users = data.data 
+            }
+                this.sortById();
         },
         
         getUserById(id){
@@ -20,18 +29,21 @@ export const  useUserStore=defineStore('users',{
             return this.users[index]; 
         },
         
-        addUser(user){
-            this.users.push(user);
+        async addUser(user){
+            //this.users.push(user);
             //Petición HTTP...
             const data={
                 name:user.name,
                 username:user.username,
                 password:user.password,
             } 
-            fetchData(URL,'post',data);
+            this.users = []
+            await fetchData(URL,'post',data);
+            this.getUsers()
+            console.log("getett")
             
         },
-        updateUser(id,newUser){ 
+        async updateUser(id,newUser){ 
             const index=this.users.map(el=>el._id).indexOf(id); //El índice que debo alterar.
             this.users[index]=newUser;
             //Petición HTTP...
@@ -42,18 +54,20 @@ export const  useUserStore=defineStore('users',{
                 password:newUser.password, 
                 state: newUser.state
             };
-            console.log(data);
-            fetchData(url,'put',data); ///PUT
+            //console.log(data);
+            this.users = []
+            await fetchData(url,'put',data); ///PUT 
+            this.getUsers() 
         },
-        deleteUser(id){
+        async deleteUser(id){
             const index=this.users.map(el=>el._id).indexOf(id); //El índice que debo borrar.
             this.users.splice(index,1);
             //Petición HTTP...
             const url=`${URL}/${id}`;
-            fetchData(url,'delete');
+            await fetchData(url,'delete');
         },
         sortById(){
-            // this.users.sort((a,b)=>a.id-b.id);
+             //this.users.sort((a,b)=>a.id-b.id);
         }
 
     }

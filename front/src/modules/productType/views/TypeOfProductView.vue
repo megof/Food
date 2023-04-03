@@ -4,7 +4,7 @@
     <TableTitle title="Tipos de Producto" id="offcanvasTypes" />
     <TypeOfProductOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="types.length !== 0">
+    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="types.length !==0 && vacio === false">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
@@ -35,7 +35,8 @@
         </tr>
       </tbody>
     </table>
-    <LoadingSpinner v-else />
+    <LoadingSpinner v-if="types.length ===0 && vacio === false"/> 
+    <EmptyElemenst title="types" v-if="types.length ===0 && vacio === true"  />
   </div>
 </template>
 
@@ -43,6 +44,7 @@
 import TableTitle from "../components/TableTitle.vue";
 import TypeOfProductOffCanvas from "../components/TypeOfProductOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
+import EmptyElemenst from "../components/EmptyElements.vue"
 
 import { useTypeStore } from "../store/types.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
@@ -52,7 +54,7 @@ import { onMounted } from "vue";
 const useType = useTypeStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { types } = storeToRefs(useType);
+const { types, vacio } = storeToRefs(useType);
 const { getTypes, deleteType } = useType;
 
 onMounted(() => {
