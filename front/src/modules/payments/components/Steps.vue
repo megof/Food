@@ -56,10 +56,10 @@
   </template>
   
   <script>
-  import { defineComponent, ref } from "vue";
-  import { MdArrowRoundBack, MdArrowRoundForward } from "@vicons/ionicons4";
-  import {useStepsStore} from '../store/steps.js';
-  import {storeToRefs} from 'pinia';
+import { defineComponent, ref } from "vue";
+import { MdArrowRoundBack, MdArrowRoundForward } from "@vicons/ionicons4";
+import {useStepsStore} from '../store/steps.js';
+import {storeToRefs} from 'pinia';
   
   export default defineComponent({
     components: {

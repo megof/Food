@@ -16,15 +16,7 @@
       </p>
     </div>
     <div class="card-footer">
-      <h5 class="card-text text-center">
-        ${{
-          product.price.toLocaleString("es-ES", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          })
-        }}
-      </h5>
+      <h5 class="card-text text-center">{{ formaterCop(product.price) }}</h5>
       <div class="cart d-flex justify-content-center align-items-center gap-2">
         <button class="btn btn-primary btn-first" :data-id="product._id" @click="decrement">
           -
@@ -43,7 +35,7 @@
       <button
         class="btn btn-primary btn-first text-center w-100 my-3"
         :id="product._id"
-        @click="addToCart(product, units)"
+        @click="addToCart({ ...product }, units)"
       >
         Agregar Al Carrito
       </button>
@@ -72,6 +64,15 @@ export default {
   },
 
   methods: {
+    formaterCop(value) {
+      const formatterPeso = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      });
+      return formatterPeso.format(value);
+    },
+
     increment() {
       this.units += 1;
     },
@@ -89,9 +90,10 @@ export default {
 
 <style scoped>
 .card {
-  word-wrap: break-word;
+  word-break: keep-all;
   width: 20rem !important;
-  height: 33rem !important;
+  height: 35rem !important;
+  max-height: 40rem !important;
   opacity: 0.9;
   border: 0.125rem solid #e1e1e1;
   box-shadow: 0 0.188rem 0.188rem 0 rgba(0, 0, 0, 0.07);
@@ -103,7 +105,6 @@ export default {
   transform: scale(1.05);
   opacity: 1;
   filter: contrast(120%);
-  cursor: pointer;
 }
 
 .btn-first {
@@ -121,9 +122,5 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
 }
 </style>
