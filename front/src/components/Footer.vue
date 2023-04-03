@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-header">
       <div class="container-col-12 footer-content text-center d-flex justify-content-center">
-        <div class="row">
+        <div class="row mb-5">
           <div
             class="col-md-12 text-center d-flex gap-1 justify-content-center align-items-center flex-md-row flex-column"
           >

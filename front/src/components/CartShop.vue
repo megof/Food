@@ -1,27 +1,26 @@
 <template>
-  <ul class="nav flex-column">
+  <ul class="nav flex-column" v-if="orders.length > 0">
     <ul class="list-group list-group">
       <div v-for="order in orders" :key="order._id">
         <li class="list-group-item d-flex align-items-center">
           <div class="flex-grow-1">
             <div class="horizontal-item">
-              <img class="img-small" :src="order.image ? order.image.secure_url : ''" />
+              <div class="container container-img">
+                <img class="img-fluid img-small" :src="order.image ? order.image.secure_url : ''" />
+              </div>
 
               <div class="vertical-item">
-                <div class="fw-light">{{ order.units }} {{ order.name }}</div>
-                Precio Unitario:
-                {{
-                  Number(order.price).toLocaleString("es-ES", {
-                    style: "currency",
-                    currency: "COP",
-                    maximumFractionDigits: 0,
-                  })
-                }}
-                COP
+                <div class="open-sans-bold">
+                  <span>{{ order.units }} {{ order.name }}</span>
+                </div>
+                <span>
+                  <span class="open-sans-bold"> Precio Unitario:</span>
+                  {{ formaterCop(order.price) }}
+                </span>
               </div>
             </div>
           </div>
-          <button @click="deleteOrderItem(order.id)" type="button" class="btn btn-danger ms-2">
+          <button @click="deleteOrderItem(order._id)" type="button" class="btn btn-danger ms-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -42,22 +41,29 @@
         </li>
       </div>
       <div class="container text-center my-3">
-        TOTAL A PAGAR: $
-        {{
-          total.toLocaleString("es-ES", {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0,
-          })
-        }}
-        COP
+        <span> TOTAL A PAGAR: {{ formaterCop(total) }}</span>
       </div>
-      <button class="btn btn-primary btn-buy" @click="buy">PAGAR CARRITO</button>
+      <button class="btn btn-primary btn-buy mb-2" @click="buy">PAGAR CARRITO</button>
+      <button class="btn btn-primary btn-cancel" @click="removeCart">CANCELAR CARRITO</button>
     </ul>
   </ul>
+
+  <div class="container text-center" v-else>
+    <div class="row">
+      <div class="col-md-12 my-4">
+        <div class="alert alert-danger" role="alert">No hay compras en el carrito</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { useCartStore } from "../stores/cart";
+
+const useCart = useCartStore();
+
+const { cancelOrders, deleteItem } = useCart;
+
 export default {
   props: {
     orders: {
@@ -79,7 +85,25 @@ export default {
 
   methods: {
     buy() {
+      // this.$router.push({ name: "payment-steps" });
       this.$router.push({ name: "payment-steps" });
+    },
+
+    removeCart() {
+      cancelOrders();
+    },
+
+    deleteOrderItem(id) {
+      deleteItem(id);
+    },
+
+    formaterCop(value) {
+      const formatterPeso = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      });
+      return formatterPeso.format(value);
     },
   },
 };
@@ -90,12 +114,17 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 1rem;
+}
+
+.container-img {
+  max-width: 50%;
+  object-fit: cover;
 }
 
 .img-small {
-  width: 20%;
-  height: 20%;
-  margin-right: 15px;
+  margin-right: 0.938rem;
+  border-radius: 0.25rem;
 }
 
 .btn-buy,

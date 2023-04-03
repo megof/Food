@@ -1,6 +1,6 @@
 <template>
   <div
-    class="offcanvas offcanvas-start bg-dark z-2 container-fluid"
+    class="offcanvas offcanvas-start bg-dark z-2"
     data-bs-scroll="true"
     data-bs-backdrop="false"
     tabindex="-1"
@@ -77,18 +77,17 @@ a {
   text-decoration: none;
   color: #fff;
   font-size: 1.5rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   border-radius: 0.5rem;
   width: 100%;
   margin-bottom: 0.5rem;
-  /* border-bottom: 1px solid #fff; */
   transition: 0.3s ease-in-out;
 }
 
 a > span {
   text-align: center;
   font-size: 1.5rem;
-  margin: 0 0.5rem;
+  margin: 0 0.25rem;
 }
 
 a:hover {

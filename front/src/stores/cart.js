@@ -8,25 +8,39 @@ export const useCartStore = defineStore("cart", {
   }),
 
   actions: {
-    addItem(product, units) {
+    addItem(product = {}, units = 0) {
       product.units = units;
+
+      this.itemsCart.push({ ...product, units });
+
       this.total += product.price * product.units;
-      const exist = this.itemsCart.find((item) => item._id === product._id);
-      if (exist) {
-        exist.units += product.units;
-        // this.total += product.price * product.units;
-      } else {
-        this.itemsCart.push(product);
-        // this.total += product.price * product.units;
-      }
-
-      // this.$state.itemsCart.push(product);
-
       this.totalItems += units;
+      localStorage.setItem("total", this.total);
+      localStorage.setItem("totalItems", this.totalItems);
+      localStorage.setItem("cart", JSON.stringify(this.itemsCart));
+    },
+
+    deleteItem(id) {
+      // console.log("deleteItem");
+      const index = this.itemsCart.findIndex((item) => item._id === id);
+
+      this.total -= this.itemsCart[index].price * this.itemsCart[index].units;
+      this.totalItems -= this.itemsCart[index].units;
+      this.itemsCart.splice(index, 1);
 
       localStorage.setItem("total", this.total);
       localStorage.setItem("totalItems", this.totalItems);
       localStorage.setItem("cart", JSON.stringify(this.itemsCart));
+    },
+
+    cancelOrders() {
+      // console.log("deleteOrders");
+      this.itemsCart = [];
+      this.total = 0;
+      this.totalItems = 0;
+      localStorage.removeItem("cart");
+      localStorage.removeItem("total");
+      localStorage.removeItem("totalItems");
     },
   },
 });

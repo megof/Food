@@ -2,6 +2,10 @@
     <n-space vertical>
       <n-steps vertical :current="(current )" :status="currentStatus">
         <n-step
+          title="Total de la Compra:"
+          description="Observe su total de compra e introduzca un cupón de descuento si lo tiene."
+        />
+        <n-step
           title="Forma de Pago:"
           description="Llene los datos para el pago electrónico."
         />
@@ -33,7 +37,7 @@
             </template>
           </n-button>
         </n-button-group> -->
-        <n-radio-group
+        <!-- <n-radio-group
           v-model:value="currentStatus"
           size="medium"
           name="vertical"
@@ -50,7 +54,8 @@
           <n-radio-button value="finish">
             Finish
           </n-radio-button>
-        </n-radio-group>
+        </n-radio-group> -->
+        
       </n-space>
     </n-space>
   </template>
@@ -79,7 +84,7 @@
         next() {
           if (currentRef.value === null)
             currentRef.value = 1;
-          else if (currentRef.value >= 3)
+          else if (currentRef.value >= 4)
             currentRef.value = null;
           else
             currentRef.value++;
@@ -88,7 +93,7 @@
           if (currentRef.value === 0)
             currentRef.value = null;
           else if (currentRef.value === null)
-            currentRef.value = 5;
+            currentRef.value = 4;
           else
             currentRef.value--;
         }
