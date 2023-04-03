@@ -2,16 +2,8 @@
   <div
     class="container w-300 h-120 d-flex flex-column justify-content-center align-items-center p-2"
   >
-    <!-- Botón para crear -->
-    <n-button color="#ed7902" v-if="!top2" @click="show = true">
-      <n-icon>
-        <Create />
-      </n-icon>
-      Crear
-    </n-button>
-
     <!-- Tabla dinámica -->
-    <n-table class="table bg-white bg-opacity-75 mt-3 w-100">
+    <table class="table bg-white bg-opacity-75 mt-3 w-100">
       <thead>
         <tr>
           <th v-for="(column, index) in columns" :key="index">{{ column }}</th>
@@ -79,7 +71,8 @@
           </tr>
         </template>
       </tbody>
-    </n-table>
+    </table>
+
   </div>
 </template>
 
@@ -115,6 +108,7 @@ export default {
     SyncCircle,
     NDrawer,
     NDrawerContent,
+    
   },
   props: {
     columns: {

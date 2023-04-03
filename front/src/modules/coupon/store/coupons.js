@@ -11,7 +11,8 @@ const URL = 'https://food-api-market.onrender.com/api/v1/coupon'
 export const useCouponsStore = defineStore('coupons', {
     state: () => ({
         coupons: [],
-        cargando:false
+        cargando:false,
+        vacio:false
     }),
     actions: {
         async getCoupons() {
@@ -23,6 +24,9 @@ export const useCouponsStore = defineStore('coupons', {
             console.log(data)
             this.sortById();
             this.cargando=false
+            if(this.coupons === null){
+                this.vacio = true
+            }
         },
 
         getCouponById(id) {

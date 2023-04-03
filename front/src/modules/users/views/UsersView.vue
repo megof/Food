@@ -3,7 +3,7 @@
     <TableTitle title="USUARIOS" id="offcanvasTypes" />
     <UserOffCanvas/>
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="true">
+    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="users.length !== 0">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr> 
@@ -33,8 +33,6 @@
     </table>
     <LoadingSpinner v-else />
   </div>
-  <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; width: 10vw; padding: 2vh; border-radius: 20px;">
-      <LoadingSpinner/></div>
 </template>
 
 <script setup> 
