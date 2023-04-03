@@ -93,6 +93,7 @@ export default {
   word-break: keep-all;
   width: 20rem !important;
   height: 35rem !important;
+  max-height: 40rem !important;
   opacity: 0.9;
   border: 0.125rem solid #e1e1e1;
   box-shadow: 0 0.188rem 0.188rem 0 rgba(0, 0, 0, 0.07);
@@ -104,7 +105,6 @@ export default {
   transform: scale(1.05);
   opacity: 1;
   filter: contrast(120%);
-  cursor: pointer;
 }
 
 .btn-first {

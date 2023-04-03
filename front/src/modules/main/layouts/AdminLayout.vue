@@ -28,7 +28,6 @@ export default {
   position: sticky !important;
   overflow: hidden;
   transition: 0.3s ease !important;
-  height: 100vh !important;
 }
 
 .show {

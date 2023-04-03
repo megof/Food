@@ -40,7 +40,7 @@ const router = createRouter({
           path: "step4",
           name: "step-4",
           component: () => import("@/modules/payments/components/Step4.vue"),
-        }
+        },
       ],
     },
 
