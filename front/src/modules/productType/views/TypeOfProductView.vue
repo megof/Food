@@ -8,16 +8,14 @@
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
-          
           <th scope="col">Nombre</th>
           <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="type in types" :key="type.id">
-          
           <td>{{ type.name }}</td>
-          
+
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"
@@ -25,11 +23,10 @@
               data-bs-target="#offcanvasTypes"
               @click="updateAction(type._id, type.name)"
             >
-              <i class="bi bi-arrow-repeat me-1"></i
-              ><span class="d-none d-md-inline-block">Actualizar</span>
+              <i class="bi bi-arrow-repeat me-1"></i>
             </button>
             <button class="btn btn-sm btn-danger" @click="deleteType(type._id)">
-              <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
+              <i class="bi bi-trash me-1"></i>
             </button>
           </td>
         </tr>

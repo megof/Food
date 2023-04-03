@@ -3,10 +3,7 @@
     <TableTitle title="Cupones" id="offcanvasTypes" />
     <CouponsOffCanvas />
 
-    <table
-      class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
-      v-if="true"
-    >
+    <table class="table bg-white bg-opacity-75 mt-3 w-100 text-center" v-if="true">
       <thead>
         <tr>
           <th scope="col">Nombre</th>
@@ -46,15 +43,10 @@
                 )
               "
             >
-              <i class="bi bi-arrow-repeat me-1"></i
-              ><span class="d-none d-md-inline-block">Actualizar</span>
+              <i class="bi bi-arrow-repeat"></i>
             </button>
-            <button
-              class="btn btn-sm btn-danger"
-              @click="deleteCoupon(coupon._id)"
-            >
-              <i class="bi bi-trash me-1"></i
-              ><span class="d-none d-md-inline-block">Borrar</span>
+            <button class="btn btn-sm btn-danger" @click="deleteCoupon(coupon._id)">
+              <i class="bi bi-trash me-1"></i>
             </button>
           </td>
         </tr>
@@ -87,8 +79,8 @@ onMounted(() => {
 
 function formatDate(fecha) {
   const date = new Date(fecha);
-  return date.toISOString().slice(0,10);
-  }
+  return date.toISOString().slice(0, 10);
+}
 </script>
 
 <style scoped></style>

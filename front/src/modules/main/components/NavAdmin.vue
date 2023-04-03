@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-dark bg-dark d-flex justify-content-between z-3 p-3">
+  <nav class="navbar navbar-dark bg-dark d-flex justify-content-between p-3">
     <button
       class="navbar-toggler"
       type="button"

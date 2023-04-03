@@ -44,3 +44,11 @@ body {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
+
+.table {
+  max-width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-align: center !important;
+}

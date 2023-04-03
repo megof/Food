@@ -2,9 +2,9 @@
   <div>
     <div class="container-md container-fluid mt-5">
       <!-- <h1 class="text-center my-4">Productos</h1> -->
-      <TableTitle title="Productos" id="offcanvasProduct"/>
+      <TableTitle title="Productos" id="offcanvasProduct" />
       <!-- Filtro de búsqueda -->
-     
+
       <div class="mt-3 d-flex justify-content-center">
         <button
           @click="productCharacterization(0, 0)"
@@ -26,7 +26,7 @@
       <!-- Fin del filtro de búsqueda -->
 
       <ProductOffCanvas />
-      <table class="table  mt-3 table-bordered" v-if="products.length !== 0">
+      <table class="table mt-3 table-bordered" v-if="products.length !== 0">
         <thead>
           <tr>
             <!-- <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
           <tr v-for="product in characterizedProducts" :key="product.id">
-          <!-- <tr v-for="product in products" :key="product.id"> -->
+            <!-- <tr v-for="product in products" :key="product.id"> -->
             <!-- <td class="d-none d-sm-table-cell">{{ product._id }}</td>
             <td class="d-none d-sm-table-cell">{{ product.id_tp_product.name }}</td> -->
             <td>{{ product.name }}</td>
@@ -50,7 +50,7 @@
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
-            <td>{{ product.edo}}</td>
+            <td>{{ product.edo }}</td>
             <td>
               <button
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
@@ -58,11 +58,10 @@
                 data-bs-target="#offcanvasProduct"
                 @click="updateAction(product._id, product.name)"
               >
-                <i class="bi bi-arrow-repeat me-1"></i
-                ><span class="d-none d-md-inline-block">Actualizar</span>
+                <i class="bi bi-arrow-repeat me-1"></i>
               </button>
               <button class="btn btn-sm btn-danger" @click="deleteProduct(product._id)">
-                <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
+                <i class="bi bi-trash me-1"></i>
               </button>
             </td>
           </tr>
@@ -81,7 +80,7 @@ import LoadingSpinner from "../components/LoadingSpinner.vue";
 import { useProductsStore } from "../store/products.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
-import { ref, onMounted,watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const useProducts = useProductsStore();
 const useOffCanvas = useOffCanvasStore();
@@ -98,16 +97,16 @@ const { getProducts, deleteProduct } = useProducts;
 const characterizedProducts = ref(products.value);
 
 const clearButtons = () => {
-  const idTypeProducts=productType.value.map(el=>el._id);
-  
-  for (let i = 0; i <productType.value.length; i++) {
+  const idTypeProducts = productType.value.map((el) => el._id);
+
+  for (let i = 0; i < productType.value.length; i++) {
     // console.log(idTypeProduct[i])
     document.getElementById(idTypeProducts[i]).classList.remove("active");
   }
-  document.getElementById(0).classList.remove("active")
+  document.getElementById(0).classList.remove("active");
 };
 const productCharacterization = (idTypeProduct, idButton) => {
-   clearButtons();
+  clearButtons();
   if (idTypeProduct !== 0) {
     characterizedProducts.value = products.value.filter(
       (product) => product.id_tp_product._id === idTypeProduct
@@ -117,9 +116,9 @@ const productCharacterization = (idTypeProduct, idButton) => {
   }
   document.getElementById(idButton).classList.add("active");
 };
-watch(products,(newProducts,oldProducts)=>{
-  characterizedProducts.value=newProducts;
-})
+watch(products, (newProducts, oldProducts) => {
+  characterizedProducts.value = newProducts;
+});
 onMounted(() => {
   getProducts();
 });

@@ -8,7 +8,6 @@
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
-          
           <th scope="col">Nombre</th>
           <th scope="col">Precio</th>
           <th scope="col">Estado</th>
@@ -17,10 +16,10 @@
       </thead>
       <tbody>
         <tr v-for="topping in toppings" :key="topping.id">
-          
           <td>{{ topping.name }}</td>
           <td>{{ topping.price }}</td>
-          <td>{{ topping.edo}}</td> <!--*****************Quitar esta negación cuando ya todo corra normal-->
+          <td>{{ topping.edo }}</td>
+          <!--*****************Quitar esta negación cuando ya todo corra normal-->
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"
@@ -28,11 +27,10 @@
               data-bs-target="#offcanvasToppings"
               @click="updateAction(topping._id, topping.name)"
             >
-              <i class="bi bi-arrow-repeat me-1"></i
-              ><span class="d-none d-md-inline-block">Actualizar</span>
+              <i class="bi bi-arrow-repeat me-1"></i>
             </button>
             <button class="btn btn-sm btn-danger" @click="deleteTopping(topping._id)">
-              <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
+              <i class="bi bi-trash me-1"></i>
             </button>
           </td>
         </tr>
