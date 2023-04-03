@@ -32,9 +32,13 @@
   import fetchData from '../../../helpers/fetchData.js';
   import {ref,onMounted} from 'vue';
   import { useRouter } from 'vue-router';
-  import {useStepsStore} from '../store/steps.js'
+  import {useStepsStore} from '../store/steps.js';
+  import {useCartStore} from '@/stores/cart.js';
+  const useCart=useCartStore();
+  const {cancelOrders}=useCart;
   const useSteps=useStepsStore();
   const{prevPinia,nextPinia,stepByNumber}=useSteps;
+  
 
   const router = useRouter();
   //Defino las variables reactivas del formulario.
@@ -85,14 +89,12 @@
       }
 
       console.log(order)
-      fetchData("https://food-api-market.onrender.com/api/v1/orders",'post',order);
+      // fetchData("https://food-api-market.onrender.com/api/v1/orders",'post',order);
 
       nextPinia();
       router.push('/payment/step4');
       //Se Borra el carrito de compras una vez exitodo este paso.
-      localStorage.removeItem("total");
-      localStorage.removeItem("totalItems");
-      localStorage.removeItem("cart"); //TODO: Ojo procesar antes de borrar si se necesita.
+      cancelOrders();
 
     }
    
