@@ -36,6 +36,11 @@ const router = createRouter({
           name: "step-3",
           component: () => import("@/modules/payments/components/Step3.vue"),
         },
+        {
+          path: "step4",
+          name: "step-4",
+          component: () => import("@/modules/payments/components/Step4.vue"),
+        }
       ],
     },
 
