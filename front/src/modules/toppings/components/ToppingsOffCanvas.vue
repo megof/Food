@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="price" >Precio:</label>
-                        <input type="number" class="form-control mt-2" id="price" placeholder="Ingrese el precio" v-model="price">
+                        <input type="text" class="form-control mt-2" id="price" placeholder="Ingrese el precio" v-model="price">
                         <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
                     </div>
                     <!-- <div class="form-group mb-2">

@@ -46,19 +46,15 @@
                 )
               "
             >
-           <n-icon size="30" style="margin-top: -6px">
-                  <Create />
-                </n-icon>
-                <span style="margin-top: 5px; margin-left: 4px">Actualizar</span>
+              <i class="bi bi-arrow-repeat me-1"></i
+              ><span class="d-none d-md-inline-block">Actualizar</span>
             </button>
             <button
               class="btn btn-sm btn-danger"
               @click="deleteCoupon(coupon._id)"
             >
-             <n-icon size="30" style="margin-top: -6px">
-                  <TrashSharp />
-                </n-icon>
-                <span style="margin-top: 5px; margin-left: 4px">Borrar</span>
+              <i class="bi bi-trash me-1"></i
+              ><span class="d-none d-md-inline-block">Borrar</span>
             </button>
           </td>
         </tr>
@@ -77,8 +73,7 @@ import TableTitle from "../components/TableTitle.vue";
 import CouponsOffCanvas from "../components/CouponsOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
 import EmptyElemenst from "../components/EmptyElements.vue";
-import {NIcon} from "naive-ui";
-import { TrashSharp, Create } from "@vicons/ionicons5";
+
 import { useCouponsStore } from "../store/coupons.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";

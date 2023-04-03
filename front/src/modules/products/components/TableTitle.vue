@@ -6,18 +6,17 @@
            class="btn btn-outline-dark d-flex align-items-center"
            data-bs-toggle="offcanvas"
            :data-bs-target='`#${id}`'
-           ><n-icon size="30" style="margin-top: -6px">
-                  <AddCircleOutline />
-                </n-icon>
-                <span style="margin-top: 5px; margin-left: 4px">Agregar {{title}}</span>
+           ><i class="bi bi-plus-circle-fill me-2 mb-3" style="font-size: 1.3em;"></i><span
+           class="d-none d-md-inline-block ">Agregar
+           {{
+           title
+           }}</span>
            </button>
   </div>
 </template>
 
 <script setup>
 import {useOffCanvasStore} from '../store/offCanvas.js'
-import {NIcon} from "naive-ui";
-import { AddCircleOutline } from "@vicons/ionicons5";
 const useOffCanvas=useOffCanvasStore();
 const {createAction}=useOffCanvas;
     const props=defineProps({

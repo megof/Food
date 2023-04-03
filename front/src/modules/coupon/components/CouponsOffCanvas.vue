@@ -73,8 +73,6 @@
                   id="name"
                   placeholder="Ingrese el descuento del cupón"
                   v-model="dcto"
-                  min="0"
-                  max="100"
                 />
                 <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
               </div>

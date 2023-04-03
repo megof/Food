@@ -7,10 +7,8 @@
       data-bs-toggle="offcanvas"
       :data-bs-target="`#${id}`"
     >
-     <n-icon size="30" style="margin-top: -6px">
-                  <AddCircleOutline />
-                </n-icon>
-                <span style="margin-top: 5px; margin-left: 4px">Agregar {{title}}</span>
+      <i class="bi bi-person-plus-fill me-2"></i
+      ><span class="d-none d-md-inline-block">Agregar {{ title }}</span>
     </button>
   </div>
 </template>
@@ -19,10 +17,6 @@
 import { useOffCanvasStore } from "../store/offCanvas.js";
 const useOffCanvas = useOffCanvasStore();
 const { createAction } = useOffCanvas;
-
-import {NIcon} from "naive-ui";
-import { AddCircleOutline } from "@vicons/ionicons5";
-
 const props = defineProps({
   title: {
     type: String,
