@@ -26,7 +26,10 @@
       <!-- Fin del filtro de búsqueda -->
 
       <ProductOffCanvas />
-      <table class="table mt-3 table-bordered" v-if="products.length !== 0">
+      <table
+        class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
+        v-if="products.length !== 0 && vacio === false"
+      >
         <thead>
           <tr>
             <!-- <th scope="col" class="d-none d-sm-table-cell col-1">Id</th>
@@ -50,24 +53,50 @@
                  <td class=" d-none d-sm-table-cell">{{product.generalDescription}}</td> -->
             <td>{{ product.price }}</td>
             <!-- <td>{{product.image}}</td> -->
-            <td>{{ product.edo }}</td>
+            <td>{{ product.edo ? "Activo" : "Inactivo" }}</td>
+
             <td>
               <button
                 class="btn btn-sm btn-secondary me-2 mb-1 mb-sm-0"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasProduct"
-                @click="updateAction(product._id, product.name)"
+                @click="
+                  updateAction(
+                    product._id,
+                    product.name,
+                    product.description,
+                    product.edo,
+                    product.generalDescr,
+                    product.id_tp_product,
+                    product.image,
+                    product.price,
+                    product.status
+                  )
+                "
               >
-                <i class="bi bi-arrow-repeat me-1"></i>
+               <n-icon size="30" style="margin-top: -6px">
+                  <Create />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Actualizar</span>
               </button>
-              <button class="btn btn-sm btn-danger" @click="deleteProduct(product._id)">
-                <i class="bi bi-trash me-1"></i>
+              <button
+                class="btn btn-sm btn-danger"
+                @click="deleteProduct(product._id)"
+              >
+             <n-icon size="30" style="margin-top: -6px">
+                  <TrashSharp />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Borrar</span>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <LoadingSpinner v-else />
+      <LoadingSpinner v-if="products.length === 0 && vacio === false" />
+      <EmptyElemenst
+        title="Productos"
+        v-if="products.length === 0 && vacio === true"
+      />
     </div>
   </div>
 </template>
@@ -76,16 +105,19 @@
 import TableTitle from "../components/TableTitle.vue";
 import ProductOffCanvas from "../components/ProductOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
+import EmptyElemenst from "../components/EmptyElements.vue";
 
 import { useProductsStore } from "../store/products.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
 import { ref, onMounted, watch } from "vue";
+import {NIcon} from "naive-ui";
+import { TrashSharp, Create } from "@vicons/ionicons5";
 
 const useProducts = useProductsStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { products, productType } = storeToRefs(useProducts);
+const { products, productType, vacio } = storeToRefs(useProducts);
 const { getProducts, deleteProduct } = useProducts;
 
 //Variable reactiva para el filtro de búsqueda ....
@@ -109,7 +141,8 @@ const productCharacterization = (idTypeProduct, idButton) => {
   clearButtons();
   if (idTypeProduct !== 0) {
     characterizedProducts.value = products.value.filter(
-      (product) => product.id_tp_product._id === idTypeProduct
+      (product) =>
+        product.id_tp_product && product.id_tp_product._id === idTypeProduct
     );
   } else {
     characterizedProducts.value = products.value;

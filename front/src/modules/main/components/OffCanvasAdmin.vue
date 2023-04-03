@@ -7,13 +7,13 @@
     id="offcanvasScrolling"
     aria-labelledby="offcanvasScrollingLabel"
   >
-    <div class="offcanvas-header mt-5 text-center">
+    <div class="offcanvas-header text-center">
       <div class="box-logo">
         <span class="text-white me-2">LA</span>
         <img class="logo mx-auto" src="@/assets/img/B-2.png" alt="Logo" />
-        <h5 class="offcanvas-title text-white mt-4 mx-auto" id="offcanvasScrollingLabel">
+        <h6 class="offcanvas-title text-white mt-4 mx-auto" id="offcanvasScrollingLabel">
           Administracion
-        </h5>
+        </h6>
       </div>
       <button
         type="button"

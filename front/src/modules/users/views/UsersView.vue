@@ -3,7 +3,9 @@
     <TableTitle title="USUARIOS" id="offcanvasTypes" />
     <UserOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="true">
+    <table
+      class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
+      v-if="users.length !==0 && vacio === false">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
@@ -21,18 +23,36 @@
               class="btn btn-sm btn-secondary me-2"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasTypes"
-              @click="updateAction(user._id, user.name, user.username, user.password, user.state)"
+              @click="
+                updateAction(
+                  user._id,
+                  user.name,
+                  user.username,
+                  user.password,
+                  user.state
+                )
+              "
             >
-              <i class="bi bi-arrow-repeat me-1"></i>
+                <n-icon size="30" style="margin-top: -6px">
+                  <Create />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Actualizar</span>
             </button>
             <button class="btn btn-sm btn-danger" @click="deleteUser(user._id)">
-              <i class="bi bi-trash me-1"></i>
+               <n-icon size="30" style="margin-top: -6px">
+                  <TrashSharp />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Borrar</span>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <LoadingSpinner v-else />
+    <LoadingSpinner v-if="users.length === 0 && vacio === false" />
+    <EmptyElemenst
+      title="Usuarios"
+      v-if="users.length === 0 && vacio === true"
+    />
   </div>
 </template>
 
@@ -40,6 +60,9 @@
 import TableTitle from "../components/TableTitle.vue";
 import UserOffCanvas from "../components/UserOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
+import EmptyElemenst from "../components/EmptyElements.vue";
+import {NIcon} from "naive-ui";
+import { TrashSharp, Create } from "@vicons/ionicons5";
 
 import { useUserStore } from "../store/users.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
@@ -50,7 +73,7 @@ const useUser = useUserStore();
 const useOffCanvas = useOffCanvasStore();
 
 const { updateAction } = useOffCanvas;
-const { users } = storeToRefs(useUser);
+const { users, vacio } = storeToRefs(useUser);
 const { getUsers, deleteUser } = useUser;
 
 onMounted(() => {

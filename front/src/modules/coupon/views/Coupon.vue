@@ -3,7 +3,10 @@
     <TableTitle title="Cupones" id="offcanvasTypes" />
     <CouponsOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100 text-center" v-if="true">
+    <table
+      class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
+      v-if="coupons.length !== 0 && vacio === false"
+    >
       <thead>
         <tr>
           <th scope="col">Nombre</th>
@@ -24,7 +27,7 @@
           <td>{{ coupon.value }}</td>
           <td>{{ coupon.dcto }}</td>
           <td>{{ coupon.min_purchase }}</td>
-          <td>{{ coupon.status }}</td>
+          <td>{{ coupon.status ? "Activo" : "Inactivo" }}</td>
           <td>
             <button
               class="btn btn-sm btn-secondary me-2"
@@ -43,16 +46,29 @@
                 )
               "
             >
-              <i class="bi bi-arrow-repeat"></i>
+           <n-icon size="30" style="margin-top: -6px">
+                  <Create />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Actualizar</span>
             </button>
-            <button class="btn btn-sm btn-danger" @click="deleteCoupon(coupon._id)">
-              <i class="bi bi-trash me-1"></i>
+            <button
+              class="btn btn-sm btn-danger"
+              @click="deleteCoupon(coupon._id)"
+            >
+             <n-icon size="30" style="margin-top: -6px">
+                  <TrashSharp />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Borrar</span>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <LoadingSpinner v-else />
+    <LoadingSpinner v-if="coupons.length === 0 && vacio === false" />
+    <EmptyElemenst
+      title="cupones"
+      v-if="coupons.length === 0 && vacio === true"
+    />
   </div>
 </template>
 
@@ -60,17 +76,19 @@
 import TableTitle from "../components/TableTitle.vue";
 import CouponsOffCanvas from "../components/CouponsOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
-
+import EmptyElemenst from "../components/EmptyElements.vue";
+import {NIcon} from "naive-ui";
+import { TrashSharp, Create } from "@vicons/ionicons5";
 import { useCouponsStore } from "../store/coupons.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, onUpdated } from "vue";
 
 const useCoupon = useCouponsStore();
 const useOffCanvas = useOffCanvasStore();
 
 const { updateAction } = useOffCanvas;
-const { coupons } = storeToRefs(useCoupon);
+const { coupons, cargando, vacio } = storeToRefs(useCoupon);
 const { getCoupons, deleteCoupon } = useCoupon;
 
 onMounted(() => {

@@ -73,6 +73,8 @@
                   id="name"
                   placeholder="Ingrese el descuento del cupón"
                   v-model="dcto"
+                  min="0"
+                  max="100"
                 />
                 <!-- <div  class="form-text text-danger" v-if="errorName">La marca que intenta registrar ya existe.</div> -->
               </div>
@@ -101,8 +103,7 @@
                   <label
                     class="form-check-label"
                     for="flexSwitchCheckChecked"
-                    >{{ status ? "Activo" : "Inactivo" }}</label
-                  >
+                    >{{ status ? "Activo" : "Inactivo" }}</label>
                 </div>
               </div>
 
@@ -132,7 +133,7 @@ import { storeToRefs } from "pinia";
 
 const useCoupon = useCouponsStore();
 const { coupon } = storeToRefs(useCoupon);
-const { getCouponById, addCoupon, updateCoupon, deleteCoupon } = useCoupon;
+const { getCouponById, addCoupon, updateCoupon, deleteCoupon,getCoupons } = useCoupon;
 const useOffCanvas = useOffCanvasStore();
 const { create, id, title, buttonText } = storeToRefs(useOffCanvas);
 
@@ -165,7 +166,7 @@ const createItem = () => {
     dcto.value !== ""
   ) {
     const ncoupon = {
-      _id: "641e1453e5181e37b4d9d32z",
+      //_id: "641e1453e5181e37b4d9d32z",
       name: name.value,
       start_date: start_date.value,
       end_date: end_date.value,
@@ -223,14 +224,14 @@ const updateItem = () => {
     status: status.value,
     dcto: dcto.value,
   };
-
+  console.log(id.value)
   updateCoupon(id.value, newCoupon);
 };
 
 // //Este es el watch en composition API.
 watch(title, (newTitle, oldTitle) => {
   let item = getCouponById(id.value);
-  console.log(item);
+  console.log(id.value);
   if (item) {
     name.value = item.name,
       start_date.value = formatDate(item.start_date),

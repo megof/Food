@@ -1,6 +1,6 @@
 <template>
   
-    <div class="offcanvas w-offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasProduct" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas w-offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasProduct" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -33,26 +33,11 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="image" class="mb-2">Cargue una imagen:</label>
-                        <input type="file" name="image" class="form-control w-100" id="image" @change="onFileSelected" >
+                        <input type="file" class="form-control w-100" id="image" @change="onFileSelected" >
                     </div>
                     
-                          
-              <div class="form-group mb-2">
-                <label for="name ">Estado:</label>
-                <div class="form-check form-switch form-group mb-2">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    checked
-                    v-model="edo"
-                  />
-                  <label
-                    class="form-check-label"
-                    for="flexSwitchCheckChecked"
-                    >{{ edo ? "Activo" : "Inactivo" }}</label>
-                </div>
-              </div>
+                    
+                    
                    
                     
                     
@@ -100,7 +85,7 @@
             const generalDescription=ref('');
             const price=ref('');
             const image=ref('');
-            const edo=ref(true)
+       
 
      
         
@@ -129,19 +114,21 @@
       
         const createItem=()=>{
                 const product={
-                    id:'641e1436e5181e37b4d9d326',
-                    id_tp_product:idTypeProduct.value,
+                    id:products.value[products.value.length-1]?.id+1 || 1,
+                    idTypeProduct:idTypeProduct.value,
                     name:name.value,
                     description:description.value,
-                    generalDescr:generalDescription.value,
+                    generalDescription:generalDescription.value,
                     price:price.value,
                     image:image.value,
-                    status:'Disponible',
-                    edo:edo.value
                 }
                 //Aquí es que debo hacer la validacion ...
                 let correctForm=formValidation();
-         
+                if(correctForm){
+                    product.state=true;
+                }else{
+                    product.state=false;
+                }
                 console.log(product)
                 addProduct(product);
                 idTypeProduct.value='',
@@ -150,25 +137,26 @@
                 generalDescription.value='',
                 price.value='',
                 image.value=''
-                edo.value=true
         }
 
         const updateItem=()=>{
                     
             const newProduct={
                 id:id.value,
-                id_tp_product:idTypeProduct.value,
+                idTypeProduct:idTypeProduct.value,
                 name:name.value,
                 description:description.value,
-                generalDescr:generalDescription.value,
+                generalDescription:generalDescription.value,
                 price:price.value,
                 image:image.value,
-                status:'Disponible',
-                edo:edo.value
             }
             //Aquí es que debo hacer la validacion ...
             let correctForm=formValidation();
-         
+                if(correctForm){
+                    newProduct.state=true;
+                }else{
+                    newProduct.state=false;
+                }
             // console.log(`Data que recojo del formulario: ${JSON.stringify(newBrand)}`);
             console.log(newProduct);
             updateProduct(id.value,newProduct);
@@ -180,13 +168,12 @@
             
               let item=getProductById(id.value)
               if(item){
-                idTypeProduct.value=item.id_tp_product,
+                idTypeProduct.value=item.id,
                 name.value=item.name,
                 description.value=item.description,
-                generalDescription.value=item.generalDescr,
+                generalDescription.value=item.generalDescription,
                 price.value=item.price,
-                image.value=item.image,
-                edo.value=item.edo
+                image.value=item.image
 
               }else{
                 idTypeProduct.value='',
@@ -194,8 +181,7 @@
                 description.value='',
                 generalDescription.value='',
                 price.value='',
-                image.value='',
-                edo.value=true
+                image.value=''
                
               }
         });
