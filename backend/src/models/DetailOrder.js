@@ -16,7 +16,6 @@ const detailOrderSchema = new Schema(
         idProduct:{
             type: Schema.Types.ObjectId,
             ref: 'Product',
-            required: true
         },
         cant: {
             type: Number,

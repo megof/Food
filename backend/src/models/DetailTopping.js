@@ -10,7 +10,6 @@ const detailtoppingSchema = new Schema(
         id_det_order: {
             type: Schema.Types.ObjectId,
             ref: 'DetailOrder',
-            required: true,
             trim: true,
         },
         id_topping: {
