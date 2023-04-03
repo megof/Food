@@ -4,7 +4,7 @@
     <TableTitle title="Toppings" id="offcanvasToppings" />
     <ToppingsOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="toppings.length !== 0">
+    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="toppings.length !==0 && vacio === false">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
@@ -38,16 +38,16 @@
         </tr>
       </tbody>
     </table>
-    <LoadingSpinner v-else />
+    <LoadingSpinner v-if="toppings.length ===0 && vacio === false"/> 
+    <EmptyElemenst title="topings" v-if="toppings.length ===0 && vacio === true"  />
   </div>
-  <div v-if="cargando" style="position: relative; float: center; margin-top: -10%; margin-left: 40% ; width: 10vw; padding: 2vh; border-radius: 20px;">
-      <LoadingSpinner/></div>
 </template>
 
 <script setup>
 import TableTitle from "../components/TableTitle.vue";
 import ToppingsOffCanvas from "../components/ToppingsOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
+import EmptyElemenst from "../components/EmptyElements.vue"
 
 import { useToppingStore } from "../store/toppings.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
@@ -57,7 +57,7 @@ import { onMounted } from "vue";
 const useTopping = useToppingStore();
 const useOffCanvas = useOffCanvasStore();
 const { updateAction } = useOffCanvas;
-const { toppings, cargando } = storeToRefs(useTopping);
+const { toppings, vacio } = storeToRefs(useTopping);
 const { getToppings, deleteTopping } = useTopping;
 
 onMounted(() => {

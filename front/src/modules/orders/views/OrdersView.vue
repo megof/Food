@@ -40,7 +40,6 @@ export default {
       this.cargando=false;
       this.top2 = data;
       console.log("hola", this.top2);
-      
     },
   },
   created() {

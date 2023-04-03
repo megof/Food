@@ -36,7 +36,7 @@
                 <template #header>
                   <div>detalles del pedido</div>
                 </template>
-                <n-table class="table table-striped table-hover table-bordered">
+                <table class="table bg-white bg-opacity-75 mt-3 w-100">
                   <thead>
                     <tr>
                       <TH>Nombre</TH>
@@ -65,7 +65,7 @@
                       <td v-else style="color: green">0</td>
                     </tr>
                   </tbody>
-                </n-table>
+                </table>
               </n-modal>
             </td>
           </tr>
@@ -81,7 +81,6 @@ import {
   NList,
   NListItem,
   NButton,
-  NTable,
   NModal,
   NIcon,
   NAvatar,
@@ -98,7 +97,6 @@ export default {
     NListItem,
     NButton,
     EyeSharp,
-    NTable,
     NModal,
     NIcon,
     NAvatar,

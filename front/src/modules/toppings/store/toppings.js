@@ -7,7 +7,8 @@ const URL= 'https://food-api-market.onrender.com/api/v1/topping';
 export const useToppingStore=defineStore('toppings',{
     state:()=>({
         toppings:[],
-        cargando:false
+        cargando:false, 
+        vacio:false
         // toppings:[
         //     {
         //         _id:1,
@@ -32,6 +33,15 @@ export const useToppingStore=defineStore('toppings',{
     actions:{
         async getToppings(){
            const {data}=await fetchData(URL);
+           if(data.length ===0){
+            console.log(data)
+            this.vacio = true
+            this.toppings = []
+        }else{
+            console.log(data)
+            this.vacio = false
+            this.toppings = data
+        }
            this.toppings=data;
            this.sortById();
            this.cargando=false
@@ -55,6 +65,7 @@ export const useToppingStore=defineStore('toppings',{
             //  for (const key in data) {
             //      formData.append(key, data[key]);
             //  }
+            this.toppings=[]
             this.cargando=true
             await fetchData(URL,'post',data);
             this.getToppings()
@@ -70,6 +81,7 @@ export const useToppingStore=defineStore('toppings',{
                 price:newTopping.price,
                 edo:newTopping.edo
              };
+             this.toppings=[]
             console.log(data);
             this.cargando=true
            await fetchData(url,'put',data); ///PUT

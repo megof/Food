@@ -24,9 +24,14 @@ export const useCouponsStore = defineStore('coupons', {
             console.log(data)
             this.sortById();
             this.cargando=false
-            if(this.coupons === null){
+            if(data.length ===0){
+                console.log(data)
                 this.vacio = true
-            }
+                this.coupons = []
+            }else{
+                console.log(data)
+                this.vacio = false
+                this.coupons = data}
         },
 
         getCouponById(id) {
@@ -46,13 +51,13 @@ export const useCouponsStore = defineStore('coupons', {
                 status: coupon.status,
                 dcto: coupon.dcto
             }
-            this.cargando=true
+            
             console.log("new cupon",data) 
-            this.cargando=true
+            this.coupons = []
             await fetchData(URL, 'post', data);  
             this.getCoupons()
             console.log(this.coupons)
-            this.cargando=true;
+            
         },
 
         async updateCoupon(id, newCoupon) {
@@ -70,7 +75,7 @@ export const useCouponsStore = defineStore('coupons', {
 
             };
             console.log(id)
-            this.cargando=true
+            this.coupons = []
             await fetchData(url, 'put', data); ///PUT
             
             this.getCoupons()
@@ -79,8 +84,10 @@ export const useCouponsStore = defineStore('coupons', {
             const index = this.coupons.map(el => el._id).indexOf(id); //El índice que debo borrar.
             this.coupons.splice(index, 1);
             const url = `${URL}/${id}`;
-            this.cargando=true
+            this.coupons = []
            await fetchData(url, 'delete');
+           this.getCoupons()
+
         },
         sortById() {}
 

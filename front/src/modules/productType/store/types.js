@@ -7,12 +7,21 @@ const URL= 'https://food-api-market.onrender.com/api/v1/types';
 export const  useTypeStore=defineStore('types',{
     state:()=>({
         types:[],
-        cargando:false
+        cargando:false,
+        vacio:false
     }),
     actions:{
         async getTypes(){
            const {data}=await fetchData(URL);
-           this.types=data;
+           if(data.length ===0){
+            console.log(data)
+            this.vacio = true
+            this.types = []
+        }else{
+            console.log(data)
+            this.vacio = false
+            this.types = data
+        }
            this.sortById();
            this.cargando=false
         },
@@ -34,6 +43,7 @@ export const  useTypeStore=defineStore('types',{
             for (const key in data) {
                 formData.append(key, data[key]);
             }
+            this.types=[]
             this.cargando=true
            await  fetchDataImg(URL,'post',formData);
            this.getTypes()
@@ -52,6 +62,7 @@ export const  useTypeStore=defineStore('types',{
             for (const key in data) {
                 formData.append(key, data[key]);
             }
+            this.types=[]
             this.cargando=true
             await fetchDataImg(url,'put',formData);
             this.getTypes()

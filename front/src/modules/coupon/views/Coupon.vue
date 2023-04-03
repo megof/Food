@@ -5,7 +5,7 @@
 
     <table
       class="table bg-white bg-opacity-75 mt-3 w-100 text-center"
-      v-if="coupons.length !== 0"
+      v-if="coupons.length !== 0 && vacio === false"
     >
       <thead>
         <tr>
@@ -60,7 +60,11 @@
         </tr>
       </tbody>
     </table>
-    <LoadingSpinner v-else />
+    <LoadingSpinner v-if="coupons.length === 0 && vacio === false" />
+    <EmptyElemenst
+      title="cupones"
+      v-if="coupons.length === 0 && vacio === true"
+    />
   </div>
 </template>
 
@@ -68,30 +72,28 @@
 import TableTitle from "../components/TableTitle.vue";
 import CouponsOffCanvas from "../components/CouponsOffCanvas.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
+import EmptyElemenst from "../components/EmptyElements.vue";
 
 import { useCouponsStore } from "../store/coupons.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
-import { onMounted, onUpdated  } from "vue";
+import { onMounted, onUpdated } from "vue";
 
 const useCoupon = useCouponsStore();
 const useOffCanvas = useOffCanvasStore();
 
 const { updateAction } = useOffCanvas;
-const { coupons, cargando } = storeToRefs(useCoupon);
+const { coupons, cargando, vacio } = storeToRefs(useCoupon);
 const { getCoupons, deleteCoupon } = useCoupon;
-
 
 onMounted(() => {
   getCoupons();
 });
 
- 
-
 function formatDate(fecha) {
   const date = new Date(fecha);
-  return date.toISOString().slice(0,10);
-  }
+  return date.toISOString().slice(0, 10);
+}
 </script>
 
 <style scoped></style>

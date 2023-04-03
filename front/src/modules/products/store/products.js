@@ -1,16 +1,18 @@
-import {defineStore} from 'pinia';
+import {
+    defineStore
+} from 'pinia';
 //Importamos los helpers de las peticiones HTTP.
 //Importamos los helpers de las peticiones HTTP.
 import fetchData from '../../../helpers/fetchData.js';
 import fetchDataImg from '../../../helpers/fetchDataImg.js';
-const URL= 'https://food-api-market.onrender.com/api/v1/products';
-const URL2='https://food-api-market.onrender.com/api/v1/types';
+const URL = 'https://food-api-market.onrender.com/api/v1/products';
+const URL2 = 'https://food-api-market.onrender.com/api/v1/types';
 
-export const useProductsStore=defineStore('products',{
-    state:()=>({
-        productType:[],
-        products:[],
-        cargando:false
+export const useProductsStore = defineStore('products', {
+    state: () => ({
+        productType: [],
+        products: [],
+        vacio: false,
         // productType:[
         //     {
         //         id:1,
@@ -89,38 +91,47 @@ export const useProductsStore=defineStore('products',{
         // ],
 
     }),
-    actions:{
-        async getProducts(){
-           const {data}=await fetchData(URL);
-           const typesData=await fetchData(URL2);
-           this.products=data;
-           this.productType=typesData.data;
-           this.sortById();
-           this.cargando=false
-        //    console.log(this.products);
-        //    console.log(this.productType);
+    actions: {
+        async getProducts() {
+            const {
+                data
+            } = await fetchData(URL);
+            const typesData = await fetchData(URL2);
+            if (data.length === 0) {
+                console.log(data)
+                this.vacio = true
+                this.products = []
+            } else {
+                console.log(data)
+                this.vacio = false
+                this.products = data
+            }
+            this.productType = typesData.data;
+            this.sortById();
+            //    console.log(this.products);
+            //    console.log(this.productType);
         },
-        
-        getProductById(id){
-            const index=this.products.map(el=>el._id).indexOf(id);
+
+        getProductById(id) {
+            const index = this.products.map(el => el._id).indexOf(id);
             // console.log(`Id recibido: ${id}`)
             // console.log(`Indice: ${index}`)
-            return this.products[index]; 
+            return this.products[index];
         },
-        
-        async addProduct(product){
+
+        async addProduct(product) {
             // this.products.push(product);
-            
+
             //Petición HTTP...
-            const data={
-                id_tp_product:product.id_tp_product,
-                name:product.name,
-                description:product.description,
-                generalDescr:product.generalDescr,
-                price:product.price,
-                image:product.image,
-                status:product.status,
-                edo:product.edo
+            const data = {
+                id_tp_product: product.id_tp_product,
+                name: product.name,
+                description: product.description,
+                generalDescr: product.generalDescr,
+                price: product.price,
+                image: product.image,
+                status: product.status,
+                edo: product.edo
             }
             const formData = new FormData();
             for (const key in data) {
@@ -128,25 +139,25 @@ export const useProductsStore=defineStore('products',{
             }
             console.log('Data que va hacia el backend:');
             console.log(formData);
-            this.cargando=true
-           await fetchDataImg(URL,'post',formData); //POST
-           this.getProducts()
+            this.products = []
+            await fetchDataImg(URL, 'post', formData); //POST
+            this.getProducts()
         },
-        async updateProduct(id,newProduct){ 
-            const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo alterar.
-            this.products[index]=newProduct;
-           
+        async updateProduct(id, newProduct) {
+            const index = this.products.map(el => el._id).indexOf(id); //El índice que debo alterar.
+            this.products[index] = newProduct;
+
             //Petición HTTP...
-            const url=`${URL}/${id}`;
-            const data={
-                id_tp_product:newProduct.id_tp_product,
-                name:newProduct.name,
-                description:newProduct.description,
-                generalDescr:newProduct.generalDescr,
-                price:newProduct.price,
-                image:newProduct.image,
-                status:newProduct.status,
-                edo:newProduct.edo
+            const url = `${URL}/${id}`;
+            const data = {
+                id_tp_product: newProduct.id_tp_product,
+                name: newProduct.name,
+                description: newProduct.description,
+                generalDescr: newProduct.generalDescr,
+                price: newProduct.price,
+                image: newProduct.image,
+                status: newProduct.status,
+                edo: newProduct.edo
             }
             const formData = new FormData();
             for (const key in data) {
@@ -157,24 +168,23 @@ export const useProductsStore=defineStore('products',{
             console.log('Esta es la URL...')
             console.log(url)
             // // console.log(formData);
-            this.cargando=true
-             await fetchDataImg(url,'put',formData); ///PUT
-             this.getProducts()
-        },
-        async deleteProduct(id){
-            const index=this.products.map(el=>el._id).indexOf(id); //El índice que debo borrar.
-            this.products.splice(index,1);
-            // //Petición HTTP...
-             const url=`${URL}/${id}`;
-             console.log(id)
-             this.cargando=true
-            await fetchData(url,'delete'); 
+            this.products = []
+            await fetchDataImg(url, 'put', formData); ///PUT
             this.getProducts()
         },
-        sortById(){
-            this.products.sort((a,b)=>a.id-b.id);
+        async deleteProduct(id) {
+            const index = this.products.map(el => el._id).indexOf(id); //El índice que debo borrar.
+            this.products.splice(index, 1);
+            // //Petición HTTP...
+            const url = `${URL}/${id}`;
+            console.log(id)
+            await fetchData(url, 'delete');
+            this.getProducts()
+        },
+        sortById() {
+            this.products.sort((a, b) => a.id - b.id);
         }
 
     }
-    
+
 });
