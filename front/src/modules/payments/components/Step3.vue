@@ -89,7 +89,10 @@
       }
 
       console.log(order)
-      // fetchData("https://food-api-market.onrender.com/api/v1/orders",'post',order);
+      //Aquí lleno la tabla ordenes
+      fetchData("https://food-api-market.onrender.com/api/v1/orders",'post',order);
+      //Aquí va lo de hacer lo de orderDetails
+
 
       nextPinia();
       router.push('/payment/step4');
