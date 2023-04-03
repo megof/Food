@@ -11,8 +11,11 @@
     />
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text open-sans">
+      <p class="card-text open-sans description-normal">
         {{ product.description }}
+      </p>
+      <p class="card-text open-sans description">
+        {{ product.generalDescr }}
       </p>
     </div>
     <div class="card-footer">
@@ -105,6 +108,23 @@ export default {
   transform: scale(1.05);
   opacity: 1;
   filter: contrast(120%);
+}
+.card:hover .description {
+  display: none;
+}
+
+.card:hover .description-normal {
+  display: none;
+}
+
+.description {
+  display: none;
+}
+.card:hover .description {
+  display: block;
+  font-family: "Bungee", cursive !important;
+  font-size: 0.8rem;
+  font-weight: 300;
 }
 
 .btn-first {
