@@ -18,7 +18,7 @@
       </div>
       <div class="mb-3">
         <label for="mensaje" class="fw-bold mb-2 d-block" >Observaciones:</label>
-        <textarea id="mensaje" name="message" rows="4" cols="50" v-model="message"></textarea>
+        <textarea id="mensaje" name="message" rows="4" cols="65" v-model="message"></textarea>
       </div>
       
     
