@@ -89,9 +89,9 @@ export default {
 
 <style scoped>
 .card {
-  word-break: keep-all;
+  word-wrap: break-word;
   width: 20rem !important;
-  height: 35rem !important;
+  height: 33rem !important;
   opacity: 0.9;
   border: 0.125rem solid #e1e1e1;
   box-shadow: 0 0.188rem 0.188rem 0 rgba(0, 0, 0, 0.07);
