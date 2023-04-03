@@ -1,6 +1,10 @@
 <template>
   <Loader v-if="loader" />
-  <RouterView />
+  <router-view v-slot="{ Component, route }" v-else>
+    <keep-alive>
+      <component :is="Component" :key="route.name" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <script>
