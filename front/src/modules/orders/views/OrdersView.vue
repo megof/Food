@@ -1,9 +1,9 @@
-<template>
-  <h1>Pedidos</h1>
-  <Lists :columns="columns" :show-modal="showModal" :top2="top2" v-if="!cargando" />
-  <div v-if="cargando" class="w-100 d-flex justify-content-center">
-    <LoadingSpinner/>
-
+<template class="w-100 d-flex justify-content-center">
+  <div class="container-md container-fluid mt-5">
+    <h1>Pedidos</h1>
+    <Lists :columns="columns" :show-modal="showModal" :orders="orders" :ordersDetails="ordersDetails" :ordersTopping="ordersTopping" v-if="orders.length !== 0 && ordersTopping.length.length!==0 && ordersDetails.length !== 0"/>
+     
+    <LoadingSpinner v-else/> 
   </div>
 </template>
 
@@ -27,23 +27,40 @@ export default {
         "Estado",
         "opciones",
       ],
-      top2: {},
-      showModal: false,
-      cargando:false,
+      orders:[],
+      ordersDetails:[],
+      ordersTopping:[],
+      showModal: false, 
     };
   },
   methods: {
-    async getDatas() {
-      let url = "https://food-api-market.onrender.com/api/v1/DetailTopping";
-      this.cargando=true;
-      const { data } = await fetchData(url);
-      this.cargando=false;
-      this.top2 = data;
-      console.log("hola", this.top2);
+    async getOrders() {
+      let url = "https://food-api-market.onrender.com/api/v1/orders"; 
+      const { data } = await fetchData(url);  
+      this.orders = data;
+ 
+      console.log("orders", this.orders);
+    },
+    async getDetailOrders() {
+      let url = "https://food-api-market.onrender.com/api/v1/detailOrders"; 
+      const { data } = await fetchData(url);  
+      this.ordersDetails = data.data;
+ 
+      console.log("orders details", this.ordersDetails);
+    },
+    
+    async getDetailToppings() {
+      let url = "https://food-api-market.onrender.com/api/v1/detailtopping/"; 
+      const { data } = await fetchData(url);  
+      this.ordersTopping = data;
+ 
+      console.log("orders topping", this.ordersTopping);
     },
   },
   created() {
-    this.getDatas();
+    this.getOrders();
+    this.getDetailOrders()
+    this.getDetailToppings()
   },
 };
 </script>

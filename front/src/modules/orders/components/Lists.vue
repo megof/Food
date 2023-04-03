@@ -2,8 +2,16 @@
   <div
     class="container w-300 h-120 d-flex flex-column justify-content-center align-items-center p-2"
   >
+    <!-- Botón para crear -->
+    <n-button color="#ed7902" v-if="!orders" @click="show = true">
+      <n-icon>
+        <Create />
+      </n-icon>
+      Crear
+    </n-button>
+
     <!-- Tabla dinámica -->
-    <table class="table bg-white bg-opacity-75 mt-3 w-100">
+    <n-table class="table bg-white bg-opacity-75 mt-3 w-100">
       <thead>
         <tr>
           <th v-for="(column, index) in columns" :key="index">{{ column }}</th>
@@ -11,14 +19,15 @@
       </thead>
       <tbody>
         <!-- Copian hasta el template que cierra este comentario y rendericen los datos que necesiten -->
-        <template v-if="top2">
-          <tr v-for="top in top2" :key="top._id">
-            <td>{{ top.id_det_order.idOrder.client }}</td>
-            <td>{{ top.id_det_order.idOrder.address }}</td>
-            <td>{{ top.id_det_order.idOrder.phone }}</td>
-            <td>{{ top.id_det_order.idOrder.obs }}</td>
-            <td>{{ formaDate(top.id_det_order.idOrder.createdAt) }}</td>
-            <td>{{ top.id_det_order.idOrder.status }}</td>
+        <template v-if="orders">
+          <tr v-for="top in orders" :key="top._id">
+            
+            <td>{{ top.client }}</td>
+            <td>{{ top.address }}</td>
+            <td>{{ top.phone }}</td>
+            <td>{{ top.obs }}</td>
+            <td>{{ formaDate(top.createdAt) }}</td>
+            <td>{{ top.status }}</td>
 
             <td>
               <n-button @click="showModals(top._id)" size="large" color="gray">
@@ -36,43 +45,67 @@
                 <template #header>
                   <div>detalles del pedido</div>
                 </template>
-                <table class="table bg-white bg-opacity-75 mt-3 w-100">
-                  <thead>
-                    <tr>
-                      <TH>Nombre</TH>
-                      <TH>Descripción</TH>
-                      <TH>CANTIDAD</TH>
-                      <TH>PRECIO</TH>
-                      <TH>TOPPING</TH>
-                      <TH>CANTIDAD</TH>
-                      <TH>PRECIO</TH>
-                    </tr>
+                <n-table class="table table-striped table-hover table-bordered">
+                  <thead> 
+                      <tr>
+                        <TH>Nombre</TH>
+                        <TH>Descripción</TH>
+                        <TH>CANTIDAD</TH>
+                        <TH>PRECIO</TH>
+                        <TH>TOPPING</TH>
+                        <TH>CANTIDAD</TH>
+                        <TH>PRECIO</TH>
+                      </tr> 
                   </thead>
-                  <tbody v-for="top in top2" :key="top._id">
-                    <tr v-if="objectId === top._id">
-                      <td>{{ top.id_det_order.idProduct.name }}</td>
-                      <td>{{ top.id_det_order.idProduct.generalDescr }}</td>
-
-                      <td style="color: blue">{{ top.id_det_order.cant }}</td>
-                      <td style="color: green">
-                        {{ top.id_det_order.idProduct.price }}
-                      </td>
-                      <td v-if="top.id_topping">{{ top.id_topping.name }}</td>
-                      <td v-else>Ninguno</td>
-                      <td v-if="top.id_topping" style="color: blue">{{ top.id_det_order.cant }}</td>
-                      <td v-else style="color: blue">0</td>
-                      <td v-if="top.id_topping" style="color: blue">{{ top.id_topping.price }}</td>
-                      <td v-else style="color: green">0</td>
-                    </tr>
+                  <tbody v-for="(top, index) in ordersDetails" :key="top._id"> 
+                      <tr   v-if="ordersTopping[index] && detail === top.idOrder._id">
+                        <td>{{ top.idProduct.name }}</td>
+                        <td>{{ top.idProduct.description }}</td>
+                        <td style="color: blue">{{ top.cant }}</td>
+                        <td style="color: green">{{ top.idProduct.price }}</td>   
+                          <td v-if="detail === ordersTopping[index].id_det_order.idOrder._id && ordersTopping[index].id_topping">{{  ordersTopping[index].id_topping.name }}</td>
+                          <td v-else>Ninguno</td> 
+                          <td v-if="detail ===  ordersTopping[index].id_det_order.idOrder._id && ordersTopping[index].id_topping" style="color: blue">{{  ordersTopping[index].id_det_order.cant }}</td>
+                          <td v-else style="color: blue">0</td> 
+                          <td v-if="detail ===  ordersTopping[index].id_det_order.idOrder._id && ordersTopping[index].id_topping" style="color: blue">{{  ordersTopping[index].id_topping.price }}</td>
+                          <td v-else style="color: green">0</td>  
+                      </tr>
+                      <tr v-if="!ordersTopping[index] && detail === top.idOrder._id">
+                        <td>{{ top.idProduct.name }}</td>
+                        <td>{{ top.idProduct.description }}</td>
+                        <td style="color: blue">{{ top.cant }}</td>
+                        <td style="color: green">{{ top.idProduct.price }}</td>   
+                        <td >Ninguno</td> 
+                        <td  style="color: blue">0</td> 
+                        <td  style="color: green">0</td>  
+                      </tr> 
                   </tbody>
-                </table>
+                  <!--
+                    <tbody v-for="top in ordersDetails" :key="top._id">
+                      <tr   v-if="detail === top.id_det_order.idOrder._id">
+                        <td>{{ top.id_det_order.idProduct.name }}</td>
+                        <td>{{ top.id_det_order.idProduct.generalDescr }}</td>
+
+                        <td style="color: blue">{{ top.id_det_order.cant }}</td>
+                        <td style="color: green">
+                          {{ top.id_det_order.idProduct.price }}
+                        </td>
+                        <td v-if="top.id_topping">{{ top.id_topping.name }}</td>
+                        <td v-else>Ninguno</td>
+                        <td v-if="top.id_topping" style="color: blue">{{ top.id_det_order.cant }}</td>
+                        <td v-else style="color: blue">0</td>
+                        <td v-if="top.id_topping" style="color: blue">{{ top.id_topping.price }}</td>
+                        <td v-else style="color: green">0</td>
+                      </tr>
+                    </tbody>
+                  -->
+                </n-table>
               </n-modal>
             </td>
           </tr>
         </template>
       </tbody>
-    </table>
-
+    </n-table>
   </div>
 </template>
 
@@ -81,6 +114,7 @@ import {
   NList,
   NListItem,
   NButton,
+  NTable,
   NModal,
   NIcon,
   NAvatar,
@@ -97,6 +131,7 @@ export default {
     NListItem,
     NButton,
     EyeSharp,
+    NTable,
     NModal,
     NIcon,
     NAvatar,
@@ -106,7 +141,6 @@ export default {
     SyncCircle,
     NDrawer,
     NDrawerContent,
-    
   },
   props: {
     columns: {
@@ -116,9 +150,15 @@ export default {
     del: {
       type: Function,
     },
-    top2: {
+    orders: {
       type: Object,
     },
+    ordersDetails: {
+      type: Object,
+    },
+    ordersTopping:{
+      type: Object,
+    }
   },
 
   methods: {
@@ -128,7 +168,7 @@ export default {
     },
     showModals(id) {
       this.showModal = true;
-      this.objectId = id;
+      this.detail = id;
       console.log(id);
     },
   },
@@ -138,6 +178,7 @@ export default {
     return {
       showModal: false,
       show: false,
+      detail: undefined,
       objectId: undefined,
     };
   },

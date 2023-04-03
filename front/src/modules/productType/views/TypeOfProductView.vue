@@ -4,7 +4,7 @@
     <TableTitle title="Tipos de Producto" id="offcanvasTypes" />
     <TypeOfProductOffCanvas />
 
-    <table class="table bg-white bg-opacity-75 mt-3 w-100" v-if="types.length !==0 && vacio === false">
+    <table class="table bg-white bg-opacity-75 mt-3 w-100 text-center" v-if="types.length !==0 && vacio === false">
       <!--v-if="references.length!==0"-->
       <thead>
         <tr>
@@ -25,12 +25,16 @@
               data-bs-target="#offcanvasTypes"
               @click="updateAction(type._id, type.name)"
             >
-              <i class="bi bi-arrow-repeat me-1"></i
-              ><span class="d-none d-md-inline-block">Actualizar</span>
+          <n-icon size="30" style="margin-top: -6px">
+                  <Create />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Actualizar</span>
             </button>
             <button class="btn btn-sm btn-danger" @click="deleteType(type._id)">
-              <i class="bi bi-trash me-1"></i><span class="d-none d-md-inline-block">Borrar</span>
-            </button>
+<n-icon size="30" style="margin-top: -6px">
+                  <TrashSharp />
+                </n-icon>
+                <span style="margin-top: 5px; margin-left: 4px">Borrar</span>            </button>
           </td>
         </tr>
       </tbody>
@@ -50,6 +54,8 @@ import { useTypeStore } from "../store/types.js";
 import { useOffCanvasStore } from "../store/offCanvas.js";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import {NIcon} from "naive-ui";
+import { TrashSharp, Create } from "@vicons/ionicons5";
 
 const useType = useTypeStore();
 const useOffCanvas = useOffCanvasStore();
