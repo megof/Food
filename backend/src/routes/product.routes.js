@@ -49,6 +49,8 @@ const router = Router();
  *              - description
  *              - generalDescr
  *              - price
+ *              - image
+ *              - status
  *              - edo
  *          example:
  *              id: 641e1436e5181e37b4d9d326
@@ -133,7 +135,7 @@ router.get('/:id', ProductController.getOne);
  *          requestBody:
  *              required: true
  *              content:
- *                  application/json:
+ *                  multipart/form-data:
  *                      schema:
  *                          $ref: '#/components/schemas/Product'
  *          responses: 
@@ -164,7 +166,7 @@ verifyTokenMiddleware, ProductController.save);
  *          requestBody:
  *              required: true
  *              content: 
- *                  application/json:
+ *                  multipart/form-data:
  *                      schema:
  *                          $ref: '#/components/schemas/Product'
  *          responses:

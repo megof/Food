@@ -27,6 +27,7 @@ const router = Router();
  *                  description: image of the product type
  *          required: 
  *              - name
+ *              - image
  *          example:
  *              id: 6410bb953e324fcfd7f51221
  *              name: Hamburguesa
@@ -105,7 +106,7 @@ router.get('/:id', ProductTypeController.getOne);
  *          requestBody:
  *              required: true
  *              content:
- *                  application/json:
+ *                  multipart/form-data:
  *                      schema:
  *                          $ref: '#/components/schemas/productType'
  *          responses: 
@@ -135,7 +136,7 @@ router.post('/', fileUpload({
  *          requestBody:
  *              required: true
  *              content: 
- *                  application/json:
+ *                  multipart/form-data:
  *                      schema:
  *                          $ref: '#/components/schemas/productType'
  *          responses:
